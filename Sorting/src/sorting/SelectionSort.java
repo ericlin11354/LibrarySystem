@@ -5,6 +5,8 @@
  */
 package sorting;
 
+import java.util.Arrays;
+
 /**
  *
  * @author 349361337
@@ -34,6 +36,11 @@ public class SelectionSort {
             arr[i] = arr[index];
             arr[index] = temp;
         }
+    }
+    
+    @Override
+    public String toString(){
+        return Arrays.toString(arr);
     }
 
 }

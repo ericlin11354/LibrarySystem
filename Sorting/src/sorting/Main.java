@@ -18,9 +18,10 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        int arr[] = {64, 25, 12, 22, 11};
+        int arr[] = {64, 25, 12, 22, 11, 5, 100, 0};
         SelectionSort ss = new SelectionSort(arr);
-        System.out.println(Arrays.toString(ss.sort()));
+        ss.sort();
+        System.out.println((ss));
     }
     
 }
