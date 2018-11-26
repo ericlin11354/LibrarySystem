@@ -52,7 +52,8 @@ public class StockInfo implements Comparable<StockInfo>{
      * Gets information of instance in a comma delimited format
      * @return returns information
      */
-    public String getInfo(){
+    @Override
+    public String toString(){
         String delim = ",";
         return getYear() + delim + getProvince() + delim + getSex() + delim + getAge() + delim + getLifeExpectancy();
     }

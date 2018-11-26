@@ -56,14 +56,17 @@ public class Main {
         
          //sorts the array by life expectancy (lowest to greatest) using selection sort algorithm
         arr = selectionSort(arr);
-
+        
         //outputs sorted array to "sortedData.csv"
         File sortedData = new File("src/eric/sortedData.csv");
         //overwrites each time
         PrintWriter pw = new PrintWriter(sortedData);
         for (StockInfo getArr : arr) {
-            pw.println(getArr.getInfo());
+            pw.println(getArr);
         }
+        
+        pw.close();
+        
     }
 
     /**
