@@ -81,7 +81,7 @@ public class Main {
         StockInfo temp;
         //gets maximum possible life expectancy. This allows the first element to switch with itslelf if it has the smallest life expectancy
         String[] max = {null, null, null, null, String.valueOf((1 << 31) - 1)};
-        
+       
         //loops through array
         for (int i = 0; i < arr.length; i++) {
             //compares StockInfo a and b
