@@ -8,7 +8,6 @@ package SierpinskiTriangle;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import javax.swing.Timer;
 
 /**
@@ -19,36 +18,73 @@ public class DrawingArea extends javax.swing.JPanel {
 
     public int x;
     public int y;
-    public int depth = 5;
-    public int side = 200;
+    //when depth is 1, there is 1 triangle in the largest triangle
+    public int depth = 10;
+    //size of equilateral triangle
+    public int side = 300;
+    
     /**
-     * Creates new form Sierpinski
+     * Program creates a Sierpinski Triangle
      */
     public DrawingArea() {
         initComponents();
     }
     
+    /**
+     * Overwrites paint component in order to draw Sierpinski triangle. Draws largest triangle (facing up) and calls recursive method
+     * @param g Graphics class
+     */
+    @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        x = this.getWidth()/2-side/2;
-        y = this.getHeight()/2+side/2;
-        int[] xCord = {x,x+side/2,x+side};
-        int height = (int)((side/2)*Math.tan(Math.PI/3));
-        int[] yCord = {y,y-height,y};
-        g.drawPolygon(xCord,yCord,3);
-        drawTriangle(g,x+side/4,y-height/2,depth,side/2);
+        x = this.getWidth()/2-(side/2);
+        y = this.getHeight()/2+(side/2);
+        g.drawPolygon(new int[] {x,x+side/2,x+side},new int[] {y,y-(int)((side/2)*Math.sqrt(3))+1,y},3);
+        drawTriangles(g,depth,x,y,side);
     }
     
-    public void drawTriangle(Graphics g,int x,int y,int depth, int side){
+    /**
+     * Recursively draws triangles (facing down) following the Sierpinski order until the depth is 0
+     * @param g Graphics class
+     * @param depth number of sets of triangles to be drawn
+     * @param x x-coordinate of reference triangle (triangle before)
+     * @param y y-coordinate of reference triangle (triangle before)
+     * @param side 
+     */
+    public static void drawTriangles(Graphics g,int depth, int x, int y, int side){
+        //base-case: when all sets of triangles have been drawn, end the program
         if(depth==0) return;
-        int[] xCord = {x,x+side/2,x+side};
-        int height = (int)((side/2)*Math.tan(Math.PI/3));
-        int[] yCord = {y,y+height,y};
-        g.drawPolygon(xCord,yCord,3);
-        drawTriangle(g,x+side/4,y-height/2,--depth,side/2);
-        //drawTriangle(g,x+side/2,y-height/2,--depth,side/2);
+        //gets coordinates of left vertice of triangle being drawn
+        int startX = x + side/4;
+        int startY = y-(int)((side/2)*Math.sqrt(3)/2);
+        //draws triangle
+        //order of array as follows: {left vertice, bottom vertice, right vertice}
+        g.drawPolygon(new int[] {startX,x+side/2,x+(side*3)/4},new int[] {startY,y,startY},3);
+        //draws left triangle
+        drawTriangles(g,depth-1,x,y,side/2);
+        //draws top triangle
+        drawTriangles(g,depth-1,startX,startY,side/2);
+        //draws right triangle
+        drawTriangles(g,depth-1,x+side/2,y,side/2);
     }
     
+    /*PSEUDOCODE FOR drawTriangles method
+    Void method drawTriangles takes in Graphics class, integer depth, x, y, side{
+        if depth is 0, return method
+        set integer startX to x coordinate of 1/4 of triangle side
+        set integer startY to y coordinate of height of triangle
+        draw polygon with the following coordinates:
+            left vertice: startX and startY
+            bottom vertice: x coordinate is 1/2 of triangle side and y coordinate is integer "y"
+            right vertice: x coordinate is 3/4 of triangle side and y coordinate is startY
+         call method to draw left triangle reduced by a factor of 1/2 and left vertice starts at x,y
+         call method to draw top triangle reduced by a factor of 1/2 and left vertice starts at startX, startY
+         call method to draw right triangle reduced by a factor of 1/2 and right vertice has x shifted by 1/2 of triangle side, y
+    }
+    */
+    /**
+     * Calls paint component method every interval of Timer
+     */
     private class TimerListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -56,6 +92,9 @@ public class DrawingArea extends javax.swing.JPanel {
         }
     }
     
+    /**
+     * Starts timer
+     */
     public void anim(){
         Timer t = new Timer(1000,new TimerListener());
         t.start();

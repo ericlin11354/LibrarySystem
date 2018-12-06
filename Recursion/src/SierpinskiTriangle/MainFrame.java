@@ -35,11 +35,11 @@ public class MainFrame extends javax.swing.JFrame {
         drawingArea1.setLayout(drawingArea1Layout);
         drawingArea1Layout.setHorizontalGroup(
             drawingArea1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addGap(0, 706, Short.MAX_VALUE)
         );
         drawingArea1Layout.setVerticalGroup(
             drawingArea1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 477, Short.MAX_VALUE)
+            .addGap(0, 479, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
