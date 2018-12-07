@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Random;
 import javax.swing.Timer;
 
 /**
@@ -19,60 +18,80 @@ import javax.swing.Timer;
 public class DrawingArea extends javax.swing.JPanel {
 
     /**
-     * Creates new form NewJPanel
+     * DrawingArea rotates and animates tree
      */
     public DrawingArea() {
         initComponents();
     }
-
+    
+    //each additional branch is shifted by angle
     static double angleFactor = Math.PI / 4;
+    //size of branches
     static double sizeFactor = 0.59;
+    //depth of branches
     static int depth = 10;
+    //height of trunk of tree
     static int trunkHeight = 100;
-    Color[] rainbow = {Color.red,Color.orange,Color.yellow,Color.green,Color.blue,Color.pink,Color.magenta};
-    int count = 0;
-    boolean goBack = false;
+    //rotates tree
+    static double startAngle = Math.PI /2;
 
+    /**
+     * animates tree
+     */
     public void anim() {
-        Timer t = new Timer(100, new TimerListener());
+        Timer t = new Timer(10, new TimerListener());
         t.start();
     }
 
+    /**
+     * Overrides paintComponent to paint fractal tree
+     * @param g 
+     */
     @Override
     public void paintComponent(Graphics g) {
+        //prevents trails on screen
         super.paintComponent(g);
-        treeFractal(g, depth, this.getWidth()/2, this.getHeight() / 2+trunkHeight, trunkHeight, Math.PI / 2);
+        //calls method that paints tree
+        treeFractal(g, depth, this.getWidth()/2, this.getHeight() / 2+trunkHeight, trunkHeight, startAngle);
     }
 
+    /**
+     * Draws branches of tree (starting at trunk). Changes angle every time it recurses in order for branches to not overlap
+     * @param g
+     * @param depth depth of branches (ex. depth set to 3 means the method calls itself 2 times)
+     * @param x (x-coordinate for branches)
+     * @param y (y-coordinate for branches)
+     * @param length length of branches
+     * @param angle angle rotates each branch
+     */
     public void treeFractal(Graphics g, int depth, int x, int y, double length, double angle) {
-        //calculate the ending x,y coordinates for this line segment.
-        //As we are moving up, we subtract from the current base coordinates 
-        //The formula used to determine end points by definition of sin and cos
+        //use sin and cos to seperate branches
+        //subtracts from base coordinates so branches stay intact
         int x1 = x - (int) (Math.cos(angle) * length);
         int y1 = y - (int) (Math.sin(angle) * length);
-        count++;
-        //actually draw the line
-        g.setColor(rainbow[(count%6)]);
+        //draws the branch
+        g.setColor(Color.white);
         g.drawLine(x, y, x1, y1);
         //if we have more depth to go, recurse
         if (depth > 0) {
-            treeFractal(g, depth - 1, x1, y1, length * sizeFactor, angle + angleFactor);
-            treeFractal(g, depth - 1, x1, y1, length * sizeFactor, angle - angleFactor);
+            treeFractal(g, depth - 1, x1, y1, length *sizeFactor, angle + angleFactor);
+            treeFractal(g, depth - 1, x1, y1, length *sizeFactor, angle - angleFactor);
         }
     }
 
+    /**
+     * calls method while timer is active
+     */
     private class TimerListener implements ActionListener {
 
+        /**
+         * Overrides actionPerformed. Decreases angleFactor and startAngle so that fractal tree rotates.
+         * @param e 
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
-            if(sizeFactor >= .8)
-                goBack = true;
-            else if(sizeFactor <= .5)
-                goBack = false;
-            if(goBack)
-                sizeFactor -= .01;
-            else
-                sizeFactor += .01;
+            angleFactor -= .01;
+            startAngle -= .01;
             repaint();
         }
     }
