@@ -10,8 +10,10 @@ public class Main {
      * @param args 
      */
     public static void main(String[]args){
-        LinkedList list = new LinkedList();
-        list.add("Eric","Lin");
+        LinkedList<Patient> list = new LinkedList<Patient>();
+        //adds node 1 and 2
+        list.add(new Patient("Eric","Lin"));
+        list.add(new Patient("Andrew","Su"));
         System.out.println(list);
     }
 }

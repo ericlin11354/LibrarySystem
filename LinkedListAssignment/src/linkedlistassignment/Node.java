@@ -3,17 +3,18 @@ package linkedlistassignment;
 /**
  *
  * @author Eric Lin
+ * @param <T>
  */
-public class Node<T> implements Comparable<Node>{
+public class Node<T extends Comparable<T>> implements Comparable<Node<T>>{
     //singly LinkedList
-    private int data;
+    private T data;
     private Node<T> next;
     
     /**
      * node value required to create node
      * @param data node value
      */
-    public Node(Object data){
+    public Node(T data){
         this.data = data;
     }
     
@@ -23,10 +24,10 @@ public class Node<T> implements Comparable<Node>{
      * @return 
      */
     @Override
-    public int compareTo(Node other){
-        if(this.getData() > other.getData())
+    public int compareTo(Node<T> other){
+        if(this.getData().compareTo(other.getData()) > 0)
             return 1;
-        else if(this.getData() < other.getData())
+        else if(this.getData().compareTo(other.getData()) < 0)
             return -1;
         else
             return 0;
@@ -44,14 +45,14 @@ public class Node<T> implements Comparable<Node>{
     /**
      * @return the data
      */
-    public int getData() {
+    public T getData() {
         return data;
     }
 
     /**
      * @param data the data to set
      */
-    public void setData(int data) {
+    public void setData(T data) {
         this.data = data;
     }
 

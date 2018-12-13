@@ -4,7 +4,7 @@ package linkedlistassignment;
  *
  * @author Eric Lin
  */
-public class LinkedList<Patient extends Comparable<Patient>> {
+public class LinkedList<T extends Comparable<T>>{
 
     //first node in chain
     private Node head = null;
@@ -21,15 +21,15 @@ public class LinkedList<Patient extends Comparable<Patient>> {
      *
      * @param node node being added
      */
-    public void add(Object item) {
-        Node temp = new Node(item);
+    public void add(T item) {
+        Node<T> node = new Node<T>(item);
         //first node being added
         if (getHead() == null) {
-            setHead(temp);
-            setTail(temp);
+            setHead(node);
+            setTail(node);
         } //links node to current last node
         else {
-            getTail().setNext(temp);
+            getTail().setNext(node);
             //identifies new node as the tail node
             setTail(getTail().getNext());
         }
@@ -43,7 +43,8 @@ public class LinkedList<Patient extends Comparable<Patient>> {
      * @param node node to be added
      * @param pos index to add node
      */
-    public void add(Node node, int pos) {
+    public void add(T item, int pos) {
+        Node<T> node = new Node<T>(item);
         Node temp = get(pos - 1);
         node.setNext(temp.getNext());
         temp.setNext(node);
@@ -124,7 +125,8 @@ public class LinkedList<Patient extends Comparable<Patient>> {
      * @param node replacement node
      * @param pos index in LinkedList
      */
-    public void set(Node node, int pos) {
+    public void set(T item, int pos) {
+        Node<T> node = new Node<T>(item);
         Node temp = get(pos - 1);
         //head case
         if (pos == 0) {
