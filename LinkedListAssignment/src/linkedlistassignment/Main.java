@@ -14,6 +14,11 @@ public class Main {
         //adds node 1 and 2
         list.add(new Patient("Eric","Lin"));
         list.add(new Patient("Andrew","Su"));
+        list.add(new Patient("Carl","Wu"),1);
+        list.remove();
+        LinkedList<Patient> list2 = new LinkedList<Patient>();
+        list2.add(new Patient("Bill","Cui"));
+        list.add(list2);
         System.out.println(list);
     }
 }
