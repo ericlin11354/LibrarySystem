@@ -7,7 +7,7 @@ package GUI;
 
 /**
  *
- * @author 349361337
+ * @author 069949345 (Natalie)
  */
 public class LoginScreen extends javax.swing.JPanel {
 
@@ -27,19 +27,104 @@ public class LoginScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        welcome = new javax.swing.JLabel();
+        searchByTitle = new javax.swing.JLabel();
+        searchBar = new javax.swing.JTextField();
+        bookBarcode = new javax.swing.JLabel();
+        barcodeGoesHere = new javax.swing.JTextField();
+        scanDirectly = new javax.swing.JLabel();
+        leaveReview = new javax.swing.JLabel();
+        IDNumber = new javax.swing.JLabel();
+        studentIDCode = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
+
+        welcome.setText("Welcome to the NHS Library Book Database!");
+
+        searchByTitle.setText("Search by Title:");
+
+        bookBarcode.setText("Book Barcode:");
+
+        scanDirectly.setText("Or, scan the barcode of a book directly:");
+
+        leaveReview.setText("Want to leave a review? Scan your Student ID!");
+
+        IDNumber.setText("ID Number:");
+
+        searchButton.setText("Search!");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(93, 93, 93)
+                        .addComponent(welcome))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(103, 103, 103)
+                        .addComponent(scanDirectly))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(leaveReview))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(72, 72, 72)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(searchByTitle)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bookBarcode)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(barcodeGoesHere))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(IDNumber)
+                                .addGap(18, 18, 18)
+                                .addComponent(studentIDCode))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(searchButton)))
+                .addContainerGap(78, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(56, 56, 56)
+                .addComponent(welcome)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchByTitle)
+                    .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(scanDirectly)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bookBarcode)
+                    .addComponent(barcodeGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(leaveReview)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(IDNumber)
+                    .addComponent(studentIDCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(searchButton)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel IDNumber;
+    private javax.swing.JTextField barcodeGoesHere;
+    private javax.swing.JLabel bookBarcode;
+    private javax.swing.JLabel leaveReview;
+    private javax.swing.JLabel scanDirectly;
+    private javax.swing.JTextField searchBar;
+    private javax.swing.JButton searchButton;
+    private javax.swing.JLabel searchByTitle;
+    private javax.swing.JTextField studentIDCode;
+    private javax.swing.JLabel welcome;
     // End of variables declaration//GEN-END:variables
 }
