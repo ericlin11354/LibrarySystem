@@ -19,6 +19,7 @@ public class Book {
     String categories;
     int barcode;
     
+    
     public Book(String title, String author, String synopsis, int rating, String comments, String datePublished, String categories){
         this.title = title;
         this.author = author;
@@ -28,5 +29,8 @@ public class Book {
         this.datePublished = datePublished;
         this.categories = categories;
     }
-     
+    
+    public Book(){
+        
+    }
 }
