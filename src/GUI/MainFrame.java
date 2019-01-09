@@ -74,6 +74,14 @@ public class MainFrame extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainFrame().setVisible(true);
+                /*
+                as the user progresses through the program, it'll cycle through
+                the different login screens by setting only one as visible at one
+                time while the rest are invisible, such as switching to the search
+                results screen once a book title has been entered and the search button
+                has been pressed
+                i'll implement this properly once the designs are done
+                */
             }
         });
     }
