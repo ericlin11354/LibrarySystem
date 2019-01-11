@@ -54,16 +54,19 @@ public class BookInfoScreen extends javax.swing.JPanel {
         authorLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         authorLabel.setText("Author:");
 
+        putAuthorNameHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putAuthorNameHere.setText("jLabel4");
 
         dateLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         dateLabel.setText("Date of Publication:");
 
+        putPublishDateHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putPublishDateHere.setText("jLabel6");
 
         publisherLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         publisherLabel.setText("Publisher:");
 
+        putPublisherNameHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putPublisherNameHere.setText("jLabel8");
 
         genreLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
@@ -135,7 +138,7 @@ public class BookInfoScreen extends javax.swing.JPanel {
                                         .addComponent(readingLevelLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(putReadingLevelHere)))
-                                .addGap(0, 87, Short.MAX_VALUE))
+                                .addGap(0, 76, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -150,9 +153,9 @@ public class BookInfoScreen extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(putTitleHere)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(putAuthorNameHere)
-                            .addComponent(authorLabel))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(authorLabel)
+                            .addComponent(putAuthorNameHere))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(dateLabel)
