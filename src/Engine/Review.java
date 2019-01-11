@@ -61,7 +61,7 @@ public class Review {
      * @return 
      */
     private double averageRating() {
-        double averageRating = addedRatings / numRatings;
+        //double averageRating = addedRatings / numRatings;
         return 0;
     }
 }
