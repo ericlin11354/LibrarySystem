@@ -13,19 +13,23 @@ public class Book {
     String title;
     String author;
     String synopsis;
-    int rating;
+    int addedRatings;
+    int numRatings;
     String comments;
+    public int numComments;
     String datePublished;
     String categories;
     int barcode;
     
     
-    public Book(String title, String author, String synopsis, int rating, String comments, String datePublished, String categories){
+    public Book(String title, String author, String synopsis, int addedRatings, int numRatings, String comments, int numComments, String datePublished, String categories){
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
-        this.rating = rating;
+        this.addedRatings = addedRatings;
+        this.numRatings = numRatings;
         this.comments = comments;
+        this.numComments = numComments;
         this.datePublished = datePublished;
         this.categories = categories;
     }
