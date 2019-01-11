@@ -23,6 +23,7 @@ public class Review {
         //if user populates the text box when the window is changed, the addComment() method is called
         //if the user user uses the slider, when the window changes,
         //the computer will take in the value of the slider and call the addRating() method
+        //link the netbeans file and an exterior file
     }
 
     /**
