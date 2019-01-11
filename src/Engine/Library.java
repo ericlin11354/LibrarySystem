@@ -29,7 +29,7 @@ public class Library {
      * @param book
      */
     public void addBook(Book book) {
-        
+
     }
 
     /**
@@ -52,34 +52,16 @@ public class Library {
      * Looks at book selection based on categories
      */
     public static void browseBook(String category) throws IOException {
-        try {
-            Document doc = Jsoup.connect("https://openlibrary.org/works/OL16313124W/Harry_Potter_and_the_Chamber_of_Secrets").get();
-            Elements itemprops = doc.getElementsContainingText("J. K.");
-            for(Element itemprop : itemprops){
-                System.out.println(itemprop.text());
-            }
-            /*URL url = new URL("https://openlibrary.org/works/OL16313124W/Harry_Potter_and_the_Chamber_of_Secrets");
-            URLConnection con = url.openConnection();
-            InputStream is = con.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(is));
-            String s = br.readLine();
-             while(s!=null){
-             System.out.println(s);
-             s = br.readLine();
-             }*/
-            /*while(!s.contains("|author")){
-             s = br.readLine();
-             }
-             System.out.println(s.substring(s.indexOf("=")+2));*/
-            //br.close();
-        } catch (MalformedURLException e) {
-            System.out.println("URL cannot be found or does not exist.");
-        }
-
+        String url = "https://openlibrary.org/works/OL16313124W/Harry_Potter_and_the_Chamber_of_Secrets";
+        url = "https://openlibrary.org/works/OL271685W/Star_Wars";
+        Document doc = Jsoup.connect(url).get();
+        Elements itemprops = doc.getElementsByAttributeStarting("itemprop");
+        String title = itemprops.get(0).text();
+        String author = itemprops.get(1).text();
+        System.out.println(title +" by "+author);
     }
 
     //driver method (FOR TESTING)
-
     public static void main(String[] args) throws IOException {
         browseBook("test");
     }
