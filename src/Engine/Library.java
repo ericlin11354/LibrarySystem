@@ -13,6 +13,10 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Scanner;
+
 
 /**
  *
@@ -25,8 +29,33 @@ public class Library {
      *
      * @param book
      */
-    public void addBook(Book book) {
+    public void addBook(Book book) throws IOException {
+        boolean exist = true;
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        PrintWriter pw = new PrintWriter(f);
+        String delimiter = ",";
+        //Checks if the file already has the book stored already
+        while (input.hasNext()) {
+            if (input.nextLine().contains(book.barcode)) {
+                exist = true;
+            } else {
+                exist = false;
+            }
+        }
+        input.close();
 
+        if (exist == false) {
+            pw.println(book.barcode + delimiter);
+            pw.println(book.title + delimiter);
+            pw.println(book.author + delimiter);
+            pw.println(book.datePublished);
+            pw.println(book.categories);
+            pw.println(book.numRatings);
+            pw.println(book.comments);
+            pw.println(book.synopsis);
+            pw.close();
+        }
     }
 
     /**

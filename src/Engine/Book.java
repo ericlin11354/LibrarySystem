@@ -19,10 +19,10 @@ public class Book {
     public int numComments;
     String datePublished;
     String categories;
-    int barcode;
+    String barcode;
     
     
-    public Book(String title, String author, String synopsis, int addedRatings, int numRatings, String comments, int numComments, String datePublished, String categories){
+    public Book(String title, String author, String synopsis, int addedRatings, int numRatings, String comments, int numComments, String datePublished, String categories, String barcode){
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
@@ -32,6 +32,7 @@ public class Book {
         this.numComments = numComments;
         this.datePublished = datePublished;
         this.categories = categories;
+        this.barcode = barcode;
     }
     
     public Book(){
