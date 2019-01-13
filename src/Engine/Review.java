@@ -1,13 +1,30 @@
 package Engine;
 
+import java.io.File; //the import used to access exterior files
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+import java.util.Scanner; //the import used to access the scanner function
+
 /**
  * This file is for when a user wants to leave a review on a book.
  *
  * @author 073685950 (Alex Weber)
  */
-public class Review {
+public class Review  {
 
+    File file = new File ("C:\\Users\\Alexander\\Documents\\Grade 12\\Computer Studies\\bookLibrary.txt");
+    Scanner sc = new Scanner(file);
+    PrintWriter pw = new PrintWriter(file);
+    //PrintWriter pw = new PrintWriter(new FileWriter(file, true));
     Book book = new Book(); //making a book so all the variables can be used
+
+    /**
+     * This is the constructor for the Review class.
+     * @throws FileNotFoundException this is thrown because the program needs to check that the file exists
+     */
+    public Review() throws FileNotFoundException {
+    }
 
     /**
      * This method is initiated by the user, this will allow them to add a
@@ -90,6 +107,15 @@ public class Review {
     public int getAddedRatings() {
         return book.addedRatings;
     }
+    
+    /**
+     * This method gets the number of ratings made on the book.
+     *
+     * @return the number of ratings made
+     */
+    public int getNumberRatings() {
+        return book.numRatings;
+    }
 
     /**
      * This method gets the number of comments made on the book.
@@ -101,12 +127,12 @@ public class Review {
     }
 
     /**
-     * This method gets the number of ratings made on the book.
+     * This method gets the comments for the book.
      *
-     * @return the number of ratings made
+     * @return the comments made on the book
      */
-    public int getNumberRatings() {
-        return book.numRatings;
+    public String getComments() {
+        return book.comments;
     }
 
     /**

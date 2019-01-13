@@ -16,7 +16,7 @@ public class Book {
     int addedRatings;
     int numRatings;
     String comments;
-    public int numComments;
+    int numComments;
     String datePublished;
     String categories;
     String barcode;
