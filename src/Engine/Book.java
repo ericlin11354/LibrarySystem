@@ -16,20 +16,17 @@ public class Book {
     int addedRatings;
     int numRatings;
     String comments;
-    int numComments;
     String datePublished;
     String categories;
     String barcode;
     
     
-    public Book(String title, String author, String synopsis, int addedRatings, int numRatings, String comments, int numComments, String datePublished, String categories, String barcode){
+    public Book(String title, String author, String synopsis, int numRatings, String comments, String datePublished, String categories, String barcode){
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
-        this.addedRatings = addedRatings;
         this.numRatings = numRatings;
         this.comments = comments;
-        this.numComments = numComments;
         this.datePublished = datePublished;
         this.categories = categories;
         this.barcode = barcode;

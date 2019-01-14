@@ -1,8 +1,8 @@
 package Engine;
 
 import java.io.File; //the import used to access exterior files
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
+import java.io.FileNotFoundException; //the import for the file not found exception
+import java.io.PrintWriter; //the import for the print writer class
 import java.util.Scanner; //the import used to access the scanner function
 
 /**
@@ -12,7 +12,7 @@ import java.util.Scanner; //the import used to access the scanner function
  */
 public class Review  {
 
-    File file = new File ("");
+    File file = new File ("H:\\Documents\\Computer Studies\\NetBeansProjects\\ICS4UAP-LibrarySystem\\bookinfo.txt");
     Scanner sc = new Scanner(file); //making a new scanner to read from a file
     PrintWriter pw = new PrintWriter(file); //allows to print added comments and ratings to the file
     Book book = new Book(); //making a book so all the variables can be used
@@ -49,8 +49,8 @@ public class Review  {
      */
     private void addComment(String saveText) {
         //from the GUI, connect to a text box and just save the text as an String
-        storeComment(saveText);
-        book.numComments++; //adds one to the counter
+        //textboxText = saveText;
+        storeComment(saveText); //stores the comment back into the file
     }
 
     /**
@@ -61,7 +61,8 @@ public class Review  {
      */
     private void addRating(int saveRating) {
         //from the GUI, connect to a slider and use that variable as the rating variable
-        storeRating(saveRating);
+        //slider = saveRating;
+        storeRating(saveRating); //stores the rating
         book.numRatings++; //adds one to the counter
     }
 
@@ -72,11 +73,7 @@ public class Review  {
      * @param comment the text to be saved
      */
     private void storeComment(String comment) {
-        //stores the comment to the exterior file
-        
-        pw.println(comment);
-        pw.close();
-        //can be read from using another method in Book (may be changed later)
+        book.comments += comment; //adds the most recent comment to all the other files
     }
 
     /**
@@ -86,8 +83,7 @@ public class Review  {
      * @param rating the rating to be saved
      */
     private void storeRating(int rating) {
-        //stores the rating to the exterior file
-        //can be read from using another method in Book (may be changed later)
+        book.addedRatings += rating; //adds the most recent rating to all the ratings
     }
 
     /**
@@ -97,7 +93,7 @@ public class Review  {
      */
     private double calculateBookRating() {
         double averageRating = book.addedRatings / book.numRatings; //calculates the average
-        return averageRating;
+        return averageRating; //returns the calculated average
     }
 
     /**
@@ -106,7 +102,7 @@ public class Review  {
      * @return the value of addedRatings
      */
     public int getAddedRatings() {
-        return book.addedRatings;
+        return book.addedRatings; //returns all the ratings added together
     }
     
     /**
@@ -115,16 +111,7 @@ public class Review  {
      * @return the number of ratings made
      */
     public int getNumberRatings() {
-        return book.numRatings;
-    }
-
-    /**
-     * This method gets the number of comments made on the book.
-     *
-     * @return the number of comments
-     */
-    public int getNumberComments() {
-        return book.numComments;
+        return book.numRatings; //returns the number of ratings made
     }
 
     /**
@@ -133,7 +120,7 @@ public class Review  {
      * @return the comments made on the book
      */
     public String getComments() {
-        return book.comments;
+        return book.comments; //returns all the comments
     }
 
     /**
