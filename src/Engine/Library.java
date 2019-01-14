@@ -23,7 +23,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
-
 /**
  *
  * @author 349361337
@@ -34,41 +33,37 @@ public class Library {
     public String author;
     public URL cover;
     public String desc;
-    
-    public Library(){
+
+    public Library() {
         title = author = desc = "";
         cover = null;
     }
+
     /**
      * Adds a new book
      *
      * @param book
      */
     public void addBook(Book book) throws IOException {
-        boolean exist = true;
+   
         File f = new File("bookinfo.txt");
         Scanner input = new Scanner(f);
         PrintWriter pw = new PrintWriter(f);
         String delimiter = ",";
         //Checks if the file already has the book stored already
-        while (input.hasNext()) {
-            if (input.nextLine().contains(book.barcode)) {
-                exist = true;
-            } else {
-                exist = false;
-            }
-        }
+        boolean exist = isBookExisting(book);
         input.close();
 
         if (exist == false) {
-            pw.println(book.barcode + delimiter);
-            pw.println(book.title + delimiter);
-            pw.println(book.author + delimiter);
-            pw.println(book.datePublished);
-            pw.println(book.categories);
-            pw.println(book.numRatings);
-            pw.println(book.comments);
-            pw.println(book.synopsis);
+            pw.print(book.barcode+delimiter);
+            pw.print(book.title+delimiter);
+            pw.print(book.author+delimiter);
+            pw.print(book.datePublished+delimiter);
+            pw.print(book.categories+delimiter);
+            pw.print(book.numRatings+delimiter);
+            pw.print(book.comments+delimiter);
+            pw.print(book.synopsis);
+            pw.println();
             pw.close();
         }
     }
@@ -78,8 +73,30 @@ public class Library {
      *
      * @param book
      */
-    public void removeBook(Book book) {
-
+    public void removeBook(Book book) throws IOException {
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        boolean exist = isBookExisting(book);
+        if(exist == true){
+            
+        }
+    }   
+    
+    /**
+     * Helper method to see if the book exists already in the file
+     * @param book
+     * @return
+     * @throws IOException 
+     */
+    public boolean isBookExisting(Book book) throws IOException {
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        while (input.hasNext()) {
+            if (input.nextLine().contains(book.barcode)) {
+                return true;
+            } 
+        }
+        return false;
     }
 
     /**
@@ -96,41 +113,51 @@ public class Library {
         WebDriver driver = new HtmlUnitDriver();
         driver.get("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=9780807286012");
         WebElement element = driver.findElement(By.name("q"));
-        
+
         /*System.out.println(driver.getCurrentUrl());*/
         String url = "https://openlibrary.org/works/OL16313124W/Harry_Potter_and_the_Chamber_of_Secrets";
         Document doc = Jsoup.connect(url).get();
         title = doc.select(".BookTitle").get(0).text();
         author = doc.select(".Author").get(0).text();
         Elements imgs = doc.getElementsByTag("img");
-        for(Element img : imgs){
-            if(img.hasAttr("src") && img.hasClass("cover")){
-                cover = new URL("https:"+img.attr("src"));
+        for (Element img : imgs) {
+            if (img.hasAttr("src") && img.hasClass("cover")) {
+                cover = new URL("https:" + img.attr("src"));
                 break;
             }
         }
         String line = null;
         Elements paragraphs = doc.getElementsByTag("p");
-        for(Element para : paragraphs){
+        for (Element para : paragraphs) {
             line = para.text();
-            if(line.contains("Source"))
+            if (line.contains("Source")) {
                 break;
+            }
             desc += line + "\n";
         }
-        desc = desc.substring(0,desc.length()-1);
+        desc = desc.substring(0, desc.length() - 1);
         //test output
         /*System.out.println(cover);
-        System.out.println(title);
-        System.out.println(author);
-        System.out.println("Description: "+desc);*/
+         System.out.println(title);
+         System.out.println(author);
+         System.out.println("Description: "+desc);*/
     }
 
     //testing
-    public static void main(String[]args)throws IOException{
+    public static void main(String[] args) throws IOException {
         Library lib = new Library();
-        lib.browseBook("s");
+       // lib.browseBook("s");
+        Book book = new Book();
+        book.title = "whatsup";
+        book.author = "asdasd";
+        lib.addBook(book);
+//        Book b1 = new Book();
+//        b1.author = "yo";
+//        b1.title = "asadasdasd";
+//        lib.addBook(b1);
+        
     }
-    
+
     /**
      * Sorts the books by categories
      */
