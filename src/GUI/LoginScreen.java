@@ -57,6 +57,11 @@ public class LoginScreen extends javax.swing.JPanel {
         IDNumber.setText("ID Number:");
 
         searchButton.setText("Search!");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,6 +128,21 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addGap(91, 91, 91))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        String title = searchBar.getText();
+        String bar = barcodeGoesHere.getText();
+        int barcode;
+        barcode = Integer.parseInt(bar);
+        //String id = studentIDCode.getText();
+        //int studentID;
+        //studentID = Integer.parseInt(id);
+        if (!title.isEmpty() || !bar.isEmpty()) {
+            new LoginScreen().setVisible(false);
+            new BookInfoScreen().setVisible(true);
+        }
+    }//GEN-LAST:event_searchButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
