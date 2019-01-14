@@ -26,12 +26,12 @@ public class BookInfoScreen extends javax.swing.JPanel {
      */
     public BookInfoScreen(){
         initComponents();
-        try{
+        /*try{
         lib.browseBook("");
         img = ImageIO.read(lib.cover);        }
         catch(IOException e){
             System.out.println("BookInfoScreen constructing error");
-        }
+        }*/
     }
 
     /**
@@ -168,7 +168,7 @@ public class BookInfoScreen extends javax.swing.JPanel {
                                         .addComponent(readingLevelLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(putReadingLevelHere)))
-                                .addGap(0, 76, Short.MAX_VALUE))
+                                .addGap(0, 77, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -215,7 +215,7 @@ public class BookInfoScreen extends javax.swing.JPanel {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ratingAndReviewButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

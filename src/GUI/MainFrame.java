@@ -4,18 +4,23 @@
  * and open the template in the editor.
  */
 package GUI;
+import java.awt.CardLayout;
 
 /**
  *
  * @author 349361337
  */
 public class MainFrame extends javax.swing.JFrame {
+    public static CardLayout cards = new CardLayout(575, 510);
+    
 
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        cards.addLayoutComponent(loginScreen1, "Login Screen");
+        cards.addLayoutComponent(bookInfoScreen1, "Book Screen");
     }
 
     /**

@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import GUI.BookInfoScreen;
+
 
 /**
  *
@@ -108,7 +110,7 @@ public class LoginScreen extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchByTitle))
@@ -139,10 +141,10 @@ public class LoginScreen extends javax.swing.JPanel {
         //String id = studentIDCode.getText();
         //int studentID;
         //studentID = Integer.parseInt(id);
-        if (!title.isEmpty() || !bar.isEmpty()) {
+        /*if (!title.isEmpty() || !bar.isEmpty()) {
             new LoginScreen().setVisible(false);
             new BookInfoScreen().setVisible(true);
-        }
+        }*/
     }//GEN-LAST:event_searchButtonActionPerformed
 
 
