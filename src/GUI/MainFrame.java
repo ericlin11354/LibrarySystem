@@ -21,6 +21,7 @@ public class MainFrame extends javax.swing.JFrame {
         initComponents();
         cards.addLayoutComponent(loginScreen1, "Login Screen");
         cards.addLayoutComponent(bookInfoScreen1, "Book Screen");
+        cards.layoutContainer(this);
     }
 
     /**
@@ -36,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         bookInfoScreen1 = new GUI.BookInfoScreen();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setSize(new java.awt.Dimension(575, 510));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -87,7 +89,9 @@ public class MainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame().setVisible(true);
+                MainFrame Main = new MainFrame();
+                Main.setVisible(true);
+                cards.first(Main);
                 /*
                 as the user progresses through the program, it'll cycle through
                 the different login screens by setting only one as visible at one
