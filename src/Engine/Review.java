@@ -2,7 +2,6 @@ package Engine;
 
 import java.io.File; //the import used to access exterior files
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.Scanner; //the import used to access the scanner function
 
@@ -13,10 +12,9 @@ import java.util.Scanner; //the import used to access the scanner function
  */
 public class Review  {
 
-    File file = new File ("C:\\Users\\Alexander\\Documents\\Grade 12\\Computer Studies\\bookLibrary.txt");
-    Scanner sc = new Scanner(file);
-    PrintWriter pw = new PrintWriter(file);
-    //PrintWriter pw = new PrintWriter(new FileWriter(file, true));
+    File file = new File ("");
+    Scanner sc = new Scanner(file); //making a new scanner to read from a file
+    PrintWriter pw = new PrintWriter(file); //allows to print added comments and ratings to the file
     Book book = new Book(); //making a book so all the variables can be used
 
     /**
@@ -75,6 +73,9 @@ public class Review  {
      */
     private void storeComment(String comment) {
         //stores the comment to the exterior file
+        
+        pw.println(comment);
+        pw.close();
         //can be read from using another method in Book (may be changed later)
     }
 
