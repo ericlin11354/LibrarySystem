@@ -6,7 +6,10 @@
 package GUI;
 
 import Engine.Library;
+import java.awt.Dimension;
+import java.awt.Image;
 import java.io.IOException;
+import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
@@ -16,22 +19,16 @@ import javax.swing.ImageIcon;
  */
 public class BookInfoScreen extends javax.swing.JPanel {
 
+    public Image img;
     public static Library lib = new Library();
     /**
      * Creates new form BookInfoScreen
      */
     public BookInfoScreen(){
         initComponents();
-    }
-    public BookInfoScreen(String s){
-        initComponents();
         try{
-        lib.browseBook(s);
-        //sets book image
-        Icon cover = new ImageIcon(lib.cover);
-        bookCover.setIcon(cover);
-            System.out.println("worked");
-        }
+        lib.browseBook("");
+        img = ImageIO.read(lib.cover);        }
         catch(IOException e){
             System.out.println("BookInfoScreen constructing error");
         }
@@ -67,6 +64,16 @@ public class BookInfoScreen extends javax.swing.JPanel {
         putAverageRatingHere = new javax.swing.JLabel();
         ratingAndReviewButton = new javax.swing.JButton();
 
+        addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                formAncestorAdded(evt);
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
+
         putTitleHere.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         putTitleHere.setText("Title goes here");
 
@@ -101,8 +108,12 @@ public class BookInfoScreen extends javax.swing.JPanel {
         synopsisLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         synopsisLabel.setText("Synopsis:");
 
+        putSynopsisHere.setEditable(false);
         putSynopsisHere.setColumns(20);
+        putSynopsisHere.setLineWrap(true);
         putSynopsisHere.setRows(5);
+        putSynopsisHere.setWrapStyleWord(true);
+        putSynopsisHere.setOpaque(false);
         jScrollPane1.setViewportView(putSynopsisHere);
 
         averageRatingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
@@ -207,6 +218,15 @@ public class BookInfoScreen extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
+        // TODO add your handling code here:
+        img = img.getScaledInstance(bookCover.getWidth(), bookCover.getHeight(), java.awt.Image.SCALE_SMOOTH);
+        bookCover.setIcon(new ImageIcon(img));
+        putAuthorNameHere.setText(lib.author);
+        putTitleHere.setText(lib.title);
+        putSynopsisHere.setText(lib.desc);
+    }//GEN-LAST:event_formAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
