@@ -1,7 +1,8 @@
 package Engine;
 
 import java.io.File; //the import used to access exterior files
-import java.io.FileNotFoundException; //the import for the file not found exception
+import java.io.FileWriter; //the import for the file writer
+import java.io.IOException; //the import for the IOException
 import java.io.PrintWriter; //the import for the print writer class
 import java.util.Scanner; //the import used to access the scanner function
 
@@ -10,18 +11,20 @@ import java.util.Scanner; //the import used to access the scanner function
  *
  * @author 073685950 (Alex Weber)
  */
-public class Review  {
+public class Review {
 
-    File file = new File ("H:\\Documents\\Computer Studies\\NetBeansProjects\\ICS4UAP-LibrarySystem\\bookinfo.txt");
-    Scanner sc = new Scanner(file); //making a new scanner to read from a file
-    PrintWriter pw = new PrintWriter(file); //allows to print added comments and ratings to the file
+    File f = new File("bookinfo.txt"); //create a new file linked to bookinfo
+    Scanner input = new Scanner(f); //create a new scanner
+    PrintWriter pw = new PrintWriter(new FileWriter(f, true)); //create a new print writer
     Book book = new Book(); //making a book so all the variables can be used
 
     /**
      * This is the constructor for the Review class.
-     * @throws FileNotFoundException this is thrown because the program needs to check that the file exists
+     *
+     * @throws IOException this is thrown because the program needs to check
+     * that the file exists
      */
-    public Review() throws FileNotFoundException {
+    public Review() throws IOException {
     }
 
     /**
@@ -104,7 +107,7 @@ public class Review  {
     public int getAddedRatings() {
         return book.addedRatings; //returns all the ratings added together
     }
-    
+
     /**
      * This method gets the number of ratings made on the book.
      *

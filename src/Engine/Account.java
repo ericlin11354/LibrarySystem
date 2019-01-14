@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Engine;
 
 /**
+ * The file for the account class.
  *
  * @author 349361337
  */
 public class Account {
-    
 }

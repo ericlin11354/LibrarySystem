@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Engine;
 
 import java.io.IOException;
@@ -25,25 +20,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
+ * The file for the library class.
  *
  * @author 349361337
  */
 public class Library {
 
-    public String title;
-    public String author;
-    public URL cover;
-    public String desc;
+    public String title; //the variable for book's title
+    public String author; //the variable for the author of the book
+    public URL cover; //the variable book's cover
+    public String desc; //the variable for the description of the book.
 
+    /**
+     * The constructor for the library class.
+     */
     public Library() {
         title = author = desc = "";
         cover = null;
     }
 
     /**
-     * Adds a new book
+     * This method adds a new book to the library.
      *
-     * @param book
+     * @param book the book to be added
+     * @throws java.io.IOException
      */
     public void addBook(Book book) throws IOException {
         File f = new File("bookinfo.txt");
@@ -75,17 +75,17 @@ public class Library {
         }
     }
 
-
-
     /**
-     * Searches for a book by its title
+     * This method searches for a book by its title.
      */
     public void searchBook() {
-
     }
 
     /**
-     * Looks at book selection based on categories
+     * This method looks at book selection based on categories.
+     *
+     * @param category the genre to be looked through
+     * @throws IOException
      */
     public void browseBook(String category) throws IOException {
         WebDriver driver = new HtmlUnitDriver();
@@ -115,13 +115,26 @@ public class Library {
         }
         desc = desc.substring(0, desc.length() - 1);
         //test output
-        /*System.out.println(cover);
+        /*
+        System.out.println(cover);
          System.out.println(title);
          System.out.println(author);
-         System.out.println("Description: "+desc);*/
+         System.out.println("Description: "+desc);
+         */
     }
 
-    //testing
+    /**
+     * This method sorts the books by categories.
+     */
+    public void sortBook() {
+    }
+
+    /**
+     * This main method is only used for testing.
+     *
+     * @param args
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
         // lib.browseBook("s");
@@ -139,13 +152,6 @@ public class Library {
         b2.barcode = "2222";
         b2.author = "eru";
         lib.addBook(b2);
-
-    }
-
-    /**
-     * Sorts the books by categories
-     */
-    public void sortBook() {
 
     }
 }

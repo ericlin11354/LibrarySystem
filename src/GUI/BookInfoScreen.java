@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import Engine.Library;
@@ -14,17 +9,19 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 /**
+ * This is the JPanel for the book information screen.
  *
- * @author 069949345
+ * @author 069949345 (Natalie)
  */
 public class BookInfoScreen extends javax.swing.JPanel {
 
     public Image img;
     public static Library lib = new Library();
+
     /**
      * Creates new form BookInfoScreen
      */
-    public BookInfoScreen(){
+    public BookInfoScreen() {
         initComponents();
         /*try{
         lib.browseBook("");
@@ -219,15 +216,17 @@ public class BookInfoScreen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * @param evt
+     */
     private void formAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_formAncestorAdded
-        // TODO add your handling code here:
         img = img.getScaledInstance(bookCover.getWidth(), bookCover.getHeight(), java.awt.Image.SCALE_SMOOTH);
         bookCover.setIcon(new ImageIcon(img));
         putAuthorNameHere.setText(lib.author);
         putTitleHere.setText(lib.title);
         putSynopsisHere.setText(lib.desc);
     }//GEN-LAST:event_formAncestorAdded
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel authorLabel;

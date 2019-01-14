@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import GUI.BookInfoScreen;
 import GUI.MainFrame;
 
-
 /**
+ * This is the JPanel for the login screen.
  *
  * @author 069949345 (Natalie)
  */
@@ -133,8 +128,11 @@ public class LoginScreen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     *
+     * @param evt
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        // TODO add your handling code here:
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         int barcode;
@@ -147,7 +145,6 @@ public class LoginScreen extends javax.swing.JPanel {
             new BookInfoScreen().setVisible(true);
         }*/
     }//GEN-LAST:event_searchButtonActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IDNumber;
