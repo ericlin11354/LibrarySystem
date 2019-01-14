@@ -5,17 +5,36 @@
  */
 package GUI;
 
+import Engine.Library;
+import java.io.IOException;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 069949345
  */
 public class BookInfoScreen extends javax.swing.JPanel {
 
+    public static Library lib = new Library();
     /**
      * Creates new form BookInfoScreen
      */
-    public BookInfoScreen() {
+    public BookInfoScreen(){
         initComponents();
+    }
+    public BookInfoScreen(String s){
+        initComponents();
+        try{
+        lib.browseBook(s);
+        //sets book image
+        Icon cover = new ImageIcon(lib.cover);
+        bookCover.setIcon(cover);
+            System.out.println("worked");
+        }
+        catch(IOException e){
+            System.out.println("BookInfoScreen constructing error");
+        }
     }
 
     /**
