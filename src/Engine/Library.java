@@ -14,6 +14,7 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.Scanner;
@@ -45,59 +46,36 @@ public class Library {
      * @param book
      */
     public void addBook(Book book) throws IOException {
-   
         File f = new File("bookinfo.txt");
         Scanner input = new Scanner(f);
-        PrintWriter pw = new PrintWriter(f);
+        boolean exist = true;
+        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
         String delimiter = ",";
         //Checks if the file already has the book stored already
-        boolean exist = isBookExisting(book);
+        while (input.hasNext()) {
+            if (input.next().contains(book.barcode)) {
+                exist = true;
+            } else {
+                exist = false;
+            }
+        }
         input.close();
 
         if (exist == false) {
-            pw.print(book.barcode+delimiter);
-            pw.print(book.title+delimiter);
-            pw.print(book.author+delimiter);
-            pw.print(book.datePublished+delimiter);
-            pw.print(book.categories+delimiter);
-            pw.print(book.numRatings+delimiter);
-            pw.print(book.comments+delimiter);
+            pw.print(book.barcode + delimiter);
+            pw.print(book.title + delimiter);
+            pw.print(book.author + delimiter);
+            pw.print(book.datePublished + delimiter);
+            pw.print(book.categories + delimiter);
+            pw.print(book.numRatings + delimiter);
+            pw.print(book.comments + delimiter);
             pw.print(book.synopsis);
             pw.println();
             pw.close();
         }
     }
 
-    /**
-     * Removes a book
-     *
-     * @param book
-     */
-    public void removeBook(Book book) throws IOException {
-        File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
-        boolean exist = isBookExisting(book);
-        if(exist == true){
-            
-        }
-    }   
-    
-    /**
-     * Helper method to see if the book exists already in the file
-     * @param book
-     * @return
-     * @throws IOException 
-     */
-    public boolean isBookExisting(Book book) throws IOException {
-        File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
-        while (input.hasNext()) {
-            if (input.nextLine().contains(book.barcode)) {
-                return true;
-            } 
-        }
-        return false;
-    }
+
 
     /**
      * Searches for a book by its title
@@ -146,16 +124,22 @@ public class Library {
     //testing
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
-       // lib.browseBook("s");
+        // lib.browseBook("s");
         Book book = new Book();
+        book.barcode = "0101010";
         book.title = "whatsup";
         book.author = "asdasd";
         lib.addBook(book);
-//        Book b1 = new Book();
-//        b1.author = "yo";
-//        b1.title = "asadasdasd";
-//        lib.addBook(b1);
-        
+        Book b1 = new Book();
+        b1.author = "yo";
+        b1.barcode = "2222";
+        b1.title = "asadasdasd";
+        lib.addBook(b1);
+        Book b2 = new Book();
+        b2.barcode = "2222";
+        b2.author = "eru";
+        lib.addBook(b2);
+
     }
 
     /**
