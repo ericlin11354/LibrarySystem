@@ -56,6 +56,7 @@ public class Library {
             String[] codes = input.nextLine().split(delimiter);
             if (codes[0].equals(book.barcode)) {
                 exist = true;
+                break;
             } else {
                 exist = false;
             }
