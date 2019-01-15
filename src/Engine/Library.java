@@ -48,12 +48,13 @@ public class Library {
     public void addBook(Book book) throws IOException {
         File f = new File("bookinfo.txt");
         Scanner input = new Scanner(f);
-        boolean exist = true;
+        boolean exist = false;
         PrintWriter pw = new PrintWriter(new FileWriter(f, true));
         String delimiter = ",";
         //Checks if the file already has the book stored already
         while (input.hasNext()) {
-            if (input.next().contains(book.barcode)) {
+            String[] codes = input.nextLine().split(delimiter);
+            if (codes[0].equals(book.barcode)) {
                 exist = true;
             } else {
                 exist = false;
@@ -74,13 +75,17 @@ public class Library {
             pw.close();
         }
     }
+//         String barcodes[] = input.nextLine().split(",");
+//             for(int i = 0; i<8;i++)
+//             System.out.println(barcodes[i]);
+//            if (barcodes[0].equals(book.barcode)) {
+//    }
 
     /**
      * This method searches for a book by its title.
      */
-    public void searchBook() {
-    }
-
+//    public void searchBook() {
+//    }
     /**
      * This method looks at book selection based on categories.
      *
@@ -116,7 +121,7 @@ public class Library {
         desc = desc.substring(0, desc.length() - 1);
         //test output
         /*
-        System.out.println(cover);
+         System.out.println(cover);
          System.out.println(title);
          System.out.println(author);
          System.out.println("Description: "+desc);
@@ -152,6 +157,10 @@ public class Library {
         b2.barcode = "2222";
         b2.author = "eru";
         lib.addBook(b2);
+        Book b3 = new Book();
+        b3.barcode = "2222";
+        b3.author = "eru";
+        lib.addBook(b3);
 
     }
 }
