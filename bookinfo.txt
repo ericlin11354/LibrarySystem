@@ -1,2 +1,2 @@
-0101010,whatsup,asdasd,null,null,0,null,null
-2222,asadasdasd,yo,null,null,0,null,null
+0101010,,whatsup,,asdasd,,null,,null,,0,,null,,null
+2222,,asadasdasd,,yo,,null,,null,,0,,null,,null
