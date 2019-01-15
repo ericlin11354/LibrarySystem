@@ -94,39 +94,43 @@ public class Library {
      * @throws IOException
      */
     public void browseBook(String category) throws IOException {
+        //test barcode
+        String barcode = "9780807286012";
+        //connects to website
+        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q="+barcode+"&fq=dt%3Abks";
         WebDriver driver = new HtmlUnitDriver();
-        driver.get("https://www.amazon.com/s/ref=nb_sb_noss?url=search-alias%3Daps&field-keywords=9780807286012");
-        WebElement element = driver.findElement(By.name("q"));
-
-        /*System.out.println(driver.getCurrentUrl());*/
-        String url = "https://openlibrary.org/works/OL16313124W/Harry_Potter_and_the_Chamber_of_Secrets";
-        Document doc = Jsoup.connect(url).get();
-        title = doc.select(".BookTitle").get(0).text();
-        author = doc.select(".Author").get(0).text();
-        Elements imgs = doc.getElementsByTag("img");
-        for (Element img : imgs) {
-            if (img.hasAttr("src") && img.hasClass("cover")) {
-                cover = new URL("https:" + img.attr("src"));
-                break;
-            }
+        driver.get(url);
+        //gets first item in liust
+        WebElement item = driver.findElement(By.id("result-1"));
+        if(item==null)
+            System.out.println("no book");
+        item.click();
+        //parses book info page
+        Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
+        //gets title,author,publisher
+        String title = doc.getElementsByClass("title").get(0).text();
+        String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
+        String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
+        //gets publisher name and date
+        String pub = publisher[0];
+        String pubDate = publisher[1];
+        //gets genres
+        Elements elements = doc.getElementsByClass("subject-term");
+        String genres = "";
+        for(Element element : elements){
+            genres += element.text();
         }
-        String line = null;
-        Elements paragraphs = doc.getElementsByTag("p");
-        for (Element para : paragraphs) {
-            line = para.text();
-            if (line.contains("Source")) {
-                break;
-            }
-            desc += line + "\n";
-        }
-        desc = desc.substring(0, desc.length() - 1);
-        //test output
-        /*
-         System.out.println(cover);
-         System.out.println(title);
-         System.out.println(author);
-         System.out.println("Description: "+desc);
-         */
+        //gets cover image file
+        String cover = "https:"+doc.getElementsByClass("cover").get(0).attr("src");
+        String summ = doc.getElementById("summary").text();
+        Book b = new Book(title,author,summ,pub,pubDate,genres,barcode);
+        addBook(b);
+        /*System.out.println(title);
+        System.out.println(author);
+        System.out.println(publisher);
+        System.out.println(genres);
+        System.out.println(summ);
+        System.out.println(cover);*/
     }
 
     /**
