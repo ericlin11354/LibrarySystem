@@ -13,7 +13,7 @@ public class Book {
     String datePublished; //the variable for the book's publishing date
     String categories; //the varible for the book's genre
     String barcode; //the variable for the book's barcode
-    
+    Review review;
     /**
      * 
      * @param title
@@ -33,11 +33,15 @@ public class Book {
         this.datePublished = datePublished;
         this.categories = categories;
         this.barcode = barcode;
+        review = new Review();
     }
     
     /**
      *
      */
     public Book(){
+    }
+    public void comment(){
+        //review.addReview();
     }
 }

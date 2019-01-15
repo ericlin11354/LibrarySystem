@@ -69,8 +69,6 @@ public class Library {
             pw.print(book.author + delimiter);
             pw.print(book.datePublished + delimiter);
             pw.print(book.categories + delimiter);
-            pw.print(book.numRatings + delimiter);
-            pw.print(book.comments + delimiter);
             pw.print(book.synopsis);
             pw.println();
             pw.close();
@@ -93,17 +91,18 @@ public class Library {
      * @param category the genre to be looked through
      * @throws IOException
      */
-    public void browseBook(String category) throws IOException {
+    public Book browseBook(String category) throws IOException {
         //test barcode
         String barcode = "9780807286012";
         //connects to website
-        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q="+barcode+"&fq=dt%3Abks";
+        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
         WebDriver driver = new HtmlUnitDriver();
         driver.get(url);
         //gets first item in liust
         WebElement item = driver.findElement(By.id("result-1"));
-        if(item==null)
+        if (item == null) {
             System.out.println("no book");
+        }
         item.click();
         //parses book info page
         Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
@@ -117,20 +116,21 @@ public class Library {
         //gets genres
         Elements elements = doc.getElementsByClass("subject-term");
         String genres = "";
-        for(Element element : elements){
+        for (Element element : elements) {
             genres += element.text();
         }
         //gets cover image file
-        String cover = "https:"+doc.getElementsByClass("cover").get(0).attr("src");
+        String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
         String summ = doc.getElementById("summary").text();
-        Book b = new Book(title,author,summ,pub,pubDate,genres,barcode);
+        Book b = new Book(title, author, summ, pub, pubDate, genres, barcode);
         addBook(b);
+        return b;
         /*System.out.println(title);
-        System.out.println(author);
-        System.out.println(publisher);
-        System.out.println(genres);
-        System.out.println(summ);
-        System.out.println(cover);*/
+         System.out.println(author);
+         System.out.println(publisher);
+         System.out.println(genres);
+         System.out.println(summ);
+         System.out.println(cover);*/
     }
 
     /**
@@ -148,24 +148,7 @@ public class Library {
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
         // lib.browseBook("s");
-        Book book = new Book();
-        book.barcode = "0101010";
-        book.title = "whatsup";
-        book.author = "asdasd";
-        lib.addBook(book);
-        Book b1 = new Book();
-        b1.author = "yo";
-        b1.barcode = "2222";
-        b1.title = "asadasdasd";
-        lib.addBook(b1);
-        Book b2 = new Book();
-        b2.barcode = "2222";
-        b2.author = "eru";
-        lib.addBook(b2);
-        Book b3 = new Book();
-        b3.barcode = "2222";
-        b3.author = "eru";
-        lib.addBook(b3);
-
+        Book book = lib.browseBook("");
+        book.review
     }
 }

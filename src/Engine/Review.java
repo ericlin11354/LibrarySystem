@@ -17,14 +17,16 @@ public class Review {
     Scanner input = new Scanner(f); //create a new scanner
     PrintWriter pw = new PrintWriter(new FileWriter(f, true)); //create a new print writer
     Book book = new Book(); //making a book so all the variables can be used
-
+    
     /**
      * This is the constructor for the Review class.
      *
      * @throws IOException this is thrown because the program needs to check
-     * that the file exists
+     * that the file exists 
+     * Edited//we don't need to catch exceptions
      */
-    public Review() throws IOException {
+    public Review(){
+     
     }
 
     /**
