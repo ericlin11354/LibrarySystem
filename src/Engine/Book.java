@@ -27,12 +27,10 @@ public class Book {
      * @param categories
      * @param barcode 
      */
-    public Book(String title, String author, String synopsis, int numRatings, String comments, String datePublished, String categories, String barcode){
+    public Book(String title, String author, String synopsis, String datePublished, String categories, String barcode){
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
-        this.numRatings = numRatings;
-        this.comments = comments;
         this.datePublished = datePublished;
         this.categories = categories;
         this.barcode = barcode;

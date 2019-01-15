@@ -50,7 +50,7 @@ public class Library {
         Scanner input = new Scanner(f);
         boolean exist = false;
         PrintWriter pw = new PrintWriter(new FileWriter(f, true));
-        String delimiter = ",";
+        String delimiter = ",,";
         //Checks if the file already has the book stored already
         while (input.hasNext()) {
             String[] codes = input.nextLine().split(delimiter);
