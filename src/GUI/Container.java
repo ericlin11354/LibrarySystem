@@ -4,21 +4,18 @@
  * and open the template in the editor.
  */
 package GUI;
-import java.awt.CardLayout;
 
 /**
  *
  * @author 069949345
  */
 public class Container extends javax.swing.JPanel {
-    public static CardLayout cards = new CardLayout(575, 510);
 
     /**
      * Creates new form Container
      */
     public Container() {
         initComponents();
-        cards.layoutContainer(this);
     }
 
     /**
@@ -30,19 +27,32 @@ public class Container extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        loginScreen1 = new GUI.LoginScreen();
+        realBookInfoScreen1 = new GUI.RealBookInfoScreen();
+        reviewScreen1 = new GUI.ReviewScreen();
+
+        jTabbedPane1.addTab("tab1", loginScreen1);
+        jTabbedPane1.addTab("tab2", realBookInfoScreen1);
+        jTabbedPane1.addTab("tab3", reviewScreen1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 575, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private GUI.LoginScreen loginScreen1;
+    private GUI.RealBookInfoScreen realBookInfoScreen1;
+    private GUI.ReviewScreen reviewScreen1;
     // End of variables declaration//GEN-END:variables
 }

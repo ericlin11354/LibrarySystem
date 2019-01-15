@@ -1,6 +1,6 @@
 package GUI;
 
-import GUI.BookInfoScreen;
+import GUI.RealBookInfoScreen;
 
 /**
  * This is the JPanel for the login screen.
