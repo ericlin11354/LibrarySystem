@@ -40,6 +40,7 @@ public class LoginScreen2 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        searchButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         searchButton.setText("Search!");
         searchButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -137,6 +138,15 @@ public class LoginScreen2 extends javax.swing.JFrame {
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
+        if ((!title.isEmpty() || !bar.isEmpty()) && !id.isEmpty()) {
+            this.setVisible(false);
+            if (!bar.isEmpty()) {
+                new BookInfoScreen2().setVisible(true);
+            }
+            //else if (!title.isEmpty()) {
+                
+            //}
+        }
 
     }//GEN-LAST:event_searchButtonActionPerformed
 

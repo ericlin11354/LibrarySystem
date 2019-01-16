@@ -141,7 +141,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(putReadingLabelHere))
                                     .addComponent(synopsisLabel))
-                                .addGap(0, 77, Short.MAX_VALUE))
+                                .addGap(0, 156, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
@@ -191,10 +191,10 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                     .addComponent(averageRatingLabel)
                     .addComponent(putAverageRatingHere))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(addReviewButton)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();

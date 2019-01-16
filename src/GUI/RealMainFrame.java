@@ -29,12 +29,8 @@ public class RealMainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        container1 = new GUI.Container();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().add(container1);
-        container1.setBounds(0, 0, 610, 550);
 
         setSize(new java.awt.Dimension(628, 602));
         setLocationRelativeTo(null);
@@ -70,7 +66,8 @@ public class RealMainFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RealMainFrame().setVisible(true);
+                new RealMainFrame().setVisible(false);
+                new LoginScreen2().setVisible(true);
                 /*
                 as the user progresses through the program, it'll cycle through
                 the different login screens by setting only one as visible at one
@@ -84,6 +81,5 @@ public class RealMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Container container1;
     // End of variables declaration//GEN-END:variables
 }
