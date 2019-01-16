@@ -33,11 +33,11 @@ public class Book {
         this.datePublished = datePublished;
         this.categories = categories;
         this.barcode = barcode;
-        review = new Review();
+        review = new Review(barcode);
     }
     
     public void writeReview(String s,int rating){
-        review.addReview(this);
+        review.addReview(s,rating);
     }
     
     /**

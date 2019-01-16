@@ -147,5 +147,6 @@ public class Library {
         // lib.browseBook("s");
         Book book = lib.browseBook("");
         book.writeReview("I hate this book",4);
+        System.exit(1);
     }
 }

@@ -19,11 +19,13 @@ public class Review {
     */
     
     
-    
-    File f = new File("bookinfo.txt"); //create a new file linked to bookinfo
-    Scanner input = new Scanner(f); //create a new scanner
-    PrintWriter pw = new PrintWriter(new FileWriter(f, true)); //create a new print writer
-    Book book = new Book(); //making a book so all the variables can be used
+    //good practice to not initialize variables outside of construct methods
+    File f = null; //create a new file linked to bookinfo
+    Scanner input = null; //create a new scanner
+    PrintWriter pw = null; //create a new print writer
+    //Book book = null; //making a book so all the variables can be used
+    public static final String delim = ";";
+    String barcode;
     
     /**
      * This is the constructor for the Review class.
@@ -33,7 +35,23 @@ public class Review {
      * Edited//we don't need to catch exceptions
      */
     public Review(){
-     
+    }
+    
+    public Review(String barcode){
+        this.barcode = barcode;
+    }
+    
+    public void initPW(String path){
+        try{
+            pw = new PrintWriter(new FileWriter(f,true));
+        }
+        catch(IOException e){
+            System.out.println("IOException reading \""+f.getName());
+        }
+    }
+    
+    public void initScanner(String path){
+        
     }
 
     /**
@@ -42,7 +60,7 @@ public class Review {
      *
      * @param book the book that the review is going to be made on
      */
-    public void addReview(Book book) {
+    public void addReview(String review, int rating){
         //on the BookIntoScreen, the user will have the option to leave a review
         //the user to can choose if they want to leave a rating (using a slider)
         //or leave a comment (using a text boxt)
@@ -52,72 +70,95 @@ public class Review {
         //the computer will take in the value of the slider and call the addRating() method
         //link the netbeans file and an exterior file
         
-        //added this-Eric
         
+        f = new File("reviews/"+barcode+".txt");
+        //added this-Eric
+        pw.println(review+delim+rating);
+        pw.close();
     }
-
-    /**
-     * This method allows the user to add a comment to a book. It is initiated
-     * by a button.
-     *
-     * @return the text that the user enters
-     */
-    private void addComment(String saveText) {
-        //from the GUI, connect to a text box and just save the text as an String
-        //textboxText = saveText;
-        storeComment(saveText); //stores the comment back into the file
-    }
-
-    /**
-     * This method allows the user to add a rating to a book. It is initiated by
-     * a button.
-     *
-     * @return the rating the user enters
-     */
-    private void addRating(int saveRating) {
-        //from the GUI, connect to a slider and use that variable as the rating variable
-        //slider = saveRating;
-        storeRating(saveRating); //stores the rating
-        book.numRatings++; //adds one to the counter
-    }
-
-    /**
-     * This is the method used to store the users comment under the books name
-     * and bar code.
-     *
-     * @param comment the text to be saved
-     */
-    private void storeComment(String comment) {
-        book.comments += comment; //adds the most recent comment to all the other files
-    }
-
-    /**
-     * This is the method used to store the users rating under the books name
-     * and bar code.
-     *
-     * @param rating the rating to be saved
-     */
-    private void storeRating(int rating) {
-        book.addedRatings += rating; //adds the most recent rating to all the ratings
-    }
-
+    
     /**
      * This method updates the rating of a book by re-calculating the average.
      *
      * @return the rating of the book
      */
     private double calculateBookRating() {
-        double averageRating = book.addedRatings / book.numRatings; //calculates the average
-        return averageRating; //returns the calculated average
+    //    double averageRating = book.addedRatings / book.numRatings; //calculates the average
+       // return averageRating; //returns the calculated average
+       
+       
+       //Added this -Eric
+       initScanner(f);
+       return 0;
     }
+    
+    
+
+    
+    //This is unnecessary. GUI will just take info from file and implement code to show it-Eric
+    /**
+     * This method allows the user to add a comment to a book. It is initiated
+     * by a button.
+     *
+     * @return the text that the user enters
+     */
+    /*
+    private void addComment(String saveText) {
+        //from the GUI, connect to a text box and just save the text as an String
+        //textboxText = saveText;
+        storeComment(saveText); //stores the comment back into the file
+    }*/
+
+    //This is unncessary, look at previous comment-Eric
+    /**
+     * This method allows the user to add a rating to a book. It is initiated by
+     * a button.
+     *
+     * @return the rating the user enters
+     */
+    /*
+    private void addRating(int saveRating) {
+        //from the GUI, connect to a slider and use that variable as the rating variable
+        //slider = saveRating;
+        storeRating(saveRating); //stores the rating
+        //book.numRatings++; //adds one to the counter
+    }
+    
+    //This method has been covered by addReview -Eric
+    /**
+     * This is the method used to store the users comment under the books name
+     * and bar code.
+     *
+     * @param comment the text to be saved
+     */
+    
+    //Comments will be stored in separate review file
+    /*
+    private void storeComment(String comment) {
+    //    book.comments += comment; //adds the most recent comment to all the other files
+    }
+
+    //This method has been covered by addReview -Eric
+    //reviews will be stored in seperate review file
+    /**
+     * This is the method used to store the users rating under the books name
+     * and bar code.
+     *
+     * @param rating the rating to be saved
+     */
+    /*
+    private void storeRating(int rating) {
+    //    book.addedRatings += rating; //adds the most recent rating to all the ratings
+    }*/
 
     /**
      * This method gets the value for the addedRatings of the book.
      *
      * @return the value of addedRatings
      */
-    public int getAddedRatings() {
-        return book.addedRatings; //returns all the ratings added together
+    /*public int getAddedRatings() {
+     //   return book.addedRatings; //returns all the ratings added together
+        return 0;
     }
 
     /**
@@ -125,24 +166,24 @@ public class Review {
      *
      * @return the number of ratings made
      */
-    public int getNumberRatings() {
-        return book.numRatings; //returns the number of ratings made
+    /*public int getNumberRatings() {
+        //return book.numRatings; //returns the number of ratings made
+        return 0;
     }
-
     /**
      * This method gets the comments for the book.
      *
      * @return the comments made on the book
      */
-    public String getComments() {
-        return book.comments; //returns all the comments
+    /*public String getComments() {
+        //return book.comments; //returns all the comments
+        return "";
     }
-
     /**
      * This main method is purely for testing purposes.
      *
      * @param args
      */
-    public static void main(String[] args) {
-    }
+    /*public static void main(String[] args) {
+    }*/
 }
