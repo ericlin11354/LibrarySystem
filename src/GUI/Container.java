@@ -28,11 +28,9 @@ public class Container extends javax.swing.JPanel {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        loginScreen1 = new GUI.LoginScreen();
         realBookInfoScreen1 = new GUI.RealBookInfoScreen();
         reviewScreen1 = new GUI.ReviewScreen();
 
-        jTabbedPane1.addTab("tab1", loginScreen1);
         jTabbedPane1.addTab("tab2", realBookInfoScreen1);
         jTabbedPane1.addTab("tab3", reviewScreen1);
 
@@ -51,7 +49,6 @@ public class Container extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane jTabbedPane1;
-    private GUI.LoginScreen loginScreen1;
     private GUI.RealBookInfoScreen realBookInfoScreen1;
     private GUI.ReviewScreen reviewScreen1;
     // End of variables declaration//GEN-END:variables
