@@ -5,6 +5,8 @@
  */
 package GUI;
 
+import java.io.IOException;
+
 /**
  *
  * @author 069949345
@@ -137,7 +139,13 @@ public class LoginScreen2 extends javax.swing.JFrame {
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
-
+        this.setVisible(false);
+        try{
+        new BookInfoScreen2(bar).setVisible(true);
+        }catch(IOException e){
+            
+        }
+    
     }//GEN-LAST:event_searchButtonActionPerformed
 
     /**

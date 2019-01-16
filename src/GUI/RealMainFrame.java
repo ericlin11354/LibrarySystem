@@ -29,12 +29,8 @@ public class RealMainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        container1 = new GUI.Container();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
-        getContentPane().add(container1);
-        container1.setBounds(0, 0, 610, 550);
 
         setSize(new java.awt.Dimension(628, 602));
         setLocationRelativeTo(null);
@@ -84,6 +80,5 @@ public class RealMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Container container1;
     // End of variables declaration//GEN-END:variables
 }

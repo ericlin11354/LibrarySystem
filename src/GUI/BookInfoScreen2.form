@@ -30,13 +30,13 @@
                       <Component id="putBookCoverHere" min="-2" pref="272" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="putTitleHere" alignment="0" min="-2" pref="135" max="-2" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="authorLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="putAuthorNameHere" min="-2" max="-2" attributes="0"/>
+                                      <Component id="putAuthorNameHere" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="dateLabel" min="-2" max="-2" attributes="0"/>
@@ -51,7 +51,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="genreLabel" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="putGenreHere" min="-2" max="-2" attributes="0"/>
+                                      <Component id="putGenreHere" min="-2" pref="167" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="readingLevelLabel" min="-2" max="-2" attributes="0"/>
@@ -59,10 +59,10 @@
                                       <Component id="putReadingLabelHere" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="synopsisLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="putTitleHere" alignment="0" min="-2" pref="258" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Component id="jScrollPane2" alignment="0" max="32767" attributes="0"/>
@@ -86,7 +86,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="putTitleHere" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -118,7 +118,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" pref="163" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="putBookCoverHere" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                  <Component id="putBookCoverHere" min="-2" pref="327" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -129,7 +129,7 @@
               <Component id="jScrollPane2" min="-2" pref="87" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="addReviewButton" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="15" max="32767" attributes="0"/>
+              <EmptySpace pref="23" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -251,6 +251,7 @@
           <Font name="Lucida Fax" size="18" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Title goes here"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="synopsisLabel">

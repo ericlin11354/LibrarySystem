@@ -6,14 +6,14 @@ package Engine;
  * @author 349361337
  */
 public class Book {
-    String title; //the variable for the book title
-    String author; //the variable for the book's author
-    String synopsis; //the variable for the book's description
-    String publisher;
-    String datePublished; //the variable for the book's publishing date
-    String categories; //the varible for the book's genre
-    String barcode; //the variable for the book's barcode
-    Review review;
+    public String title; //the variable for the book title
+    public String author; //the variable for the book's author
+    public String synopsis; //the variable for the book's description
+    public String publisher;
+    public String datePublished; //the variable for the book's publishing date
+    public String categories; //the varible for the book's genre
+    public String barcode; //the variable for the book's barcode
+    public Review review;
     /**
      * 
      * @param title

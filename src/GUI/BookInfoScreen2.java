@@ -5,17 +5,33 @@
  */
 package GUI;
 
+import Engine.Book;
+import Engine.Library;
+import java.io.IOException;
+
 /**
  *
  * @author 069949345
  */
 public class BookInfoScreen2 extends javax.swing.JFrame {
-
+    Library lib = new Library();
+    Book b = new Book();
     /**
      * Creates new form BookInfoScreen2
      */
     public BookInfoScreen2() {
         initComponents();
+    }
+    public BookInfoScreen2(String barcode)throws IOException{
+        initComponents();
+        b = lib.browseBook(barcode);
+        putAuthorNameHere.setText(b.author);
+        putGenreHere.setText(b.categories);
+        putPublicationDateHere.setText(b.datePublished);
+        putPublisherNameHere.setText(b.publisher);
+        putSynopsisHere.setText(b.synopsis);
+        putTitleHere.setText(b.title);
+        
     }
 
     /**
@@ -91,6 +107,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
 
         putTitleHere.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         putTitleHere.setText("Title goes here");
+        putTitleHere.setToolTipText("");
 
         synopsisLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         synopsisLabel.setText("Synopsis:");
@@ -117,13 +134,13 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                         .addComponent(putBookCoverHere, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(putTitleHere, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(authorLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putAuthorNameHere))
+                                        .addComponent(putAuthorNameHere, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(dateLabel)
                                         .addGap(10, 10, 10)
@@ -135,14 +152,14 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(genreLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putGenreHere))
+                                        .addComponent(putGenreHere, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(readingLevelLabel)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(putReadingLabelHere))
-                                    .addComponent(synopsisLabel))
-                                .addGap(0, 77, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)))
+                                    .addComponent(synopsisLabel)
+                                    .addComponent(putTitleHere, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 27, Short.MAX_VALUE))))
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(averageRatingLabel)
@@ -194,7 +211,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(addReviewButton)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
