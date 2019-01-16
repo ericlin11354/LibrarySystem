@@ -74,6 +74,39 @@ public class Library {
             pw.close();
         }
     }
+    public boolean bookExists(String barcode)throws IOException{
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        String delimiter = ",,";
+        //Checks if the file already has the book stored already
+        while (input.hasNext()) {
+            String[] codes = input.nextLine().split(delimiter);
+            if (codes[0].equals(barcode)) {
+                return true;
+            }
+        }
+        input.close();
+        return false;
+    }
+    
+    public Book searchBook(String barcode) throws IOException{
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        String delimiter = ",,";
+        String[] codes = null;
+        //Checks if the file already has the book stored already
+        while (input.hasNext()) {
+            codes = input.nextLine().split(delimiter);
+            if (codes[0].equals(barcode)) {
+                break;
+            }
+        }
+        Book temp = new Book(codes[0],codes[1],codes[2],codes[3],codes[4],codes[5],codes[6]);
+        input.close();
+        return temp;
+    }
 
 //         String barcodes[] = input.nextLine().split(",");
 //             for(int i = 0; i<8;i++)
@@ -88,8 +121,11 @@ public class Library {
      * @throws IOException throws Exception initializing Document and calling addBook method
      */
     public Book browseBook(String barcode) throws IOException{
-        //test barcode
-        barcode = "9780807286012";
+        Book b = null;
+        if(bookExists(barcode)){
+            b = searchBook(barcode);
+        }
+        else{
         //connects to website
         String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
         WebDriver driver = new HtmlUnitDriver();
@@ -121,9 +157,8 @@ public class Library {
         //gets cover image file
         String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
         String summ = doc.getElementById("summary").text();
-        Book b = new Book(title, author, summ, pub, pubDate, genres, barcode);
+         b = new Book(title, author, summ, pub, pubDate, genres, barcode);
         addBook(b);
-        return b;
         //test
         /*System.out.println(title);
          System.out.println(author);
@@ -131,6 +166,8 @@ public class Library {
          System.out.println(genres);
          System.out.println(summ);
          System.out.println(cover);*/
+        }
+        return b;
     }
 
     /**
@@ -147,9 +184,8 @@ public class Library {
      */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
-        // lib.browseBook("s");
+        
         Book book = lib.browseBook("9780807286012");
-        Book book1 = lib.browseBook("9780807286012");
         /*book.writeReview("I hate this book",1);
         book.writeReview("This book is ok",3);
         book.writeReview("I can't live without this book",5);*/
