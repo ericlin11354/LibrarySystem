@@ -27,76 +27,68 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        putAuthorNameHere = new javax.swing.JLabel();
-        genreLabel = new javax.swing.JLabel();
-        averageRatingLabel = new javax.swing.JLabel();
-        putPublicationDateHere = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        ratingsList = new javax.swing.JTextArea();
-        publisherLabel = new javax.swing.JLabel();
-        putPublisherNameHere = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         putAverageRatingHere = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        addReviewButton = new javax.swing.JButton();
-        putGenreHere = new javax.swing.JLabel();
-        readingLevelLabel = new javax.swing.JLabel();
-        putBookCoverHere = new javax.swing.JLabel();
-        putReadingLabelHere = new javax.swing.JLabel();
-        putTitleHere = new javax.swing.JLabel();
-        synopsisLabel = new javax.swing.JLabel();
-        authorLabel = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        ratingAndReviewButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         putSynopsisHere = new javax.swing.JTextArea();
+        averageRatingLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ratingsList = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        putAuthorNameHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        putAuthorNameHere.setText("jLabel4");
+        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        jLabel2.setText("Title goes here");
 
-        genreLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        genreLabel.setText("Genre:");
+        jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel3.setText("Author:");
 
-        averageRatingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
-        averageRatingLabel.setText("Average Rating:");
+        jLabel4.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel4.setText("jLabel4");
 
-        putPublicationDateHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        putPublicationDateHere.setText("jLabel6");
+        jLabel5.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel5.setText("Genre:");
 
-        ratingsList.setColumns(20);
-        ratingsList.setRows(5);
-        jScrollPane2.setViewportView(ratingsList);
+        jLabel6.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel6.setText("jLabel6");
 
-        publisherLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        publisherLabel.setText("Publisher:");
+        jLabel7.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel7.setText("Publisher:");
 
-        putPublisherNameHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        putPublisherNameHere.setText("jLabel8");
+        jLabel8.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel8.setText("jLabel8");
 
-        putAverageRatingHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putAverageRatingHere.setText("jLabel15");
 
-        dateLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        dateLabel.setText("Date of Publication:");
+        jLabel9.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel9.setText("Date of Publication:");
 
-        addReviewButton.setText("Add Rating/Review");
+        ratingAndReviewButton.setText("Add Rating/Review");
 
-        putGenreHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        putGenreHere.setText("jLabel10");
+        jLabel10.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel10.setText("jLabel10");
 
-        readingLevelLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        readingLevelLabel.setText("Reading Level:");
+        jLabel11.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel11.setText("Reading Level:");
 
-        putReadingLabelHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        putReadingLabelHere.setText("jLabel12");
+        jLabel12.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jLabel12.setText("jLabel12");
 
-        putTitleHere.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
-        putTitleHere.setText("Title goes here");
-
-        synopsisLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        synopsisLabel.setText("Synopsis:");
-
-        authorLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        authorLabel.setText("Author:");
+        jLabel13.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        jLabel13.setText("Synopsis:");
 
         putSynopsisHere.setEditable(false);
         putSynopsisHere.setColumns(20);
@@ -106,6 +98,13 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         putSynopsisHere.setOpaque(false);
         jScrollPane1.setViewportView(putSynopsisHere);
 
+        averageRatingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        averageRatingLabel.setText("Average Rating:");
+
+        ratingsList.setColumns(20);
+        ratingsList.setRows(5);
+        jScrollPane2.setViewportView(ratingsList);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -114,34 +113,34 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(putBookCoverHere, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(putTitleHere, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(authorLabel)
+                                        .addComponent(jLabel3)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putAuthorNameHere))
+                                        .addComponent(jLabel4))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(dateLabel)
+                                        .addComponent(jLabel9)
                                         .addGap(10, 10, 10)
-                                        .addComponent(putPublicationDateHere))
+                                        .addComponent(jLabel6))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(publisherLabel)
+                                        .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putPublisherNameHere))
+                                        .addComponent(jLabel8))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(genreLabel)
+                                        .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putGenreHere))
+                                        .addComponent(jLabel10))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(readingLevelLabel)
+                                        .addComponent(jLabel11)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(putReadingLabelHere))
-                                    .addComponent(synopsisLabel))
-                                .addGap(0, 156, Short.MAX_VALUE))
+                                        .addComponent(jLabel12))
+                                    .addComponent(jLabel13))
+                                .addGap(0, 233, Short.MAX_VALUE))
                             .addComponent(jScrollPane1)))
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
@@ -151,7 +150,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                         .addGap(283, 283, 283))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(addReviewButton)))
+                        .addComponent(ratingAndReviewButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -160,40 +159,40 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(putTitleHere, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(authorLabel)
-                            .addComponent(putAuthorNameHere))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(putPublicationDateHere)
-                            .addComponent(dateLabel))
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(publisherLabel)
-                            .addComponent(putPublisherNameHere))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(genreLabel)
-                            .addComponent(putGenreHere))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(readingLevelLabel)
-                            .addComponent(putReadingLabelHere))
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel12))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(synopsisLabel)
+                        .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(putBookCoverHere, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(averageRatingLabel)
                     .addComponent(putAverageRatingHere))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(addReviewButton)
+                .addComponent(ratingAndReviewButton)
                 .addContainerGap())
         );
 
@@ -236,25 +235,25 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addReviewButton;
-    private javax.swing.JLabel authorLabel;
     private javax.swing.JLabel averageRatingLabel;
-    private javax.swing.JLabel dateLabel;
-    private javax.swing.JLabel genreLabel;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel publisherLabel;
-    private javax.swing.JLabel putAuthorNameHere;
     private javax.swing.JLabel putAverageRatingHere;
-    private javax.swing.JLabel putBookCoverHere;
-    private javax.swing.JLabel putGenreHere;
-    private javax.swing.JLabel putPublicationDateHere;
-    private javax.swing.JLabel putPublisherNameHere;
-    private javax.swing.JLabel putReadingLabelHere;
     private javax.swing.JTextArea putSynopsisHere;
-    private javax.swing.JLabel putTitleHere;
+    private javax.swing.JButton ratingAndReviewButton;
     private javax.swing.JTextArea ratingsList;
-    private javax.swing.JLabel readingLevelLabel;
-    private javax.swing.JLabel synopsisLabel;
     // End of variables declaration//GEN-END:variables
 }
