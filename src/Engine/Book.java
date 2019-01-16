@@ -36,6 +36,10 @@ public class Book {
         review = new Review();
     }
     
+    public void writeReview(String s,int rating){
+        review.addReview(this);
+    }
+    
     /**
      *
      */

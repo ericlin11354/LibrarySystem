@@ -13,6 +13,13 @@ import java.util.Scanner; //the import used to access the scanner function
  */
 public class Review {
 
+    /*
+        Hey Alex, me and Andrew decided that the reviews should have a file called "reviews" which uses comma delimited format.
+        It would look something like this: "barcode ; comment1 ; comment2 ; comment3"
+    */
+    
+    
+    
     File f = new File("bookinfo.txt"); //create a new file linked to bookinfo
     Scanner input = new Scanner(f); //create a new scanner
     PrintWriter pw = new PrintWriter(new FileWriter(f, true)); //create a new print writer
@@ -44,6 +51,9 @@ public class Review {
         //if the user user uses the slider, when the window changes,
         //the computer will take in the value of the slider and call the addRating() method
         //link the netbeans file and an exterior file
+        
+        //added this-Eric
+        
     }
 
     /**

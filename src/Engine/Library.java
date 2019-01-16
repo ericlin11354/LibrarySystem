@@ -81,19 +81,14 @@ public class Library {
 //    }
 
     /**
-     * This method searches for a book by its title.
+     * Searches up a barcode and gets book info
+     * @param barcode barcode number
+     * @return returns Book class containing info
+     * @throws IOException throws Exception initializing Document and calling addBook method
      */
-//    public void searchBook() {
-//    }
-    /**
-     * This method looks at book selection based on categories.
-     *
-     * @param category the genre to be looked through
-     * @throws IOException
-     */
-    public Book browseBook(String category) throws IOException {
+    public Book browseBook(String barcode) throws IOException{
         //test barcode
-        String barcode = "9780807286012";
+        barcode = "9780807286012";
         //connects to website
         String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
         WebDriver driver = new HtmlUnitDriver();
@@ -105,7 +100,8 @@ public class Library {
         }
         item.click();
         //parses book info page
-        Document doc = Jsoup.connect(driver.getCurrentUrl()).get();
+        Document doc = null;
+        doc = Jsoup.connect(driver.getCurrentUrl()).get();
         //gets title,author,publisher
         String title = doc.getElementsByClass("title").get(0).text();
         String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
@@ -125,6 +121,7 @@ public class Library {
         Book b = new Book(title, author, summ, pub, pubDate, genres, barcode);
         addBook(b);
         return b;
+        //test
         /*System.out.println(title);
          System.out.println(author);
          System.out.println(publisher);
@@ -149,6 +146,6 @@ public class Library {
         Library lib = new Library();
         // lib.browseBook("s");
         Book book = lib.browseBook("");
-        book.review
+        book.writeReview("I hate this book",4);
     }
 }
