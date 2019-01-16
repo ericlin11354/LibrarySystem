@@ -156,7 +156,13 @@ public class Library {
         }
         //gets cover image file
         String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
-        String summ = doc.getElementById("summary").text();
+        String summ;
+        try{
+            summ = doc.getElementById("summary").text();
+        }
+        catch(NullPointerException e){
+            summ = doc.getElementsByClass("nielsen-review").get(0).text();
+        }
          b = new Book(title, author, summ, pub, pubDate, genres, barcode);
         addBook(b);
         //test
