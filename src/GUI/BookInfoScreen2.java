@@ -47,6 +47,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         averageRatingLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ratingsList = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -71,12 +72,19 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jLabel8.setText("jLabel8");
 
+        putAverageRatingHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putAverageRatingHere.setText("jLabel15");
 
         jLabel9.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel9.setText("Date of Publication:");
 
+        ratingAndReviewButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         ratingAndReviewButton.setText("Add Rating/Review");
+        ratingAndReviewButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ratingAndReviewButtonActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jLabel10.setText("jLabel10");
@@ -104,6 +112,14 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         ratingsList.setColumns(20);
         ratingsList.setRows(5);
         jScrollPane2.setViewportView(ratingsList);
+
+        jButton1.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jButton1.setText("Back to Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -147,9 +163,11 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                         .addComponent(averageRatingLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(putAverageRatingHere)
-                        .addGap(283, 283, 283))
+                        .addGap(283, 509, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ratingAndReviewButton)))
                 .addContainerGap())
         );
@@ -192,12 +210,26 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ratingAndReviewButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ratingAndReviewButton)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void ratingAndReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingAndReviewButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ReviewScreen2().setVisible(true);
+    }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new LoginScreen2().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +268,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel averageRatingLabel;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

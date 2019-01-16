@@ -33,7 +33,7 @@ public class ReviewScreen2 extends javax.swing.JFrame {
         enterStarNumberHere = new javax.swing.JTextField();
         starsLabel = new javax.swing.JLabel();
         reviewLabel = new javax.swing.JLabel();
-        cancelButton = new javax.swing.JButton();
+        backButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -51,8 +51,13 @@ public class ReviewScreen2 extends javax.swing.JFrame {
         reviewLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         reviewLabel.setText("Review:");
 
-        cancelButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        cancelButton.setText("Cancel");
+        backButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         doneButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         doneButton.setText("Done");
@@ -75,7 +80,7 @@ public class ReviewScreen2 extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cancelButton)
+                .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doneButton)
                 .addGap(48, 48, 48))
@@ -94,13 +99,19 @@ public class ReviewScreen2 extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cancelButton)
+                    .addComponent(backButton)
                     .addComponent(doneButton))
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new BookInfoScreen2().setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,7 +149,7 @@ public class ReviewScreen2 extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton backButton;
     private javax.swing.JButton doneButton;
     private javax.swing.JTextArea enterReviewHere;
     private javax.swing.JTextField enterStarNumberHere;
