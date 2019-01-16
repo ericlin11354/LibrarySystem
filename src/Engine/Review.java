@@ -1,6 +1,7 @@
 package Engine;
 
 import java.io.File; //the import used to access exterior files
+import java.io.FileNotFoundException;
 import java.io.FileWriter; //the import for the file writer
 import java.io.IOException; //the import for the IOException
 import java.io.PrintWriter; //the import for the print writer class
@@ -26,6 +27,7 @@ public class Review {
     //Book book = null; //making a book so all the variables can be used
     public static final String delim = ";";
     String barcode;
+    int numRatings;
     
     /**
      * This is the constructor for the Review class.
@@ -39,19 +41,25 @@ public class Review {
     
     public Review(String barcode){
         this.barcode = barcode;
+        f = new File("reviews/"+barcode+".txt");
     }
     
-    public void initPW(String path){
+    public void initPW(){
         try{
             pw = new PrintWriter(new FileWriter(f,true));
         }
         catch(IOException e){
-            System.out.println("IOException reading \""+f.getName());
+            System.out.println("IOException reading "+f.getName());
         }
     }
     
-    public void initScanner(String path){
-        
+    public void initScanner(){
+        try{
+            input = new Scanner(f);
+        }
+        catch(FileNotFoundException e){
+            System.out.println("FileNotFoundException reading "+f.getName());
+        }
     }
 
     /**
@@ -70,8 +78,7 @@ public class Review {
         //the computer will take in the value of the slider and call the addRating() method
         //link the netbeans file and an exterior file
         
-        
-        f = new File("reviews/"+barcode+".txt");
+        initPW();
         //added this-Eric
         pw.println(review+delim+rating);
         pw.close();
@@ -82,14 +89,26 @@ public class Review {
      *
      * @return the rating of the book
      */
-    private double calculateBookRating() {
+    public double calculateBookRating() {
     //    double averageRating = book.addedRatings / book.numRatings; //calculates the average
        // return averageRating; //returns the calculated average
        
        
        //Added this -Eric
-       initScanner(f);
-       return 0;
+       f = new File("reviews/"+barcode+".txt");
+       initScanner();
+       int ratings = 0;
+       int count = 0;
+       String[] s = null;
+       while(input.hasNextLine()){
+           s = input.nextLine().split(delim);
+           ratings += Integer.parseInt(s[1]);
+           count++;
+       }
+       input.close();
+       //updates number of ratings
+       numRatings = count;
+       return ratings/count;
     }
     
     
@@ -161,6 +180,7 @@ public class Review {
         return 0;
     }
 
+    //Getter for numRatings -Eric
     /**
      * This method gets the number of ratings made on the book.
      *

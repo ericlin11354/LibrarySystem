@@ -92,6 +92,8 @@ public class Library {
         //connects to website
         String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
         WebDriver driver = new HtmlUnitDriver();
+        //turn off htmlunit warnings
+        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
         driver.get(url);
         //gets first item in liust
         WebElement item = driver.findElement(By.id("result-1"));
@@ -145,8 +147,11 @@ public class Library {
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
         // lib.browseBook("s");
-        Book book = lib.browseBook("");
-        book.writeReview("I hate this book",4);
-        System.exit(1);
+        Book book = lib.browseBook("9780807286012");
+        /*book.writeReview("I hate this book",1);
+        book.writeReview("This book is ok",3);
+        book.writeReview("I can't live without this book",5);*/
+        System.out.printf("%f",book.getAverageReview());
+        System.exit(0);
     }
 }

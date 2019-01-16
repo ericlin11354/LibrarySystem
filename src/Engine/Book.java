@@ -40,6 +40,10 @@ public class Book {
         review.addReview(s,rating);
     }
     
+    public double getAverageReview(){
+        return review.calculateBookRating();
+    }
+    
     /**
      *
      */

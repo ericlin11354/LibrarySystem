@@ -134,15 +134,8 @@ public class LoginScreen extends javax.swing.JPanel {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
-        int barcode;
-        barcode = Integer.parseInt(bar);
-        //String id = studentIDCode.getText();
-        //int studentID;
-        //studentID = Integer.parseInt(id);
-        /*if (!title.isEmpty() || !bar.isEmpty()) {
-            new LoginScreen().setVisible(false);
-            new BookInfoScreen().setVisible(true);
-        }*/
+        String id = studentIDCode.getText();
+        
     }//GEN-LAST:event_searchButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

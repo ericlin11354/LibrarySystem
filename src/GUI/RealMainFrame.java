@@ -36,7 +36,8 @@ public class RealMainFrame extends javax.swing.JFrame {
         getContentPane().add(container1);
         container1.setBounds(0, 0, 610, 550);
 
-        pack();
+        setSize(new java.awt.Dimension(628, 602));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
