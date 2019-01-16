@@ -135,6 +135,9 @@ public class LoginScreen extends javax.swing.JPanel {
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
+        RealBookInfoScreen obj = new RealBookInfoScreen();
+        obj.setVisible(true);
+        
         
     }//GEN-LAST:event_searchButtonActionPerformed
 

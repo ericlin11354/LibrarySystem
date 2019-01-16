@@ -74,6 +74,7 @@ public class Library {
             pw.close();
         }
     }
+
 //         String barcodes[] = input.nextLine().split(",");
 //             for(int i = 0; i<8;i++)
 //             System.out.println(barcodes[i]);
@@ -148,10 +149,11 @@ public class Library {
         Library lib = new Library();
         // lib.browseBook("s");
         Book book = lib.browseBook("9780807286012");
+        Book book1 = lib.browseBook("9780807286012");
         /*book.writeReview("I hate this book",1);
         book.writeReview("This book is ok",3);
         book.writeReview("I can't live without this book",5);*/
-        System.out.printf("%f",book.getAverageReview());
-        System.exit(0);
+        //System.out.printf("%f",book.getAverageReview());
+        //System.exit(0);
     }
 }
