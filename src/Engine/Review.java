@@ -5,7 +5,7 @@ import java.io.FileNotFoundException; //this is the import for the file not foun
 import java.io.FileWriter; //the import for the file writer
 import java.io.IOException; //the import for the IOException
 import java.io.PrintWriter; //the import for the print writer class
-import java.util.ArrayList;
+import java.util.ArrayList; //the import for the ArrayList class
 import java.util.Scanner; //the import used to access the scanner function
 
 /**
