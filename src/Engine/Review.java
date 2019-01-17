@@ -170,7 +170,7 @@ public class Review {
         String[] s = null;
         int count = 0;
         if (fileEmpty()) { //checks if the file is empty
-            return 0;
+            return 1;
         }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
             s = input.nextLine().split(delim); //splits the ratings from the comments
