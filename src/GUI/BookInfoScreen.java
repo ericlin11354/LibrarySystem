@@ -98,7 +98,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         ratingAndReviewButton = new javax.swing.JButton();
         jGenreLabel = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        readingLevelLabel = new javax.swing.JLabel();
         jReadingLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -106,11 +106,10 @@ public class BookInfoScreen extends javax.swing.JFrame {
         averageRatingLabel = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         ratingsList = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        backToLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setAutoRequestFocus(false);
-        setPreferredSize(tk.getScreenSize());
 
         jTitleLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         jTitleLabel.setText("Title goes here");
@@ -151,8 +150,8 @@ public class BookInfoScreen extends javax.swing.JFrame {
         jGenreLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jGenreLabel.setText("jLabel10");
 
-        jLabel11.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        jLabel11.setText("Reading Level:");
+        readingLevelLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
+        readingLevelLabel.setText("Reading Level:");
 
         jReadingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jReadingLabel.setText("jLabel12");
@@ -177,11 +176,11 @@ public class BookInfoScreen extends javax.swing.JFrame {
         ratingsList.setRows(5);
         jScrollPane2.setViewportView(ratingsList);
 
-        jButton1.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jButton1.setText("Back to Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        backToLogin.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        backToLogin.setText("Back to Login");
+        backToLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                backToLoginActionPerformed(evt);
             }
         });
 
@@ -214,7 +213,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jGenreLabel))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel11)
+                                .addComponent(readingLevelLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jReadingLabel))
                             .addComponent(jLabel13)
@@ -231,8 +230,8 @@ public class BookInfoScreen extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(62, 62, 62)
+                .addComponent(backToLogin)
+                .addGap(18, 18, 18)
                 .addComponent(ratingAndReviewButton)
                 .addGap(101, 101, 101))
         );
@@ -261,7 +260,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
                             .addComponent(jGenreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel11)
+                            .addComponent(readingLevelLabel)
                             .addComponent(jReadingLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
@@ -276,7 +275,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(backToLogin)
                     .addComponent(ratingAndReviewButton))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
@@ -290,11 +289,11 @@ public class BookInfoScreen extends javax.swing.JFrame {
         new ReviewScreen(barcode).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
         // TODO add your handling code here:
         this.dispose();
         new LoginScreen().setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_backToLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -334,12 +333,11 @@ public class BookInfoScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel averageRatingLabel;
+    private javax.swing.JButton backToLogin;
     private javax.swing.JLabel jAuthorLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jCoverLabel;
     private javax.swing.JLabel jDatePubLabel;
     private javax.swing.JLabel jGenreLabel;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -354,5 +352,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea putSynopsisHere;
     private javax.swing.JButton ratingAndReviewButton;
     private javax.swing.JTextArea ratingsList;
+    private javax.swing.JLabel readingLevelLabel;
     // End of variables declaration//GEN-END:variables
 }
