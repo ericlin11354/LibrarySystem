@@ -39,6 +39,7 @@ public class LoginScreen extends javax.swing.JFrame {
         scanDirectly = new javax.swing.JLabel();
         leaveReview = new javax.swing.JLabel();
         IDNumber = new javax.swing.JLabel();
+        quitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,12 +69,20 @@ public class LoginScreen extends javax.swing.JFrame {
         IDNumber.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         IDNumber.setText("ID Number:");
 
+        quitButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        quitButton.setText("Quit");
+        quitButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                quitButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(bookBarcode)
@@ -100,11 +109,13 @@ public class LoginScreen extends javax.swing.JFrame {
                         .addGap(119, 119, 119)
                         .addComponent(leaveReview))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(237, 237, 237)
-                        .addComponent(searchButton))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(144, 144, 144)
-                        .addComponent(scanDirectly)))
+                        .addComponent(scanDirectly))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(quitButton)
+                        .addGap(50, 50, 50)
+                        .addComponent(searchButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,7 +123,7 @@ public class LoginScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(63, 63, 63)
                 .addComponent(welcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchByTitle))
@@ -129,8 +140,10 @@ public class LoginScreen extends javax.swing.JFrame {
                     .addComponent(studentIDCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(IDNumber))
                 .addGap(39, 39, 39)
-                .addComponent(searchButton)
-                .addGap(91, 91, 91))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(searchButton)
+                    .addComponent(quitButton))
+                .addGap(90, 90, 90))
         );
 
         setSize(new java.awt.Dimension(594, 557));
@@ -147,6 +160,11 @@ public class LoginScreen extends javax.swing.JFrame {
         else
             new BookInfoScreen(bar).setVisible(true);
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_quitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,6 +207,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JTextField barcodeGoesHere;
     private javax.swing.JLabel bookBarcode;
     private javax.swing.JLabel leaveReview;
+    private javax.swing.JButton quitButton;
     private javax.swing.JLabel scanDirectly;
     private javax.swing.JTextField searchBar;
     private javax.swing.JButton searchButton;
