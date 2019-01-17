@@ -52,6 +52,7 @@ public class ReviewScreen extends javax.swing.JFrame {
         reviewLabel = new javax.swing.JLabel();
         backButton = new javax.swing.JButton();
         doneButton = new javax.swing.JButton();
+        backToLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +85,14 @@ public class ReviewScreen extends javax.swing.JFrame {
             }
         });
 
+        backToLogin.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        backToLogin.setText("Log In Again");
+        backToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -102,6 +111,8 @@ public class ReviewScreen extends javax.swing.JFrame {
                 .addContainerGap(48, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(backToLogin)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(backButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(doneButton)
@@ -122,7 +133,8 @@ public class ReviewScreen extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backButton)
-                    .addComponent(doneButton))
+                    .addComponent(doneButton)
+                    .addComponent(backToLogin))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -141,6 +153,12 @@ public class ReviewScreen extends javax.swing.JFrame {
         this.dispose();
         new BookInfoScreen(barcode).setVisible(true);
     }//GEN-LAST:event_doneButtonActionPerformed
+
+    private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new LoginScreen().setVisible(true);
+    }//GEN-LAST:event_backToLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +198,7 @@ public class ReviewScreen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
+    private javax.swing.JButton backToLogin;
     private javax.swing.JButton doneButton;
     private javax.swing.JTextArea enterReviewHere;
     private javax.swing.JTextField enterStarNumberHere;
