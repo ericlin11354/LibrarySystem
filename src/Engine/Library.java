@@ -199,6 +199,8 @@ public class Library {
         }
         //gets cover image file
         String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
+               
+        
         String summ;
         try{
             summ = doc.getElementById("summary").text();
