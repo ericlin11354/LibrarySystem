@@ -18,7 +18,7 @@ public class ReviewScreen extends javax.swing.JFrame {
     String barcode;
     Book b;
     /**
-     * Creates new form ReviewScreen2
+     * Creates new form ReviewScreen
      */
     public ReviewScreen() {
         initComponents();
@@ -207,5 +207,4 @@ public class ReviewScreen extends javax.swing.JFrame {
     private javax.swing.JLabel reviewLabel;
     private javax.swing.JLabel starsLabel;
     // End of variables declaration//GEN-END:variables
-
 }

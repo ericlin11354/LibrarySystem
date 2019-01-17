@@ -14,49 +14,51 @@ import java.util.Scanner; //the import used to access the scanner function
  * @author 073685950 (Alex Weber)
  */
 public class Review {
+
     File f = null; //create a new file linked to bookinfo
     Scanner input = null; //create a new scanner
     PrintWriter pw = null; //create a new print writer
     String barcode; //the variable for the barcode of the book
-    int numRatings; //the varible for the number of ratings made on the book
     public static final String delim = ";"; //the variable for the delimeter
 
     /**
      * This is the constructor for the review class.
+     *
      * @param barcode takes in the barcode of the book
      */
     public Review(String barcode) {
         this.barcode = barcode;
         f = new File("reviews/" + barcode + ".txt");
-        if(!f.exists()){
-            try{
-            f.createNewFile();
-            }
-            catch(IOException e){
+        if (!f.exists()) { //checks if the file already exist
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
                 System.out.println("IOException creating new file");
             }
         }
     }
 
     /**
-     * This method tries to open a print writer, if it cannot it will return an error.
+     * This method tries to open a print writer, if it cannot it will return an
+     * error.
      */
     public void initPW() {
-        try {
+        try { //checks to see if a print writer can be opened
             pw = new PrintWriter(new FileWriter(f, true));
-        } catch (IOException e) {
+        } catch (IOException e) { //if not then print an error
             System.out.println("IOException reading " + f.getName());
             System.exit(0);
         }
     }
 
     /**
-     * This method tries to open a scanner, if it cannot it will return an error.
+     * This method tries to open a scanner, if it cannot it will return an
+     * error.
      */
     public void initScanner() {
-        try {
+        try { //checks to see if a scanner can be opened
             input = new Scanner(f);
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { //if not then print an error
             System.out.println("FileNotFoundException reading " + f.getName());
             System.exit(0);
         }
@@ -76,7 +78,6 @@ public class Review {
         initPW();
         pw.println(comment + delim + rating);
         pw.close();
-        numRatings++;
     }
 
     /**
@@ -85,23 +86,23 @@ public class Review {
      * @return the rating of the book
      */
     public double calculateBookRating() {
-        double num = getAddedRatings();
-        double den = getNumberRatings();
-        return num / den;
+        return getAddedRatings() / getNumberRatings();
     }
 
-    //Made changes. Instead of returning a string containing all comments, we return an array(each element is a comment);
     /**
-     * This method gets the comments of the book from the exterior document.
+     * This method gets the comments of the book and adds them to a String
+     * ArrayList.
      *
-     * @return returns all of the comments
+     * @return returns all of the comments in String array
      */
     public String[] getComments() {
         initScanner(); //opens the scanner
         ArrayList<String> list = new ArrayList<>();
         //creates temporary varibles
         String[] s = null;
-        if(fileEmpty()) return null;
+        if (fileEmpty()) { //checks if the file is empty
+            return null;
+        }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
             s = input.nextLine().split(delim); //splits the comments from the ratings
             list.add(s[0]);
@@ -111,14 +112,22 @@ public class Review {
         temp = list.toArray(temp);
         return temp;
     }
-    
+
     //same as a getComments but with ratings (should we merge them)? -Eric
-    public String[] getRatings(){
+    /**
+     * This method gets the ratings all the ratings of the books and adds them
+     * to a String ArrayList.
+     *
+     * @return returns a String array of all the ratings together
+     */
+    public String[] getRatings() {
         initScanner(); //opens the scanner
         ArrayList<String> list = new ArrayList<>();
         //creates temporary varibles
         String[] s = null;
-        if(fileEmpty()) return null;
+        if (fileEmpty()) { //checks if the file is empty
+            return null;
+        }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
             s = input.nextLine().split(delim); //splits the comments from the ratings
             list.add(s[1]);
@@ -139,7 +148,7 @@ public class Review {
         //creates temporary varibles
         String[] s = null;
         int counter = 0;
-        if(fileEmpty()){
+        if (fileEmpty()) { //checks if the file is empty
             return 0;
         }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
@@ -160,7 +169,7 @@ public class Review {
         //creates temporary varibles
         String[] s = null;
         int count = 0;
-        if(fileEmpty()){
+        if (fileEmpty()) { //checks if the file is empty
             return 0;
         }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
@@ -170,12 +179,17 @@ public class Review {
         input.close();
         return count;
     }
-    
-    public boolean fileEmpty(){
-        try{
+
+    /**
+     * This method checks if the books file is empty, meaning it has no comments
+     * or ratings
+     *
+     * @return
+     */
+    public boolean fileEmpty() {
+        try { //trys to see if the scanner can take in the next line
             input.hasNextLine();
-        }
-        catch(NullPointerException e){
+        } catch (NullPointerException e) {
             return true;
         }
         return false;
