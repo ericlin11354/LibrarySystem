@@ -61,6 +61,13 @@ public class BookInfoScreen extends javax.swing.JFrame {
         }
         jCoverLabel.setIcon(new ImageIcon(temp));
         putAverageRatingHere.setText(String.format("%.2f",b.getAverageRating()));
+        String[] comments = b.getComments();
+        String[] ratings = b.getRatings();
+        String s = "";
+        for(int i=0;i<comments.length;i++){
+            s += "Student\tRating: "+ratings[i]+"\n"+comments[i]+"\n\n";
+        }
+        ratingsList.setText(s);
         //System.out.println(b.getAverageRating());
     }
 

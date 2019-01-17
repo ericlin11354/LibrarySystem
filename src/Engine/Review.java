@@ -5,6 +5,7 @@ import java.io.FileNotFoundException; //this is the import for the file not foun
 import java.io.FileWriter; //the import for the file writer
 import java.io.IOException; //the import for the IOException
 import java.io.PrintWriter; //the import for the print writer class
+import java.util.ArrayList;
 import java.util.Scanner; //the import used to access the scanner function
 
 /**
@@ -89,21 +90,42 @@ public class Review {
         return num / den;
     }
 
+    //Made changes. Instead of returning a string containing all comments, we return an array(each element is a comment);
     /**
      * This method gets the comments of the book from the exterior document.
      *
      * @return returns all of the comments
      */
-    public String getComments() {
+    public String[] getComments() {
         initScanner(); //opens the scanner
+        ArrayList<String> list = new ArrayList<>();
         //creates temporary varibles
         String[] s = null;
-        String temp = "";
+        if(fileEmpty()) return null;
         while (input.hasNextLine()) { //runs until there are no more lines in the file
             s = input.nextLine().split(delim); //splits the comments from the ratings
-            temp += s[0]; //sets the string to the comments
+            list.add(s[0]);
         }
         input.close();
+        String[] temp = new String[list.size()];
+        temp = list.toArray(temp);
+        return temp;
+    }
+    
+    //same as a getComments but with ratings (should we merge them)? -Eric
+    public String[] getRatings(){
+        initScanner(); //opens the scanner
+        ArrayList<String> list = new ArrayList<>();
+        //creates temporary varibles
+        String[] s = null;
+        if(fileEmpty()) return null;
+        while (input.hasNextLine()) { //runs until there are no more lines in the file
+            s = input.nextLine().split(delim); //splits the comments from the ratings
+            list.add(s[1]);
+        }
+        input.close();
+        String[] temp = new String[list.size()];
+        temp = list.toArray(temp);
         return temp;
     }
 

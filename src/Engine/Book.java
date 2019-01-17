@@ -46,6 +46,14 @@ public class Book {
         return review.calculateBookRating();
     }
     
+    public String[] getComments(){
+        return review.getComments();
+    }
+    
+    public String[] getRatings(){
+        return review.getRatings();
+    }
+    
     /**
      *
      */

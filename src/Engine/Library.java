@@ -57,8 +57,6 @@ public class Library {
             if (codes[0].equals(book.barcode)) {
                 exist = true;
                 break;
-            } else {
-                exist = false;
             }
         }
         input.close();
@@ -75,6 +73,32 @@ public class Library {
             pw.println();
             pw.close();
         }
+    }
+    
+    //I feel like we can code this to be faster -Eric
+    public void deleteBook(Book book) throws IOException{
+        File f = new File("bookinfo.txt");
+        Scanner input = new Scanner(f);
+        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        String delimiter = ",,";
+        String s = "";
+        String remove = "";
+        //Checks if the file already has the book stored already
+        while (input.hasNext()) {
+            s += input.nextLine();
+            if(s.split(delimiter)[0].equals(book.barcode))
+                remove = s;
+        }
+        input.close();
+        //System.out.println(remove);
+        s = s.replaceAll(remove, "");
+        f.delete();
+        f.createNewFile();
+        pw = new PrintWriter(new FileWriter(f,true));
+        pw.println(s);
+        pw.close();
+        
+        //System.out.println(s);
     }
     public boolean bookExists(String barcode)throws IOException{
         File f = new File("bookinfo.txt");
@@ -178,6 +202,7 @@ public class Library {
         String summ;
         try{
             summ = doc.getElementById("summary").text();
+            System.out.println(summ);
         }
         catch(NullPointerException e){
             try{
@@ -214,12 +239,6 @@ public class Library {
      */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
-        
-        Book book = lib.browseBook("9780807286012");
-        /*book.writeReview("I hate this book",1);
-        book.writeReview("This book is ok",3);
-        book.writeReview("I can't live without this book",5);*/
-        //System.out.printf("%f",book.getAverageReview());
-        //System.exit(0);
+        lib.deleteBook(lib.browseBook("1853267333"));
     }
 }
