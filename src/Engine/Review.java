@@ -27,6 +27,14 @@ public class Review {
     public Review(String barcode) {
         this.barcode = barcode;
         f = new File("reviews/" + barcode + ".txt");
+        if(!f.exists()){
+            try{
+            f.createNewFile();
+            }
+            catch(IOException e){
+                System.out.println("IOException creating new file");
+            }
+        }
     }
 
     /**
@@ -37,6 +45,7 @@ public class Review {
             pw = new PrintWriter(new FileWriter(f, true));
         } catch (IOException e) {
             System.out.println("IOException reading " + f.getName());
+            System.exit(0);
         }
     }
 
@@ -48,6 +57,7 @@ public class Review {
             input = new Scanner(f);
         } catch (FileNotFoundException e) {
             System.out.println("FileNotFoundException reading " + f.getName());
+            System.exit(0);
         }
     }
 
@@ -74,7 +84,9 @@ public class Review {
      * @return the rating of the book
      */
     public double calculateBookRating() {
-        return getAddedRatings() / getNumberRatings();
+        double num = getAddedRatings();
+        double den = getNumberRatings();
+        return num / den;
     }
 
     /**
@@ -105,6 +117,9 @@ public class Review {
         //creates temporary varibles
         String[] s = null;
         int counter = 0;
+        if(fileEmpty()){
+            return 0;
+        }
         while (input.hasNextLine()) { //runs until there are no more lines in the file
             s = input.nextLine().split(delim); //splits the ratings from the comments
             counter += Integer.parseInt(s[1]); //sets the counter to the arrays values
@@ -119,6 +134,28 @@ public class Review {
      * @return returns the number of ratings on the book
      */
     public int getNumberRatings() {
-        return numRatings; //returns the number of ratings made
+        initScanner(); //opens the scanner
+        //creates temporary varibles
+        String[] s = null;
+        int count = 0;
+        if(fileEmpty()){
+            return 0;
+        }
+        while (input.hasNextLine()) { //runs until there are no more lines in the file
+            s = input.nextLine().split(delim); //splits the ratings from the comments
+            count++;
+        }
+        input.close();
+        return count;
+    }
+    
+    public boolean fileEmpty(){
+        try{
+            input.hasNextLine();
+        }
+        catch(NullPointerException e){
+            return true;
+        }
+        return false;
     }
 }

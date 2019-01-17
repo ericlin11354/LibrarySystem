@@ -1,16 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package GUI;
 
-import GUI.RealBookInfoScreen;
+import java.io.IOException;
 
 /**
- * This is the JPanel for the login screen.
  *
- * @author 069949345 (Natalie)
+ * @author 069949345
  */
-public class LoginScreen extends javax.swing.JPanel {
+public class LoginScreen extends javax.swing.JFrame {
 
     /**
-     * Creates new form LoginScreen
+     * Creates new form LoginScreen2
      */
     public LoginScreen() {
         initComponents();
@@ -25,6 +29,8 @@ public class LoginScreen extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        studentIDCode = new javax.swing.JTextField();
+        searchButton = new javax.swing.JButton();
         welcome = new javax.swing.JLabel();
         searchByTitle = new javax.swing.JLabel();
         searchBar = new javax.swing.JTextField();
@@ -33,8 +39,16 @@ public class LoginScreen extends javax.swing.JPanel {
         scanDirectly = new javax.swing.JLabel();
         leaveReview = new javax.swing.JLabel();
         IDNumber = new javax.swing.JLabel();
-        studentIDCode = new javax.swing.JTextField();
-        searchButton = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        searchButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        searchButton.setText("Search!");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         welcome.setFont(new java.awt.Font("Lucida Fax", 0, 24)); // NOI18N
         welcome.setText("Welcome to the NHS Library Book Database!");
@@ -54,15 +68,8 @@ public class LoginScreen extends javax.swing.JPanel {
         IDNumber.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         IDNumber.setText("ID Number:");
 
-        searchButton.setText("Search!");
-        searchButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchButtonActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -72,12 +79,12 @@ public class LoginScreen extends javax.swing.JPanel {
                         .addComponent(bookBarcode)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(barcodeGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(143, 143, 143))
+                        .addGap(131, 131, 131))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(welcome)
                         .addGap(19, 19, 19))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(124, Short.MAX_VALUE)
+                .addContainerGap(123, Short.MAX_VALUE)
                 .addComponent(searchByTitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(searchBar, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -125,21 +132,57 @@ public class LoginScreen extends javax.swing.JPanel {
                 .addComponent(searchButton)
                 .addGap(91, 91, 91))
         );
+
+        setSize(new java.awt.Dimension(594, 557));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     *
-     * @param evt
-     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
-        RealBookInfoScreen obj = new RealBookInfoScreen();
-        obj.setVisible(true);
-        
-        
+        this.dispose();
+        if(bar.isEmpty())
+            new BookInfoScreen().setVisible(true);
+        else
+            new BookInfoScreen(bar).setVisible(true);
     }//GEN-LAST:event_searchButtonActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LoginScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LoginScreen().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel IDNumber;

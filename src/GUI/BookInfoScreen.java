@@ -5,17 +5,63 @@
  */
 package GUI;
 
+import Engine.Book;
+import Engine.Library;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.awt.Dimension;
+import java.io.IOException;
+import java.net.URL;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author 069949345
  */
-public class BookInfoScreen2 extends javax.swing.JFrame {
+public class BookInfoScreen extends javax.swing.JFrame {
 
+    Toolkit tk = Toolkit.getDefaultToolkit();
+    Library lib = null;
+    Book b = null;
+    String barcode;
     /**
      * Creates new form BookInfoScreen2
      */
-    public BookInfoScreen2() {
+    public BookInfoScreen() {
         initComponents();
+    }
+    public BookInfoScreen(String barcode){
+        initComponents();
+        this.barcode = barcode;
+        lib = new Library();
+        try{
+        b = lib.browseBook(barcode);
+        }
+        catch(IOException e){
+            System.out.println("IOException calling browseBook");
+        }
+        jTitleLabel.setText(b.title);
+        jAuthorLabel.setText(b.author);
+        jDatePubLabel.setText(b.datePublished);
+        jPubLabel.setText(b.publisher);
+        jGenreLabel.setText(b.categories);
+        putSynopsisHere.setText(b.synopsis);
+        //System.out.println(b.cover);
+        Image temp = null;
+        try{
+        temp = ImageIO.read(new URL(b.cover));
+        //gets PreferredSize for img
+        this.pack();
+        temp = temp.getScaledInstance(jCoverLabel.getWidth(), jCoverLabel.getHeight(), Image.SCALE_SMOOTH);
+        }
+        catch(IOException e){
+            System.out.println("IOException reading image url");
+        }
+        jCoverLabel.setIcon(new ImageIcon(temp));
+        putAverageRatingHere.setText(String.format("%.2f",b.getAverageRating()));
+        //System.out.println(b.getAverageRating());
     }
 
     /**
@@ -27,20 +73,20 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jCoverLabel = new javax.swing.JLabel();
+        jTitleLabel = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jAuthorLabel = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        jDatePubLabel = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jPubLabel = new javax.swing.JLabel();
         putAverageRatingHere = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         ratingAndReviewButton = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        jGenreLabel = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        jReadingLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         putSynopsisHere = new javax.swing.JTextArea();
@@ -50,27 +96,30 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setAutoRequestFocus(false);
+        setPreferredSize(tk.getScreenSize());
 
-        jLabel2.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
-        jLabel2.setText("Title goes here");
+        jTitleLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
+        jTitleLabel.setText("Title goes here");
+        jTitleLabel.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         jLabel3.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel3.setText("Author:");
 
-        jLabel4.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel4.setText("jLabel4");
+        jAuthorLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jAuthorLabel.setText("jLabel4");
 
         jLabel5.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel5.setText("Genre:");
 
-        jLabel6.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel6.setText("jLabel6");
+        jDatePubLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jDatePubLabel.setText("jLabel6");
 
         jLabel7.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel7.setText("Publisher:");
 
-        jLabel8.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel8.setText("jLabel8");
+        jPubLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jPubLabel.setText("jLabel8");
 
         putAverageRatingHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         putAverageRatingHere.setText("jLabel15");
@@ -86,14 +135,14 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel10.setText("jLabel10");
+        jGenreLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jGenreLabel.setText("jLabel10");
 
         jLabel11.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel11.setText("Reading Level:");
 
-        jLabel12.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jLabel12.setText("jLabel12");
+        jReadingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        jReadingLabel.setText("jLabel12");
 
         jLabel13.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel13.setText("Synopsis:");
@@ -102,6 +151,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         putSynopsisHere.setColumns(20);
         putSynopsisHere.setLineWrap(true);
         putSynopsisHere.setRows(5);
+        putSynopsisHere.setToolTipText("");
         putSynopsisHere.setWrapStyleWord(true);
         putSynopsisHere.setOpaque(false);
         jScrollPane1.setViewportView(putSynopsisHere);
@@ -109,6 +159,7 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
         averageRatingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         averageRatingLabel.setText("Average Rating:");
 
+        ratingsList.setEditable(false);
         ratingsList.setColumns(20);
         ratingsList.setRows(5);
         jScrollPane2.setViewportView(ratingsList);
@@ -129,41 +180,38 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(5, 5, 5)
+                        .addComponent(jCoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel4))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addGap(10, 10, 10)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel7)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel8))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel10))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jLabel12))
-                                    .addComponent(jLabel13))
-                                .addGap(0, 233, Short.MAX_VALUE))
-                            .addComponent(jScrollPane1)))
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jAuthorLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(10, 10, 10)
+                                .addComponent(jDatePubLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPubLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jGenreLabel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jReadingLabel))
+                            .addComponent(jLabel13)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addComponent(jScrollPane2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(averageRatingLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(putAverageRatingHere)
-                        .addGap(283, 509, Short.MAX_VALUE))
+                        .addComponent(putAverageRatingHere))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jButton1)
@@ -177,32 +225,32 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTitleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jAuthorLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
+                            .addComponent(jDatePubLabel)
                             .addComponent(jLabel9))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel8))
+                            .addComponent(jPubLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
-                            .addComponent(jLabel10))
+                            .addComponent(jGenreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(jLabel12))
+                            .addComponent(jReadingLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jCoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(averageRatingLabel)
@@ -221,14 +269,14 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
 
     private void ratingAndReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingAndReviewButtonActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new ReviewScreen2().setVisible(true);
+        this.dispose();
+        new ReviewScreen(barcode).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        this.setVisible(false);
-        new LoginScreen2().setVisible(true);
+        this.dispose();
+        new LoginScreen().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -248,42 +296,43 @@ public class BookInfoScreen2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(BookInfoScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookInfoScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(BookInfoScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookInfoScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(BookInfoScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookInfoScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(BookInfoScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(BookInfoScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BookInfoScreen2().setVisible(true);
+                new BookInfoScreen().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel averageRatingLabel;
+    private javax.swing.JLabel jAuthorLabel;
     private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jCoverLabel;
+    private javax.swing.JLabel jDatePubLabel;
+    private javax.swing.JLabel jGenreLabel;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jPubLabel;
+    private javax.swing.JLabel jReadingLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jTitleLabel;
     private javax.swing.JLabel putAverageRatingHere;
     private javax.swing.JTextArea putSynopsisHere;
     private javax.swing.JButton ratingAndReviewButton;

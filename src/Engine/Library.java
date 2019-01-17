@@ -67,9 +67,11 @@ public class Library {
             pw.print(book.barcode + delimiter);
             pw.print(book.title + delimiter);
             pw.print(book.author + delimiter);
+            pw.print(book.synopsis + delimiter);
+            pw.print(book.publisher + delimiter);
             pw.print(book.datePublished + delimiter);
             pw.print(book.categories + delimiter);
-            pw.print(book.synopsis);
+            pw.print(book.cover + delimiter);
             pw.println();
             pw.close();
         }
@@ -103,7 +105,7 @@ public class Library {
                 break;
             }
         }
-        Book temp = new Book(codes[0],codes[1],codes[2],codes[3],codes[4],codes[5],codes[6]);
+        Book temp = new Book(codes[0],codes[1],codes[2],codes[3],codes[4],codes[5],codes[6],codes[7]);
         input.close();
         return temp;
     }
@@ -133,7 +135,14 @@ public class Library {
         java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
         driver.get(url);
         //gets first item in liust
-        WebElement item = driver.findElement(By.id("result-1"));
+        WebElement item = null;
+        try{
+        item = driver.findElement(By.id("result-1"));
+        }
+        catch(Exception e){
+            System.out.println("No such item can be found");
+            System.exit(0);
+        }
         if (item == null) {
             System.out.println("no book");
         }
@@ -146,8 +155,18 @@ public class Library {
         String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
         String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
         //gets publisher name and date
-        String pub = publisher[0];
-        String pubDate = publisher[1];
+        String pub = "";
+        String pubDate = "";
+        try{
+            pub = publisher[0];
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+        }
+        try{
+            pubDate = publisher[1];
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+        }
         //gets genres
         Elements elements = doc.getElementsByClass("subject-term");
         String genres = "";
@@ -161,9 +180,14 @@ public class Library {
             summ = doc.getElementById("summary").text();
         }
         catch(NullPointerException e){
+            try{
             summ = doc.getElementsByClass("nielsen-review").get(0).text();
+            }
+            catch(IndexOutOfBoundsException f){
+                summ = "";
+            }
         }
-         b = new Book(title, author, summ, pub, pubDate, genres, barcode);
+         b = new Book(barcode,title, author,summ, pub, pubDate, genres,cover);
         addBook(b);
         //test
         /*System.out.println(title);

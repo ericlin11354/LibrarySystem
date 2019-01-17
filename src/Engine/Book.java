@@ -12,6 +12,7 @@ public class Book {
     public String publisher;
     public String datePublished; //the variable for the book's publishing date
     public String categories; //the varible for the book's genre
+    public String cover;
     public String barcode; //the variable for the book's barcode
     public Review review;
     /**
@@ -25,7 +26,7 @@ public class Book {
      * @param categories
      * @param barcode 
      */
-    public Book(String title, String author, String synopsis, String publisher,String datePublished, String categories, String barcode){
+    public Book(String barcode,String title, String author, String synopsis, String publisher,String datePublished, String categories,String cover){
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
@@ -33,6 +34,7 @@ public class Book {
         this.datePublished = datePublished;
         this.categories = categories;
         this.barcode = barcode;
+        this.cover = cover;
         review = new Review(barcode);
     }
     
@@ -40,7 +42,7 @@ public class Book {
         review.addReview(s,rating);
     }
     
-    public double getAverageReview(){
+    public double getAverageRating(){
         return review.calculateBookRating();
     }
     
