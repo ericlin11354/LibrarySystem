@@ -175,7 +175,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
         if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
-            barcodeGoesHere.setText(evt.getKeyChar());
+            barcodeGoesHere.setText(evt.getKeyChar() + "");
         }
     }//GEN-LAST:event_formKeyReleased
 

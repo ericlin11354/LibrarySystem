@@ -177,6 +177,9 @@ public class Review {
             count++;
         }
         input.close();
+        if (count == 0) {
+            count = 1;
+        }
         return count;
     }
 
