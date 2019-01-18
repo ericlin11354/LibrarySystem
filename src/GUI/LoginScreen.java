@@ -12,12 +12,13 @@ import java.io.IOException;
  * @author 069949345
  */
 public class LoginScreen extends javax.swing.JFrame {
-
+    boolean keyPressed;
     /**
      * Creates new form LoginScreen2
      */
     public LoginScreen() {
         initComponents();
+        keyPressed = false;
     }
 
     /**
@@ -42,6 +43,11 @@ public class LoginScreen extends javax.swing.JFrame {
         quitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+        });
 
         searchButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         searchButton.setText("Search!");
@@ -165,6 +171,13 @@ public class LoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_quitButtonActionPerformed
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+            barcodeGoesHere.setText(evt.getKeyChar());
+        }
+    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
