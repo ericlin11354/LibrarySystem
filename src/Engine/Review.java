@@ -89,8 +89,8 @@ public class Review {
         switch (choice) { //decides to get comments or ratings
             case 0: { //case statement for comments
                 initScanner(); //opens the scanner
-                ArrayList<String> list = new ArrayList<>();
                 //creates temporary varibles
+                ArrayList<String> list = new ArrayList<>();
                 String[] s = null;
                 if (fileEmpty()) { //checks if the file is empty
                     return null;
@@ -106,8 +106,8 @@ public class Review {
             }
             case 1: { //case statement for ratings
                 initScanner(); //opens the scanner
-                ArrayList<String> list = new ArrayList<>();
                 //creates temporary varibles
+                ArrayList<String> list = new ArrayList<>();
                 String[] s = null;
                 if (fileEmpty()) { //checks if the file is empty
                     return null;
