@@ -33,7 +33,7 @@ public class Review {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                System.out.println("IOException creating new file");
+                System.out.println("IOException creating new file.");
             }
         }
     }
@@ -42,7 +42,7 @@ public class Review {
      * This method tries to open a print writer, if it cannot it will return an
      * error.
      */
-    public void initPW() {
+    public void initiatePrintWriter() {
         try { //checks to see if a print writer can be opened
             pw = new PrintWriter(new FileWriter(f, true));
         } catch (IOException e) { //if not then print an error
@@ -55,7 +55,7 @@ public class Review {
      * This method tries to open a scanner, if it cannot it will return an
      * error.
      */
-    public void initScanner() {
+    public void initiateScanner() {
         try { //checks to see if a scanner can be opened
             input = new Scanner(f);
         } catch (FileNotFoundException e) { //if not then print an error
@@ -72,7 +72,7 @@ public class Review {
      * @param rating the rating made by the user
      */
     public void addReview(String comment, int rating) {
-        initPW();
+        initiatePrintWriter();
         pw.println(comment + delim + rating);
         pw.close();
     }
@@ -88,7 +88,7 @@ public class Review {
     public String[] getReview(int choice) {
         switch (choice) { //decides to get comments or ratings
             case 0: { //case statement for comments
-                initScanner(); //opens the scanner
+                initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 ArrayList<String> list = new ArrayList<>();
                 String[] s = null;
@@ -105,7 +105,7 @@ public class Review {
                 return temp;
             }
             case 1: { //case statement for ratings
-                initScanner(); //opens the scanner
+                initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 ArrayList<String> list = new ArrayList<>();
                 String[] s = null;
@@ -137,7 +137,7 @@ public class Review {
     public int getRatingValues(int choice) {
         switch (choice) { //decides to get the sum or number of ratings
             case 0: { //case statement for the sum of ratings
-                initScanner(); //opens the scanner
+                initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 String[] s = null;
                 int count = 0;
@@ -152,7 +152,7 @@ public class Review {
                 return count;
             }
             case 1: { //case statement for the number of ratings
-                initScanner(); //opens the scanner
+                initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 String[] s = null;
                 int count = 0;
@@ -161,7 +161,7 @@ public class Review {
                 }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
-                    count++;
+                    count++; //adds to the count
                 }
                 input.close();
                 return count;
