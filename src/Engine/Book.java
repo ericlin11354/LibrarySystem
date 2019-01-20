@@ -39,7 +39,7 @@ public class Book {
     }
     
     public void writeReview(String s,int rating){
-        review.addReview(s,rating);
+        review.addReview(s, rating);
     }
     
     public double getAverageRating(){
@@ -47,11 +47,11 @@ public class Book {
     }
     
     public String[] getComments(){
-        return review.getComments();
+        return review.getReview(0);
     }
     
     public String[] getRatings(){
-        return review.getRatings();
+        return review.getReview(1);
     }
     
     /**

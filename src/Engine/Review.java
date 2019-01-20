@@ -19,7 +19,7 @@ public class Review {
     Scanner input = null; //create a new scanner
     PrintWriter pw = null; //create a new print writer
     String barcode; //the variable for the barcode of the book
-    public static final String delim = ";"; //the variable for the delimeter
+    public static final String delim = ",,"; //the variable for the delimeter
 
     /**
      * This is the constructor for the review class.
@@ -72,122 +72,119 @@ public class Review {
      * @param rating the rating made by the user
      */
     public void addReview(String comment, int rating) {
-        //when the user iniciates the review class by clicking a button,
-        //the user must enter a comment, and a rating for the book
-        //then the comment and rating is stored to a text file based on the barcode
         initPW();
         pw.println(comment + delim + rating);
         pw.close();
     }
 
     /**
+     * This method is used to get the comments and ratings of a book using an
+     * Integer.
+     *
+     * @param choice 0 would be used for comments, 1 would be used for ratings
+     * @return returns either the comments, ratings, or null for an incorrect
+     * entry
+     */
+    public String[] getReview(int choice) {
+        switch (choice) { //decides to get comments or ratings
+            case 0: { //case statement for comments
+                initScanner(); //opens the scanner
+                ArrayList<String> list = new ArrayList<>();
+                //creates temporary varibles
+                String[] s = null;
+                if (fileEmpty()) { //checks if the file is empty
+                    return null;
+                }
+                while (input.hasNextLine()) { //runs until there are no more lines in the file
+                    s = input.nextLine().split(delim); //splits the comments from the ratings
+                    list.add(s[choice]);
+                }
+                input.close();
+                String[] temp = new String[list.size()];
+                temp = list.toArray(temp); //converts the list into a String array
+                return temp;
+            }
+            case 1: { //case statement for ratings
+                initScanner(); //opens the scanner
+                ArrayList<String> list = new ArrayList<>();
+                //creates temporary varibles
+                String[] s = null;
+                if (fileEmpty()) { //checks if the file is empty
+                    return null;
+                }
+                while (input.hasNextLine()) { //runs until there are no more lines in the file
+                    s = input.nextLine().split(delim); //splits the comments from the ratings
+                    list.add(s[choice]);
+                }
+                input.close();
+                String[] temp = new String[list.size()];
+                temp = list.toArray(temp); //converts the list into a String array
+                return temp;
+            }
+            default: //if an unacceptable entry is made
+                return null;
+        }
+    }
+
+    /**
+     * This method gets either the sum of ratings, or the number of ratings made
+     * on a book.
+     *
+     * @param choice 0 is for sum of ratings, 1 is for number of ratings
+     * @return returns the sum of ratings, or number of ratings, if an error
+     * occurs -1 is returned
+     */
+    public int getRatingValues(int choice) {
+        switch (choice) { //decides to get the sum or number of ratings
+            case 0: { //case statement for the sum of ratings
+                initScanner(); //opens the scanner
+                //creates temporary varibles
+                String[] s = null;
+                int count = 0;
+                if (fileEmpty()) { //checks if the file is empty
+                    return 0;
+                }
+                while (input.hasNextLine()) { //runs until there are no more lines in the file
+                    s = input.nextLine().split(delim); //splits the ratings from the comments
+                    count += Integer.parseInt(s[1]); //sets the counter to the arrays values
+                }
+                input.close();
+                return count;
+            }
+            case 1: { //case statement for the number of ratings
+                initScanner(); //opens the scanner
+                //creates temporary varibles
+                String[] s = null;
+                int count = 0;
+                if (fileEmpty()) { //checks if the file is empty
+                    return 0;
+                }
+                while (input.hasNextLine()) { //runs until there are no more lines in the file
+                    s = input.nextLine().split(delim); //splits the ratings from the comments
+                    count++;
+                }
+                input.close();
+                return count;
+            }
+            default: //for an incorrect use of method
+                return -1;
+        }
+    }
+    
+    /**
      * This method updates the rating of a book by re-calculating the average.
      *
      * @return the rating of the book
      */
     public double calculateBookRating() {
-        return getAddedRatings() / getNumberRatings();
-    }
-
-    /**
-     * This method gets the comments of the book and adds them to a String
-     * ArrayList.
-     *
-     * @return returns all of the comments in String array
-     */
-    public String[] getComments() {
-        initScanner(); //opens the scanner
-        ArrayList<String> list = new ArrayList<>();
-        //creates temporary varibles
-        String[] s = null;
-        if (fileEmpty()) { //checks if the file is empty
-            return null;
-        }
-        while (input.hasNextLine()) { //runs until there are no more lines in the file
-            s = input.nextLine().split(delim); //splits the comments from the ratings
-            list.add(s[0]);
-        }
-        input.close();
-        String[] temp = new String[list.size()];
-        temp = list.toArray(temp);
-        return temp;
-    }
-
-    //same as a getComments but with ratings (should we merge them)? -Eric
-    /**
-     * This method gets the ratings all the ratings of the books and adds them
-     * to a String ArrayList.
-     *
-     * @return returns a String array of all the ratings together
-     */
-    public String[] getRatings() {
-        initScanner(); //opens the scanner
-        ArrayList<String> list = new ArrayList<>();
-        //creates temporary varibles
-        String[] s = null;
-        if (fileEmpty()) { //checks if the file is empty
-            return null;
-        }
-        while (input.hasNextLine()) { //runs until there are no more lines in the file
-            s = input.nextLine().split(delim); //splits the comments from the ratings
-            list.add(s[1]);
-        }
-        input.close();
-        String[] temp = new String[list.size()];
-        temp = list.toArray(temp);
-        return temp;
-    }
-
-    /**
-     * This method gets the sum of all the ratings.
-     *
-     * @return returns the value of all the ratings
-     */
-    public int getAddedRatings() {
-        initScanner(); //opens the scanner
-        //creates temporary varibles
-        String[] s = null;
-        int counter = 0;
-        if (fileEmpty()) { //checks if the file is empty
-            return 0;
-        }
-        while (input.hasNextLine()) { //runs until there are no more lines in the file
-            s = input.nextLine().split(delim); //splits the ratings from the comments
-            counter += Integer.parseInt(s[1]); //sets the counter to the arrays values
-        }
-        input.close();
-        return counter;
-    }
-
-    /**
-     * This method gets the number of ratings that have been made on the book.
-     *
-     * @return returns the number of ratings on the book
-     */
-    public int getNumberRatings() {
-        initScanner(); //opens the scanner
-        //creates temporary varibles
-        String[] s = null;
-        int count = 0;
-        if (fileEmpty()) { //checks if the file is empty
-            return 1;
-        }
-        while (input.hasNextLine()) { //runs until there are no more lines in the file
-            s = input.nextLine().split(delim); //splits the ratings from the comments
-            count++;
-        }
-        input.close();
-        if (count == 0) {
-            count = 1;
-        }
-        return count;
+        return getRatingValues(0) / getRatingValues(1);
     }
 
     /**
      * This method checks if the books file is empty, meaning it has no comments
-     * or ratings
+     * or ratings.
      *
-     * @return
+     * @return returns true if it is empty, returns false if it is not empty
      */
     public boolean fileEmpty() {
         try { //trys to see if the scanner can take in the next line
