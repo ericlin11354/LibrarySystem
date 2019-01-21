@@ -18,7 +18,7 @@ public class Review {
     File f = null; //create a new file linked to bookinfo
     Scanner input = null; //create a new scanner
     PrintWriter pw = null; //create a new print writer
-    String barcode; //the variable for the barcode of the book
+    String barcode = null; //the variable for the barcode of the book
     public static final String delim = ",,"; //the variable for the delimeter
 
     /**
@@ -27,12 +27,12 @@ public class Review {
      * @param barcode takes in the barcode of the book
      */
     public Review(String barcode) {
-        this.barcode = barcode;
-        f = new File("reviews/" + barcode + ".txt");
+        this.barcode = barcode; //gets the barcode of the book
+        f = new File("reviews/" + barcode + ".txt"); //creates a file under the name of the barcode
         if (!f.exists()) { //checks if the file already exist
-            try {
-                f.createNewFile(); //creates 
-            } catch (IOException e) {
+            try { //try to open new file
+                f.createNewFile(); //creates a new file
+            } catch (IOException e) { //if not then return an error
                 System.out.println("IOException creating new file.");
             }
         }
@@ -44,10 +44,10 @@ public class Review {
      */
     public void initiatePrintWriter() {
         try { //checks to see if a print writer can be opened
-            pw = new PrintWriter(new FileWriter(f, true));
+            pw = new PrintWriter(new FileWriter(f, true)); //makes a new print writer for the file
         } catch (IOException e) { //if not then print an error
             System.out.println("IOException reading " + f.getName());
-            System.exit(0);
+            System.exit(0); //shuts the program down
         }
     }
 
@@ -57,10 +57,10 @@ public class Review {
      */
     public void initiateScanner() {
         try { //checks to see if a scanner can be opened
-            input = new Scanner(f);
+            input = new Scanner(f); //makes a new scanner for the file
         } catch (FileNotFoundException e) { //if not then print an error
             System.out.println("FileNotFoundException reading " + f.getName());
-            System.exit(0);
+            System.exit(0); //shuts the program down
         }
     }
 
@@ -72,9 +72,9 @@ public class Review {
      * @param rating the rating made by the user
      */
     public void addReview(String comment, int rating) {
-        initiatePrintWriter();
-        pw.println(comment + delim + rating);
-        pw.close();
+        initiatePrintWriter(); //open the print writer
+        pw.println(comment + delim + rating); //adds the review to the file
+        pw.close(); //close the print writer
     }
 
     /**
@@ -91,35 +91,35 @@ public class Review {
                 initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 ArrayList<String> list = new ArrayList<>();
-                String[] s = null;
+                String[] s = null, temp = null;
                 if (fileEmpty()) { //checks if the file is empty
-                    return null;
+                    return null; //return null if true
                 }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the comments from the ratings
-                    list.add(s[choice]);
+                    list.add(s[choice]); //adds the comment to the list
                 }
-                input.close();
-                String[] temp = new String[list.size()];
+                input.close(); //closes the scanner
+                temp = new String[list.size()]; //makes it the size of the list
                 temp = list.toArray(temp); //converts the list into a String array
-                return temp;
+                return temp; //return the String array of comments
             }
             case 1: { //case statement for ratings
                 initiateScanner(); //opens the scanner
                 //creates temporary varibles
                 ArrayList<String> list = new ArrayList<>();
-                String[] s = null;
+                String[] s = null, temp = null;
                 if (fileEmpty()) { //checks if the file is empty
-                    return null;
+                    return null; //return null if true
                 }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the comments from the ratings
-                    list.add(s[choice]);
+                    list.add(s[choice]); //adds the rating to the list
                 }
-                input.close();
-                String[] temp = new String[list.size()];
+                input.close(); //closes the scanner
+                temp = new String[list.size()]; //makes the it the size of the list
                 temp = list.toArray(temp); //converts the list into a String array
-                return temp;
+                return temp; //returns the String array of ratings
             }
             default: //if an unacceptable entry is made
                 return null;
@@ -142,14 +142,14 @@ public class Review {
                 String[] s = null;
                 int count = 0;
                 if (fileEmpty()) { //checks if the file is empty
-                    return 0;
+                    return 0; //return 0 if true
                 }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
                     count += Integer.parseInt(s[1]); //sets the counter to the arrays values
                 }
-                input.close();
-                return count;
+                input.close(); //closes the scanner
+                return count; //returns the total sum of ratings
             }
             case 1: { //case statement for the number of ratings
                 initiateScanner(); //opens the scanner
@@ -157,32 +157,30 @@ public class Review {
                 String[] s = null;
                 int count = 0;
                 if (fileEmpty()) { //checks if the file is empty
-                    return 0;
+                    return 0; //return 0 if it is
                 }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
                     count++; //adds to the count
                 }
-                input.close();
-                return count;
+                input.close(); //closes the scanner
+                return count; //returns the number of ratings
             }
             default: //for an incorrect use of method
-                return -1;
+                return -1; //returns -1 to clearly show that a mistake or error occured
         }
     }
-    
+
     /**
      * This method updates the rating of a book by re-calculating the average.
      *
      * @return the rating of the book
      */
     public double calculateBookRating() {
-        //check for exception where total ratings is 0
-        try{
-        return getRatingValues(0) / getRatingValues(1);
-        }
-        catch(ArithmeticException e){
-            return 0;
+        try { //if they equal 0 then try to calculate it
+            return getRatingValues(0) / getRatingValues(1); //calculate the average
+        } catch (ArithmeticException e) { //if the average cannot be calculated
+            return 0; //return 0
         }
     }
 
@@ -194,10 +192,10 @@ public class Review {
      */
     public boolean fileEmpty() {
         try { //trys to see if the scanner can take in the next line
-            input.hasNextLine();
-        } catch (NullPointerException e) {
-            return true;
+            input.hasNextLine(); //goes to the next line in the file
+        } catch (NullPointerException e) { //if the file is empty
+            return true; //return true
         }
-        return false;
+        return false; //if not then return false
     }
 }
