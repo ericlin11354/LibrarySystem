@@ -31,7 +31,7 @@ public class Review {
         f = new File("reviews/" + barcode + ".txt");
         if (!f.exists()) { //checks if the file already exist
             try {
-                f.createNewFile();
+                f.createNewFile(); //creates 
             } catch (IOException e) {
                 System.out.println("IOException creating new file.");
             }
