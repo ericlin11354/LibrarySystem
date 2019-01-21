@@ -1,16 +1,20 @@
 package Engine;
 
+import java.util.List;
 import java.io.IOException; //the import for the input, ouput exception
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.jsoup.nodes.Element;
 import java.io.File; //the import used to access exterior files
+import java.io.FileNotFoundException;
 import java.io.FileWriter; //the import for the File Writer
 import java.io.PrintWriter; //the import for the Print Writer
 import java.net.URL; //the import to access the internet using a URL
+import java.util.ArrayList;
 import java.util.Scanner; //the import for the Scanner
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -26,13 +30,30 @@ public class Library {
     public String author; //the variable for the author of the book
     public URL cover; //the variable book's cover
     public String desc; //the variable for the description of the book.
-
     /**
      * The constructor for the library class.
      */
     public Library() {
         title = author = desc = "";
         cover = null;
+    }
+    public Scanner initScanner(File f){
+        try{
+            return new Scanner(f);
+        }
+        catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public PrintWriter initPW(File f){
+        try{
+            return new PrintWriter(new FileWriter(f,true));
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        return null;
     }
 
     /**
@@ -41,12 +62,12 @@ public class Library {
      * @param book the book to be added
      * @throws java.io.IOException
      */
-    public void addBook(Book book) throws IOException {
+    public void addBook(Book book) {
         //create temporary variables
         File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
+        Scanner input = initScanner(f);
         boolean exist = false;
-        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        PrintWriter pw = initPW(f);
         String delimiter = ",,";
         //Checks if the file already has the book stored already
         while (input.hasNext()) {
@@ -66,6 +87,7 @@ public class Library {
             pw.print(book.datePublished + delimiter);
             pw.print(book.categories + delimiter);
             pw.print(book.cover + delimiter);
+            pw.print(book.link+delimiter);
             pw.println();
             pw.close();
         }
@@ -110,10 +132,10 @@ public class Library {
      * @return
      * @throws IOException
      */
-    public boolean bookExists(String barcode) throws IOException {
+    public boolean bookExists(String barcode) {
         File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
-        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        Scanner input = initScanner(f);
+        PrintWriter pw = initPW(f);
         String delim = ",,";
         //Checks if the file already has the book stored already
         while (input.hasNext()) {
@@ -132,10 +154,10 @@ public class Library {
      * @return
      * @throws IOException
      */
-    public Book searchBook(String barcode) throws IOException {
+    public Book searchBook(String barcode) {
         File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
-        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
+        Scanner input = initScanner(f);
+        PrintWriter pw = initPW(f);
         String delim = ",,";
         String[] codes = null;
         //Checks if the file already has the book stored already
@@ -145,7 +167,7 @@ public class Library {
                 break;
             }
         }
-        Book temp = new Book(codes[0], codes[1], codes[2], codes[3], codes[4], codes[5], codes[6], codes[7]);
+        Book temp = new Book(codes[0], codes[1], codes[2], codes[3], codes[4], codes[5], codes[6], codes[7],codes[8]);
         input.close();
         return temp;
     }
@@ -163,8 +185,90 @@ public class Library {
      * @throws IOException throws Exception initializing Document and calling
      * addBook method
      */
-    public Book browseBook(String barcode) throws IOException {
-        Book b = null;
+    public Book getBookInfo(String url) {
+        //System.out.println(url);
+        WebDriver driver = new HtmlUnitDriver();
+        //turn off htmlunit warnings
+        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
+        driver.get(url);
+        Book b;
+        Document doc = null;
+        try{
+        doc = Jsoup.connect(driver.getCurrentUrl()).get();
+        }
+        catch(IOException e){
+            e.printStackTrace();
+        }
+        String barcode = doc.getElementById("details-standardno").text();
+        if(bookExists(barcode)){
+            b = searchBook(barcode);
+            return b;
+        }
+        //gets title,author,publisher
+        String title = doc.getElementsByClass("title").get(0).text();
+        String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
+        String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
+        //gets publisher name and date
+        String pub = "";
+        String pubDate = "";
+        try {
+            pub = publisher[0];
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        try {
+            pubDate = publisher[1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+        }
+        //gets genres
+        String genres = doc.getElementById("details-genre").text();
+        genres = genres.replaceFirst("Genre/Form: ","");
+        System.out.println(genres);
+        //System.out.println(genres);
+        //String genres = "";
+        /*for (Element element : elements) {
+            genres += element.text();
+        }*/
+        //gets cover image file
+        String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
+        String summ = doc.getElementsByClass("abstracttxt").text();
+        /*try {
+            summ = doc.getElementById("summary").text();
+            System.out.println(summ);
+        } catch (NullPointerException e) {
+            try {
+                summ = doc.getElementsByClass("nielsen-review").get(0).text();
+            } catch (IndexOutOfBoundsException f) {
+                summ = "";
+            }
+        }*/
+        b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover,url);
+        addBook(b);
+        return b;
+    }
+
+    public Book[] browseBook(String barcode) {
+        //connects to website
+        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
+        WebDriver driver = new HtmlUnitDriver();
+        //turn off htmlunit warnings
+        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
+        driver.get(url);
+        List<WebElement> items = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            try {
+                items.add(driver.findElement(By.id("result-" + i)));
+                //System.out.println(items.get(i-1).getText());
+            } catch (NoSuchElementException e) {
+                //does nothing
+            }
+        }
+        Book[] temp = new Book[items.size()];
+        for (int i = 0; i < temp.length; i++) {
+            temp[i] = new Book(items.get(i).getText(), items.get(i).getAttribute("href"));
+            //System.out.println(items.get(i).getAttribute("href"));
+        }
+        return temp;
+        /*Book b = null;
         if (bookExists(barcode)) {
             b = searchBook(barcode);
         } else {
@@ -232,8 +336,8 @@ public class Library {
          System.out.println(genres);
          System.out.println(summ);
          System.out.println(cover);*/
-        }
-        return b;
+        //}
+        //return b;
     }
 
     /**
@@ -250,6 +354,5 @@ public class Library {
      */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
-        lib.deleteBook(lib.browseBook("1853267333"));
     }
 }

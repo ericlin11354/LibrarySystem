@@ -177,7 +177,13 @@ public class Review {
      * @return the rating of the book
      */
     public double calculateBookRating() {
+        //check for exception where total ratings is 0
+        try{
         return getRatingValues(0) / getRatingValues(1);
+        }
+        catch(ArithmeticException e){
+            return 0;
+        }
     }
 
     /**

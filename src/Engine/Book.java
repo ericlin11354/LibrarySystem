@@ -16,6 +16,7 @@ public class Book {
     public String cover; //the variable for the book's cover
     public String barcode; //the variable for the book's barcode
     public Review review; //the variable used to access the Review Class
+    public String link;
 
     /**
      * This is the constructor for the Book Class.
@@ -29,7 +30,7 @@ public class Book {
      * @param barcode the barcode of the book
      * @param cover the cover of the book
      */
-    public Book(String barcode, String title, String author, String synopsis, String publisher, String datePublished, String categories, String cover) {
+    public Book(String barcode, String title, String author, String synopsis, String publisher, String datePublished, String categories, String cover,String link) {
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
@@ -39,6 +40,10 @@ public class Book {
         this.barcode = barcode;
         this.cover = cover;
         review = new Review(barcode);
+    }
+    public Book(String title, String link){
+        this.title = title;
+        this.link = link;
     }
 
     /**

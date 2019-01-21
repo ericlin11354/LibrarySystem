@@ -5,17 +5,33 @@
  */
 package GUI;
 
+import Engine.Book;
+import Engine.Library;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author 069949345
  */
-public class SearchResultsScreen2 extends javax.swing.JFrame {
+public class SearchResultsScreen extends javax.swing.JFrame {
 
+    Library lib = new Library();
+    Book[] list;
     /**
      * Creates new form SearchResultsScreen2
      */
-    public SearchResultsScreen2() {
+    public SearchResultsScreen() {
         initComponents();
+    }
+    public SearchResultsScreen(String barcode){
+        initComponents();
+        list = lib.browseBook(barcode);
+        DefaultListModel dlm = new DefaultListModel();
+        resultGoesHere.setText(barcode);
+        for(int i=0;i<list.length;i++){
+            dlm.addElement(list[i].title);
+        }
+        searchResultsGoHere.setModel(dlm);
     }
 
     /**
@@ -27,8 +43,9 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         resultsForQueryLabel = new javax.swing.JLabel();
-        bookTitleGoesHere = new javax.swing.JTextField();
+        resultGoesHere = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         searchResultsGoHere = new javax.swing.JList();
         backButton = new javax.swing.JButton();
@@ -39,11 +56,12 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
         resultsForQueryLabel.setFont(new java.awt.Font("Lucida Fax", 0, 18)); // NOI18N
         resultsForQueryLabel.setText("Search Results for Query:");
 
-        bookTitleGoesHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        bookTitleGoesHere.setText("jTextField1");
-        bookTitleGoesHere.addActionListener(new java.awt.event.ActionListener() {
+        resultGoesHere.setEditable(false);
+        resultGoesHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
+        resultGoesHere.setText("jTextField1");
+        resultGoesHere.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bookTitleGoesHereActionPerformed(evt);
+                resultGoesHereActionPerformed(evt);
             }
         });
 
@@ -76,7 +94,7 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(resultsForQueryLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(bookTitleGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(resultGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -91,7 +109,7 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(resultsForQueryLabel)
-                    .addComponent(bookTitleGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(resultGoesHere, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 427, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -102,14 +120,22 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bookTitleGoesHereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookTitleGoesHereActionPerformed
+    private void resultGoesHereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultGoesHereActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_bookTitleGoesHereActionPerformed
+    }//GEN-LAST:event_resultGoesHereActionPerformed
 
     private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedButtonActionPerformed
         // TODO add your handling code here:
+        if(searchResultsGoHere.isSelectionEmpty())
+            jOptionPane1.showMessageDialog(null, "Please select an item");
+        else{
+            dispose();
+            //System.out.println(list[searchResultsGoHere.getSelectedIndex()].link);
+            new BookInfoScreen(list[searchResultsGoHere.getSelectedIndex()].link).setVisible(true);
+        }
     }//GEN-LAST:event_proceedButtonActionPerformed
 
     /**
@@ -129,29 +155,31 @@ public class SearchResultsScreen2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SearchResultsScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchResultsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SearchResultsScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchResultsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SearchResultsScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchResultsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SearchResultsScreen2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SearchResultsScreen.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SearchResultsScreen2().setVisible(true);
+                new SearchResultsScreen().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backButton;
-    private javax.swing.JTextField bookTitleGoesHere;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton proceedButton;
+    private javax.swing.JTextField resultGoesHere;
     private javax.swing.JLabel resultsForQueryLabel;
     private javax.swing.JList searchResultsGoHere;
     // End of variables declaration//GEN-END:variables

@@ -26,12 +26,7 @@ public class ReviewScreen extends javax.swing.JFrame {
     public ReviewScreen(String barcode){
         initComponents();
         lib = new Library();
-        try{
-        b = lib.browseBook(barcode);
-        }
-        catch(IOException e){
-            System.out.println("IOException browsing book");
-        }
+        b = lib.getBookInfo(barcode);
         this.barcode = barcode;
     }
 

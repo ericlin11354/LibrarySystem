@@ -22,25 +22,18 @@ import javax.swing.ImageIcon;
 public class BookInfoScreen extends javax.swing.JFrame {
 
     Toolkit tk = Toolkit.getDefaultToolkit();
-    Library lib = null;
-    Book b = null;
-    String barcode;
+    Library lib = new Library();
+    Book b;
     /**
      * Creates new form BookInfoScreen2
      */
     public BookInfoScreen() {
         initComponents();
     }
-    public BookInfoScreen(String barcode){
+    public BookInfoScreen(String url){
         initComponents();
-        this.barcode = barcode;
-        lib = new Library();
-        try{
-        b = lib.browseBook(barcode);
-        }
-        catch(IOException e){
-            System.out.println("IOException calling browseBook");
-        }
+        //System.out.println(url);
+        b = lib.getBookInfo(url);
         jTitleLabel.setText(b.title);
         jAuthorLabel.setText(b.author);
         jDatePubLabel.setText(b.datePublished);
@@ -284,7 +277,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private void ratingAndReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingAndReviewButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ReviewScreen(barcode).setVisible(true);
+        new ReviewScreen(b.link).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed

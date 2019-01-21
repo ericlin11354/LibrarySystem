@@ -12,7 +12,9 @@ import java.io.IOException;
  * @author 069949345
  */
 public class LoginScreen extends javax.swing.JFrame {
+
     boolean keyPressed;
+
     /**
      * Creates new form LoginScreen2
      */
@@ -30,6 +32,7 @@ public class LoginScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         studentIDCode = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         welcome = new javax.swing.JLabel();
@@ -160,11 +163,29 @@ public class LoginScreen extends javax.swing.JFrame {
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
-        this.dispose();
-        if(bar.isEmpty())
-            new BookInfoScreen().setVisible(true);
-        else
-            new BookInfoScreen(bar).setVisible(true);
+        String[] options = {"Title", "Barcode"};
+        if (id.isEmpty()) {
+            jOptionPane1.showMessageDialog(null, "Please enter your Student ID");
+        } else if (!title.isEmpty() && !bar.isEmpty()) {
+            if (jOptionPane1.showOptionDialog(null, "Would you like to search by title or barcode?", "Message", jOptionPane1.DEFAULT_OPTION, jOptionPane1.DEFAULT_OPTION, null,
+                    options, 0) == 0) {
+                //System.out.println(title);
+                this.dispose();
+                new SearchResultsScreen(title).setVisible(true);
+            } else {
+                this.dispose();
+                new SearchResultsScreen(bar).setVisible(true);
+            }
+        } else if (title.isEmpty() && bar.isEmpty()) {
+            jOptionPane1.showMessageDialog(null, "Please enter a title or barcode");
+        } else {
+            this.dispose();
+            if (bar.isEmpty()) {
+                new SearchResultsScreen(title).setVisible(true);
+            } else {
+                new SearchResultsScreen(bar).setVisible(true);
+            }
+        }
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void quitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitButtonActionPerformed
@@ -174,7 +195,7 @@ public class LoginScreen extends javax.swing.JFrame {
 
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
         // TODO add your handling code here:
-        if(evt.getKeyCode()==java.awt.event.KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
             barcodeGoesHere.setText(evt.getKeyChar() + "");
         }
     }//GEN-LAST:event_formKeyReleased
@@ -219,6 +240,7 @@ public class LoginScreen extends javax.swing.JFrame {
     private javax.swing.JLabel IDNumber;
     private javax.swing.JTextField barcodeGoesHere;
     private javax.swing.JLabel bookBarcode;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JLabel leaveReview;
     private javax.swing.JButton quitButton;
     private javax.swing.JLabel scanDirectly;
