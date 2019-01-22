@@ -144,7 +144,7 @@ public class Review {
      */
     public double calculateBookRating() {
         try { //if they equal 0 then try to calculate it
-            return getRatingValues(0) / getRatingValues(1); //calculate the average
+            return getRatingValues(1) / getRatingValues(0); //calculate the average
         } catch (ArithmeticException e) { //if the average cannot be calculated
             return 0; //return 0
         }
