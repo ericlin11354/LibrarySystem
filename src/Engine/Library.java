@@ -27,10 +27,10 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 public class Library {
 
     String delimiter = ",,";
-    /**
-             * The constructor for the library class.
-             */
 
+    /**
+     * The constructor for the library class.
+     */
     public Library() {
     }
 
@@ -105,7 +105,7 @@ public class Library {
         PrintWriter pw = initPW(f);
         //As long as there is still things to read from the file
         while (input.hasNext()) {
-            //Separates each line into elements by the commas 
+            //Separates each line into elements by the commas
             String[] codes = input.nextLine().split(delimiter);
             //first element of each row is the barcode
             if (codes[0].equals(barcode)) {
@@ -120,7 +120,8 @@ public class Library {
      * Gets a book in bookinfo.txt
      *
      * @param barcode gets the barcode for the book
-     * @return returns Book class for the book. Returns null if book cannot be found
+     * @return returns Book class for the book. Returns null if book cannot be
+     * found
      */
     public Book searchBook(String barcode) {
         File f = new File("bookinfo.txt");
@@ -159,7 +160,7 @@ public class Library {
         //stores html for book info page
         Document doc = null;
         try {
-            //Jsoup is used to parse html 
+            //Jsoup is used to parse html
             doc = Jsoup.connect(url).get();
         } catch (IOException e) {
             e.printStackTrace();
@@ -208,6 +209,7 @@ public class Library {
 
     /**
      * Provides a list of books from a title/barcode
+     *
      * @param search gets title/barcode search
      * @return returns a Book array containing items
      */

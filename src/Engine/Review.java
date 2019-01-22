@@ -79,6 +79,15 @@ public class Review {
     }
 
     /**
+     * This method deletes all the reviews for a specific book.
+     *
+     * @param f the file to be deleted
+     */
+    public void deleteReview(File f) {
+        f.delete(); //actually deletes the file
+    }
+
+    /**
      * This method is used to get the comments and ratings of a book using an
      * Integer.
      *
