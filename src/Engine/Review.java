@@ -71,9 +71,9 @@ public class Review {
      * @param comment the comment made by the user
      * @param rating the rating made by the user
      */
-    public void addReview(String comment, int rating) {
+    public void addReview(String comment, int rating, String id) {
         initiatePrintWriter(); //open the print writer
-        pw.println(comment + delim + rating); //adds the review to the file
+        pw.println(comment + delim + rating + delim + id); //adds the review to the file
         pw.close(); //close the print writer
     }
 
@@ -86,44 +86,23 @@ public class Review {
      * entry
      */
     public String[] getReview(int choice) {
-        switch (choice) { //decides to get comments or ratings
-            case 0: { //case statement for comments
-                initiateScanner(); //opens the scanner
-                //creates temporary varibles
-                ArrayList<String> list = new ArrayList<>();
-                String[] s = null, temp = null;
-                if (fileEmpty()) { //checks if the file is empty
-                    return null; //return null if true
-                }
-                while (input.hasNextLine()) { //runs until there are no more lines in the file
-                    s = input.nextLine().split(delim); //splits the comments from the ratings
-                    list.add(s[choice]); //adds the comment to the list
-                }
-                input.close(); //closes the scanner
-                temp = new String[list.size()]; //makes it the size of the list
-                temp = list.toArray(temp); //converts the list into a String array
-                return temp; //return the String array of comments
-            }
-            case 1: { //case statement for ratings
-                initiateScanner(); //opens the scanner
-                //creates temporary varibles
-                ArrayList<String> list = new ArrayList<>();
-                String[] s = null, temp = null;
-                if (fileEmpty()) { //checks if the file is empty
-                    return null; //return null if true
-                }
-                while (input.hasNextLine()) { //runs until there are no more lines in the file
-                    s = input.nextLine().split(delim); //splits the comments from the ratings
-                    list.add(s[choice]); //adds the rating to the list
-                }
-                input.close(); //closes the scanner
-                temp = new String[list.size()]; //makes the it the size of the list
-                temp = list.toArray(temp); //converts the list into a String array
-                return temp; //returns the String array of ratings
-            }
-            default: //if an unacceptable entry is made
-                return null;
+        //case statement for comments
+        initiateScanner(); //opens the scanner
+        //creates temporary varibles
+        ArrayList<String> list = new ArrayList<>();
+        String[] s = null, temp = null;
+        if (fileEmpty()) { //checks if the file is empty
+            return null; //return null if true
         }
+        while (input.hasNextLine()) { //runs until there are no more lines in the file
+            s = input.nextLine().split(delim); //splits the comments from the ratings
+            list.add(s[choice]); //adds the comment to the list
+        }
+        input.close(); //closes the scanner
+        temp = new String[list.size()]; //makes it the size of the list
+        temp = list.toArray(temp); //converts the list into a String array
+        return temp; //return the String array of comments
+
     }
 
     /**
@@ -135,48 +114,36 @@ public class Review {
      * occurs -1 is returned
      */
     public int getRatingValues(int choice) {
+        initiateScanner(); //opens the scanner
+        //creates temporary varibles
+        String[] s = null;
+        int count = 0;
+        if (fileEmpty()) { //checks if the file is empty
+            return 0; //return 0 if true
+        }
         switch (choice) { //decides to get the sum or number of ratings
             case 0: { //case statement for the sum of ratings
-                initiateScanner(); //opens the scanner
-                //creates temporary varibles
-                String[] s = null;
-                int count = 0;
-                if (fileEmpty()) { //checks if the file is empty
-                    return 0; //return 0 if true
-                }
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
                     count += Integer.parseInt(s[1]); //sets the counter to the arrays values
                 }
-                input.close(); //closes the scanner
-                return count; //returns the total sum of ratings
             }
-            case 1: { //case statement for the number of ratings
-                initiateScanner(); //opens the scanner
-                //creates temporary varibles
-                String[] s = null;
-                int count = 0;
-                if (fileEmpty()) { //checks if the file is empty
-                    return 0; //return 0 if it is
-                }
+            case 1:
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
                     count++; //adds to the count
                 }
-                input.close(); //closes the scanner
-                return count; //returns the number of ratings
-            }
-            default: //for an incorrect use of method
-                return -1; //returns -1 to clearly show that a mistake or error occured
         }
+        input.close(); //closes the scanner
+        return count; //returns the total sum of ratings
     }
 
-    /**
-     * This method updates the rating of a book by re-calculating the average.
-     *
-     * @return the rating of the book
-     */
-    public double calculateBookRating() {
+/**
+ * This method updates the rating of a book by re-calculating the average.
+ *
+ * @return the rating of the book
+ */
+public double calculateBookRating() {
         try { //if they equal 0 then try to calculate it
             return getRatingValues(0) / getRatingValues(1); //calculate the average
         } catch (ArithmeticException e) { //if the average cannot be calculated

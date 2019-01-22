@@ -15,19 +15,20 @@ import java.io.IOException;
  */
 public class ReviewScreen extends javax.swing.JFrame {
     Library lib;
-    String barcode;
+    String url;
     Book b;
+    public static String id;
     /**
      * Creates new form ReviewScreen
      */
     public ReviewScreen() {
         initComponents();
     }
-    public ReviewScreen(String barcode){
+    public ReviewScreen(String url){
         initComponents();
         lib = new Library();
-        b = lib.getBookInfo(barcode);
-        this.barcode = barcode;
+        b = lib.getBookInfo(url);
+        this.url = url;
     }
 
     /**
@@ -139,14 +140,14 @@ public class ReviewScreen extends javax.swing.JFrame {
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new BookInfoScreen(barcode).setVisible(true);
+        new BookInfoScreen(url).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-        b.writeReview(enterReviewHere.getText(),Integer.parseInt(enterStarNumberHere.getText()));
+        b.writeReview(enterReviewHere.getText(),Integer.parseInt(enterStarNumberHere.getText()),id);
         this.dispose();
-        new BookInfoScreen(barcode).setVisible(true);
+        new BookInfoScreen(url).setVisible(true);
     }//GEN-LAST:event_doneButtonActionPerformed
 
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed

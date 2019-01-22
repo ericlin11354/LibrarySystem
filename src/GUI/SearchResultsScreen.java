@@ -23,11 +23,11 @@ public class SearchResultsScreen extends javax.swing.JFrame {
     public SearchResultsScreen() {
         initComponents();
     }
-    public SearchResultsScreen(String barcode){
+    public SearchResultsScreen(String search){
         initComponents();
-        list = lib.browseBook(barcode);
+        list = lib.browseBook(search);
         DefaultListModel dlm = new DefaultListModel();
-        resultGoesHere.setText(barcode);
+        resultGoesHere.setText(search);
         for(int i=0;i<list.length;i++){
             dlm.addElement(list[i].title);
         }
@@ -134,7 +134,7 @@ public class SearchResultsScreen extends javax.swing.JFrame {
         else{
             dispose();
             //System.out.println(list[searchResultsGoHere.getSelectedIndex()].link);
-            new BookInfoScreen(list[searchResultsGoHere.getSelectedIndex()].link).setVisible(true);
+            new BookInfoScreen(list[searchResultsGoHere.getSelectedIndex()].url).setVisible(true);
         }
     }//GEN-LAST:event_proceedButtonActionPerformed
 

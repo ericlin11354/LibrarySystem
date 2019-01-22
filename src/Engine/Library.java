@@ -26,31 +26,42 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class Library {
 
-    public String title; //the variable for book's title
-    public String author; //the variable for the author of the book
-    public URL cover; //the variable book's cover
-    public String desc; //the variable for the description of the book.
+    String delimiter = ",,";
     /**
-     * The constructor for the library class.
-     */
+             * The constructor for the library class.
+             */
+
     public Library() {
-        title = author = desc = "";
-        cover = null;
     }
-    public Scanner initScanner(File f){
-        try{
+
+    /**
+     * Handles FileNotFound Exception when initializing Scanner class
+     *
+     * @param f gets file
+     * @return returns Scanner object. Returns null if FileNotFoundException
+     * occurs
+     */
+    public Scanner initScanner(File f) {
+        try {
             return new Scanner(f);
-        }
-        catch(FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         return null;
     }
-    public PrintWriter initPW(File f){
-        try{
-            return new PrintWriter(new FileWriter(f,true));
-        }
-        catch(IOException e){
+
+    /**
+     *
+     * Handles FileNotFound Exception when initializing PrintWriter class
+     *
+     * @param f gets file
+     * @return returns PrintWriter object. Returns null if FileNotFoundException
+     * occurs
+     */
+    public PrintWriter initPW(File f) {
+        try {
+            return new PrintWriter(new FileWriter(f, true));
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
@@ -60,86 +71,41 @@ public class Library {
      * This method adds a new book to the library.
      *
      * @param book the book to be added
-     * @throws java.io.IOException
      */
     public void addBook(Book book) {
-        //create temporary variables
+        //reads bookinfo file
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
-        boolean exist = false;
         PrintWriter pw = initPW(f);
-        String delimiter = ",,";
-        //Checks if the file already has the book stored already
-        while (input.hasNext()) {
-            String[] codes = input.nextLine().split(delimiter);
-            if (codes[0].equals(book.barcode)) {
-                exist = true;
-                break;
-            }
-        }
         input.close();
-        if (exist == false) {
-            pw.print(book.barcode + delimiter);
-            pw.print(book.title + delimiter);
-            pw.print(book.author + delimiter);
-            pw.print(book.synopsis + delimiter);
-            pw.print(book.publisher + delimiter);
-            pw.print(book.datePublished + delimiter);
-            pw.print(book.categories + delimiter);
-            pw.print(book.cover + delimiter);
-            pw.print(book.link+delimiter);
-            pw.println();
-            pw.close();
-        }
-    }
-
-    //I feel like we can code this to be faster -Eric
-    /**
-     *
-     * @param book
-     * @throws IOException
-     */
-    public void deleteBook(Book book) throws IOException {
-        //create temporary variables
-        File f = new File("bookinfo.txt");
-        Scanner input = new Scanner(f);
-        PrintWriter pw = new PrintWriter(new FileWriter(f, true));
-        String delim = ",,";
-        String s = "";
-        String remove = "";
-        //Checks if the file already has the book stored already
-        while (input.hasNext()) {
-            s += input.nextLine();
-            if (s.split(delim)[0].equals(book.barcode)) {
-                remove = s;
-            }
-        }
-        input.close();
-        //System.out.println(remove);
-        s = s.replaceAll(remove, "");
-        f.delete();
-        f.createNewFile();
-        pw = new PrintWriter(new FileWriter(f, true));
-        pw.println(s);
+        //adds book info
+        pw.print(book.barcode + delimiter);
+        pw.print(book.title + delimiter);
+        pw.print(book.author + delimiter);
+        pw.print(book.synopsis + delimiter);
+        pw.print(book.publisher + delimiter);
+        pw.print(book.datePublished + delimiter);
+        pw.print(book.categories + delimiter);
+        pw.print(book.cover + delimiter);
+        pw.print(book.url + delimiter);
+        pw.println();
         pw.close();
-
-        //System.out.println(s);
     }
 
     /**
+     * Checks that book exists in bookinfo.txt
      *
-     * @param barcode
-     * @return
-     * @throws IOException
+     * @param barcode gets the barcode of the book
+     * @return returns true if the book exists in the file. Returns false if
+     * not.
      */
     public boolean bookExists(String barcode) {
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
         PrintWriter pw = initPW(f);
-        String delim = ",,";
-        //Checks if the file already has the book stored already
         while (input.hasNext()) {
-            String[] codes = input.nextLine().split(delim);
+            String[] codes = input.nextLine().split(delimiter);
+            //first element of each row is the barcode
             if (codes[0].equals(barcode)) {
                 return true;
             }
@@ -149,58 +115,54 @@ public class Library {
     }
 
     /**
+     * Gets a book in bookinfo.txt
      *
-     * @param barcode
-     * @return
-     * @throws IOException
+     * @param barcode gets the barcode for the book
+     * @return returns Book class for the book. Returns null if book cannot be found
      */
     public Book searchBook(String barcode) {
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
         PrintWriter pw = initPW(f);
-        String delim = ",,";
+        //stores book info
         String[] codes = null;
-        //Checks if the file already has the book stored already
         while (input.hasNext()) {
-            codes = input.nextLine().split(delim);
+            codes = input.nextLine().split(delimiter);
             if (codes[0].equals(barcode)) {
                 break;
             }
         }
-        Book temp = new Book(codes[0], codes[1], codes[2], codes[3], codes[4], codes[5], codes[6], codes[7],codes[8]);
         input.close();
-        return temp;
+        if (!codes[0].equals(barcode)) {
+            System.out.println("Book not found");
+            return null;
+        } else {
+            Book temp = new Book(codes[0], codes[1], codes[2], codes[3], codes[4], codes[5], codes[6], codes[7], codes[8]);
+            return temp;
+        }
     }
 
-//         String barcodes[] = input.nextLine().split(",");
-//             for(int i = 0; i<8;i++)
-//             System.out.println(barcodes[i]);
-//            if (barcodes[0].equals(book.barcode)) {
-//    }
     /**
-     * Searches up a barcode and gets book info.
+     * Gets book info from book page
      *
-     * @param barcode barcode number
+     * @param url gets book page url
      * @return returns Book class containing info
-     * @throws IOException throws Exception initializing Document and calling
-     * addBook method
      */
     public Book getBookInfo(String url) {
-        //System.out.println(url);
-        WebDriver driver = new HtmlUnitDriver();
-        //turn off htmlunit warnings
-        java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
-        driver.get(url);
         Book b;
+        //stores html for book info page
         Document doc = null;
-        try{
-        doc = Jsoup.connect(driver.getCurrentUrl()).get();
-        }
-        catch(IOException e){
+        try {
+            //Jsoup is used to parse html 
+            doc = Jsoup.connect(url).get();
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        String barcode = doc.getElementById("details-standardno").text();
-        if(bookExists(barcode)){
+        //gets barcode and formats it
+        String barcode = doc.getElementById("details-standardno").tagName("td").text().replaceFirst("ISBN: ", "");
+        barcode = barcode.substring(0, barcode.indexOf(" "));
+        //checks if book exists already in bookinfo.txt
+        if (bookExists(barcode)) {
             b = searchBook(barcode);
             return b;
         }
@@ -214,136 +176,60 @@ public class Library {
         try {
             pub = publisher[0];
         } catch (ArrayIndexOutOfBoundsException e) {
+            pub = "Not Available";
         }
         try {
             pubDate = publisher[1];
         } catch (ArrayIndexOutOfBoundsException e) {
+            pubDate = "Not Available";
         }
-        //gets genres
-        String genres = doc.getElementById("details-genre").text();
-        genres = genres.replaceFirst("Genre/Form: ","");
-        System.out.println(genres);
-        //System.out.println(genres);
-        //String genres = "";
-        /*for (Element element : elements) {
-            genres += element.text();
-        }*/
+        //gets and formats genres
+        String genres;
+        try {
+            genres = doc.getElementById("details-genre").text();
+        } catch (NullPointerException e) {
+            genres = "Not Available";
+        }
+        genres = genres.replaceFirst("Genre/Form: ", "");
         //gets cover image file
         String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
         String summ = doc.getElementsByClass("abstracttxt").text();
-        /*try {
-            summ = doc.getElementById("summary").text();
-            System.out.println(summ);
-        } catch (NullPointerException e) {
-            try {
-                summ = doc.getElementsByClass("nielsen-review").get(0).text();
-            } catch (IndexOutOfBoundsException f) {
-                summ = "";
-            }
-        }*/
-        b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover,url);
+        //initializes Book class and adds it to bookinfo.txt
+        b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover, url);
         addBook(b);
         return b;
     }
 
-    public Book[] browseBook(String barcode) {
+    /**
+     * Provides a list of books from a title/barcode
+     * @param search gets title/barcode search
+     * @return returns a Book array containing items
+     */
+    public Book[] browseBook(String search) {
         //connects to website
-        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
+        String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + search + "&fq=dt%3Abks";
+        //WebDriver is used to interact with WorldCat website
         WebDriver driver = new HtmlUnitDriver();
         //turn off htmlunit warnings
         java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
         driver.get(url);
+        //stores items from search results
         List<WebElement> items = new ArrayList<>();
-        for (int i = 1; i <= 5; i++) {
+        //max 6 results as WorldCat can only store that many on one page
+        for (int i = 1; i <= 6; i++) {
+            //gets items
             try {
                 items.add(driver.findElement(By.id("result-" + i)));
-                //System.out.println(items.get(i-1).getText());
             } catch (NoSuchElementException e) {
                 //does nothing
             }
         }
+        //Book array uses special constructor which only takes in title and url in order to associate the two
         Book[] temp = new Book[items.size()];
         for (int i = 0; i < temp.length; i++) {
             temp[i] = new Book(items.get(i).getText(), items.get(i).getAttribute("href"));
-            //System.out.println(items.get(i).getAttribute("href"));
         }
         return temp;
-        /*Book b = null;
-        if (bookExists(barcode)) {
-            b = searchBook(barcode);
-        } else {
-            //connects to website
-            String url = "https://www.worldcat.org/search?qt=worldcat_org_bks&q=" + barcode + "&fq=dt%3Abks";
-            WebDriver driver = new HtmlUnitDriver();
-            //turn off htmlunit warnings
-            java.util.logging.Logger.getLogger("com.gargoylesoftware.htmlunit").setLevel(java.util.logging.Level.OFF);
-            driver.get(url);
-            //gets first item in liust
-            WebElement item = null;
-            try {
-                item = driver.findElement(By.id("result-1"));
-            } catch (Exception e) {
-                System.out.println("No such item can be found");
-                System.exit(0);
-            }
-            if (item == null) {
-                System.out.println("no book");
-            }
-            item.click();
-            //parses book info page
-            Document doc = null;
-            doc = Jsoup.connect(driver.getCurrentUrl()).get();
-            //gets title,author,publisher
-            String title = doc.getElementsByClass("title").get(0).text();
-            String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
-            String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
-            //gets publisher name and date
-            String pub = "";
-            String pubDate = "";
-            try {
-                pub = publisher[0];
-            } catch (ArrayIndexOutOfBoundsException e) {
-            }
-            try {
-                pubDate = publisher[1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-            }
-            //gets genres
-            Elements elements = doc.getElementsByClass("subject-term");
-            String genres = "";
-            for (Element element : elements) {
-                genres += element.text();
-            }
-            //gets cover image file
-            String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
-            String summ;
-            try {
-                summ = doc.getElementById("summary").text();
-                System.out.println(summ);
-            } catch (NullPointerException e) {
-                try {
-                    summ = doc.getElementsByClass("nielsen-review").get(0).text();
-                } catch (IndexOutOfBoundsException f) {
-                    summ = "";
-                }
-            }
-            b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover);
-            addBook(b);
-            //test
-            /*System.out.println(title);
-         System.out.println(author);
-         System.out.println(publisher);
-         System.out.println(genres);
-         System.out.println(summ);
-         System.out.println(cover);*/
-        //}
-        //return b;
-    }
-
-    /**
-     * This method sorts the books by categories.
-     */
-    public void sortBook() {
     }
 
     /**
@@ -354,5 +240,8 @@ public class Library {
      */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
+        //lib.getBookInfo("https://www.worldcat.org/title/harry-potter-and-the-chamber-of-secrets/oclc/660230089&referer=brief_results");
+        //System.out.println(lib.bookExists("9780807286012"));
+        System.exit(0);
     }
 }

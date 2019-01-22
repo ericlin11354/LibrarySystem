@@ -60,9 +60,10 @@ public class BookInfoScreen extends javax.swing.JFrame {
         putAverageRatingHere.setText(String.format("%.2f",b.getAverageRating()));
         String[] comments = b.getComments();
         String[] ratings = b.getRatings();
+        String[] ids = b.getIds();
         String s = "";
         for(int i=0;i<comments.length;i++){
-            s += "Student\tRating: "+ratings[i]+"\n"+comments[i]+"\n\n";
+            s += ids[i]+"\tRating: "+ratings[i]+"\n"+comments[i]+"\n\n";
         }
         ratingsList.setText(s);
         //System.out.println(b.getAverageRating());
@@ -277,7 +278,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private void ratingAndReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingAndReviewButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ReviewScreen(b.link).setVisible(true);
+        new ReviewScreen(b.url).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed

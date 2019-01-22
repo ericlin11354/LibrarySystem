@@ -159,6 +159,7 @@ public class LoginScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
@@ -167,19 +168,19 @@ public class LoginScreen extends javax.swing.JFrame {
         if (id.isEmpty()) {
             jOptionPane1.showMessageDialog(null, "Please enter your Student ID");
         } else if (!title.isEmpty() && !bar.isEmpty()) {
+            this.dispose();
+            ReviewScreen.id = id;
             if (jOptionPane1.showOptionDialog(null, "Would you like to search by title or barcode?", "Message", jOptionPane1.DEFAULT_OPTION, jOptionPane1.DEFAULT_OPTION, null,
                     options, 0) == 0) {
-                //System.out.println(title);
-                this.dispose();
                 new SearchResultsScreen(title).setVisible(true);
             } else {
-                this.dispose();
                 new SearchResultsScreen(bar).setVisible(true);
             }
         } else if (title.isEmpty() && bar.isEmpty()) {
             jOptionPane1.showMessageDialog(null, "Please enter a title or barcode");
         } else {
             this.dispose();
+            ReviewScreen.id = id;
             if (bar.isEmpty()) {
                 new SearchResultsScreen(title).setVisible(true);
             } else {

@@ -16,7 +16,7 @@ public class Book {
     public String cover; //the variable for the book's cover
     public String barcode; //the variable for the book's barcode
     public Review review; //the variable used to access the Review Class
-    public String link;
+    public String url;
 
     /**
      * This is the constructor for the Book Class.
@@ -30,7 +30,7 @@ public class Book {
      * @param barcode the barcode of the book
      * @param cover the cover of the book
      */
-    public Book(String barcode, String title, String author, String synopsis, String publisher, String datePublished, String categories, String cover,String link) {
+    public Book(String barcode, String title, String author, String synopsis, String publisher, String datePublished, String categories, String cover,String url) {
         this.title = title;
         this.author = author;
         this.synopsis = synopsis;
@@ -39,11 +39,12 @@ public class Book {
         this.categories = categories;
         this.barcode = barcode;
         this.cover = cover;
+        this.url = url;
         review = new Review(barcode);
     }
     public Book(String title, String link){
         this.title = title;
-        this.link = link;
+        this.url = link;
     }
 
     /**
@@ -52,8 +53,8 @@ public class Book {
      * @param s the comment made on the book
      * @param rating the rating made on the book
      */
-    public void writeReview(String s, int rating) {
-        review.addReview(s, rating);
+    public void writeReview(String s, int rating, String id) {
+        review.addReview(s, rating,id);
     }
 
     /**
@@ -81,5 +82,9 @@ public class Book {
      */
     public String[] getRatings() {
         return review.getReview(1);
+    }
+    
+    public String[] getIds(){
+        return review.getReview(2);
     }
 }
