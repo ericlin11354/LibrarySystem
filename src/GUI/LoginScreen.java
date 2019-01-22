@@ -5,7 +5,15 @@
  */
 package GUI;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
 
 /**
  *
@@ -13,15 +21,17 @@ import java.io.IOException;
  */
 public class LoginScreen extends javax.swing.JFrame {
 
-    boolean keyPressed;
 
     /**
      * Creates new form LoginScreen2
      */
+
     public LoginScreen() {
         initComponents();
-        keyPressed = false;
+        this.pack();
+        barcodeGoesHere.requestFocusInWindow();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,11 +56,6 @@ public class LoginScreen extends javax.swing.JFrame {
         quitButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                formKeyReleased(evt);
-            }
-        });
 
         searchButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         searchButton.setText("Search!");
@@ -159,7 +164,7 @@ public class LoginScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
@@ -193,13 +198,6 @@ public class LoginScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_quitButtonActionPerformed
-
-    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
-            barcodeGoesHere.setText(evt.getKeyChar() + "");
-        }
-    }//GEN-LAST:event_formKeyReleased
 
     /**
      * @param args the command line arguments
