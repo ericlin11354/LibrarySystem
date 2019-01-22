@@ -70,6 +70,7 @@ public class Review {
      *
      * @param comment the comment made by the user
      * @param rating the rating made by the user
+     * @param id the identification of the book
      */
     public void addReview(String comment, int rating, String id) {
         initiatePrintWriter(); //open the print writer
@@ -86,7 +87,6 @@ public class Review {
      * entry
      */
     public String[] getReview(int choice) {
-        //case statement for comments
         initiateScanner(); //opens the scanner
         //creates temporary varibles
         ArrayList<String> list = new ArrayList<>();
@@ -102,16 +102,14 @@ public class Review {
         temp = new String[list.size()]; //makes it the size of the list
         temp = list.toArray(temp); //converts the list into a String array
         return temp; //return the String array of comments
-
     }
 
     /**
      * This method gets either the sum of ratings, or the number of ratings made
      * on a book.
      *
-     * @param choice 0 is for sum of ratings, 1 is for number of ratings
-     * @return returns the sum of ratings, or number of ratings, if an error
-     * occurs -1 is returned
+     * @param choice 0 is for number of ratings, 1 is for sum of ratings
+     * @return returns the sum of ratings, or number of ratings
      */
     public int getRatingValues(int choice) {
         initiateScanner(); //opens the scanner
@@ -122,28 +120,29 @@ public class Review {
             return 0; //return 0 if true
         }
         switch (choice) { //decides to get the sum or number of ratings
-            case 0: { //case statement for the sum of ratings
-                while (input.hasNextLine()) { //runs until there are no more lines in the file
-                    s = input.nextLine().split(delim); //splits the ratings from the comments
-                    count += Integer.parseInt(s[1]); //sets the counter to the arrays values
-                }
-            }
-            case 1:
+            case 0: { //case statement for the number of ratings
                 while (input.hasNextLine()) { //runs until there are no more lines in the file
                     s = input.nextLine().split(delim); //splits the ratings from the comments
                     count++; //adds to the count
                 }
+            }
+            case 1: { //case statement for the sum of ratings
+                while (input.hasNextLine()) { //runs until there are no more lines in the file
+                    s = input.nextLine().split(delim); //splits the ratings from the comments
+                    count += Integer.parseInt(s[choice]); //sets the counter to the arrays values
+                }
+            }
         }
         input.close(); //closes the scanner
         return count; //returns the total sum of ratings
     }
 
-/**
- * This method updates the rating of a book by re-calculating the average.
- *
- * @return the rating of the book
- */
-public double calculateBookRating() {
+    /**
+     * This method updates the rating of a book by re-calculating the average.
+     *
+     * @return the rating of the book
+     */
+    public double calculateBookRating() {
         try { //if they equal 0 then try to calculate it
             return getRatingValues(0) / getRatingValues(1); //calculate the average
         } catch (ArithmeticException e) { //if the average cannot be calculated
