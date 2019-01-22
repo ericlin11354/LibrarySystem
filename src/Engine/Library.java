@@ -78,7 +78,7 @@ public class Library {
         Scanner input = initScanner(f);
         PrintWriter pw = initPW(f);
         input.close();
-        //adds book info
+        //adds book info to the file
         pw.print(book.barcode + delimiter);
         pw.print(book.title + delimiter);
         pw.print(book.author + delimiter);
@@ -103,7 +103,9 @@ public class Library {
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
         PrintWriter pw = initPW(f);
+        //As long as there is still things to read from the file
         while (input.hasNext()) {
+            //Separates each line into elements by the commas 
             String[] codes = input.nextLine().split(delimiter);
             //first element of each row is the barcode
             if (codes[0].equals(barcode)) {
@@ -127,16 +129,20 @@ public class Library {
         //stores book info
         String[] codes = null;
         while (input.hasNext()) {
+            //Separates each line into elements by using a comma as a delimiter
             codes = input.nextLine().split(delimiter);
+            //Exits the loop when the barcode matches
             if (codes[0].equals(barcode)) {
                 break;
             }
         }
         input.close();
+        //When the barcode does not match, the book does not exist in the file
         if (!codes[0].equals(barcode)) {
             System.out.println("Book not found");
             return null;
         } else {
+            //Use the elements read from the file to make a new book
             Book temp = new Book(codes[0], codes[1], codes[2], codes[3], codes[4], codes[5], codes[6], codes[7], codes[8]);
             return temp;
         }
