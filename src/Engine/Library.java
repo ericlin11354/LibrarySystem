@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter; //the import for the File Writer
 import java.io.PrintWriter; //the import for the Print Writer
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner; //the import for the Scanner
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -21,10 +22,9 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  *
  * @author North Star Inc. Team
  */
-
 public class Library {
 
-    String delimiter = "\\\\"; //Two backslash
+    static final String delimiter = ",,"; //Two backslash
 
     /**
      * The constructor for the library class.
@@ -100,7 +100,7 @@ public class Library {
     public boolean bookExists(String barcode) {
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
-        PrintWriter pw = initPW(f);
+        input.nextLine();
         //As long as there is still things to read from the file
         while (input.hasNext()) {
             //Separates each line into elements by the commas
@@ -124,7 +124,6 @@ public class Library {
     public Book searchBook(String barcode) {
         File f = new File("bookinfo.txt");
         Scanner input = initScanner(f);
-        PrintWriter pw = initPW(f);
         //stores book info
         String[] codes = null;
         while (input.hasNext()) {
@@ -170,39 +169,43 @@ public class Library {
         if (bookExists(barcode)) {
             b = searchBook(barcode);
             return b;
+        } else {
+            //gets title,author,publisher
+            String title = doc.getElementsByClass("title").get(0).text();
+            String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
+            String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
+            //gets publisher name and date
+            String pub = "";
+            String pubDate = "";
+            try {
+                pub = publisher[0];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                pub = "Not Available";
+            }
+            try {
+                pubDate = publisher[1];
+            } catch (ArrayIndexOutOfBoundsException e) {
+                pubDate = "Not Available";
+            }
+            //gets and formats genres
+            String genres;
+            try {
+                genres = doc.getElementById("details-genre").text();
+            } catch (NullPointerException e) {
+                genres = "Not Available";
+            }
+            genres = genres.replaceFirst("Genre/Form: ", "");
+            //gets cover image file
+            String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
+            String summ = doc.getElementsByClass("abstracttxt").text();
+            if (summ == "") {
+                summ = "Not Available";
+            }
+            //initializes Book class and adds it to bookinfo.txt
+            b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover, url);
+            addBook(b);
+            return b;
         }
-        //gets title,author,publisher
-        String title = doc.getElementsByClass("title").get(0).text();
-        String author = doc.getElementsByAttributeValue("title", "Search for more by this author").get(0).text();
-        String[] publisher = doc.getElementById("bib-publisher-cell").text().split(",");
-        //gets publisher name and date
-        String pub = "";
-        String pubDate = "";
-        try {
-            pub = publisher[0];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            pub = "Not Available";
-        }
-        try {
-            pubDate = publisher[1];
-        } catch (ArrayIndexOutOfBoundsException e) {
-            pubDate = "Not Available";
-        }
-        //gets and formats genres
-        String genres;
-        try {
-            genres = doc.getElementById("details-genre").text();
-        } catch (NullPointerException e) {
-            genres = "Not Available";
-        }
-        genres = genres.replaceFirst("Genre/Form: ", "");
-        //gets cover image file
-        String cover = "https:" + doc.getElementsByClass("cover").get(0).attr("src");
-        String summ = doc.getElementsByClass("abstracttxt").text();
-        //initializes Book class and adds it to bookinfo.txt
-        b = new Book(barcode, title, author, summ, pub, pubDate, genres, cover, url);
-        addBook(b);
-        return b;
     }
 
     /**
@@ -246,8 +249,10 @@ public class Library {
      */
     public static void main(String[] args) throws IOException {
         Library lib = new Library();
-        //lib.getBookInfo("https://www.worldcat.org/title/harry-potter-and-the-chamber-of-secrets/oclc/660230089&referer=brief_results");
+        lib.getBookInfo("https://www.worldcat.org/title/harry-potter-and-the-chamber-of-secrets/oclc/660230089&referer=brief_results");
         //System.out.println(lib.bookExists("9780807286012"));
+        //Scanner pw = new Scanner(new File("bookinfo.txt"));
+        //System.out.println(Arrays.toString(pw.nextLine().split(delimiter)));
         System.exit(0);
     }
 }
