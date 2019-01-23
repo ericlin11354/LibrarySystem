@@ -13,7 +13,6 @@ import java.util.Scanner; //the import used to access the scanner function
  *
  * @author North Star Inc. Team
  */
-
 public class Review {
 
     private File f = null; //create a new file linked to bookinfo
@@ -67,7 +66,7 @@ public class Review {
 
     /**
      * This method is initiated by the user, this will allow them to add a
-     * comment or rating to a book.
+     * comment, rating and identification to a book.
      *
      * @param comment the comment made by the user
      * @param rating the rating made by the user
@@ -89,12 +88,40 @@ public class Review {
     }
 
     /**
-     * This method is used to get the comments and ratings of a book using an
-     * Integer.
+     * This method updates the rating of a book by re-calculating the average.
      *
-     * @param choice 0 would be used for comments, 1 would be used for ratings
-     * @return returns either the comments, ratings, or null for an incorrect
-     * entry
+     * @return the rating of the book
+     */
+    public double calculateBookRating() {
+        try { //if they equal 0 then try to calculate it
+            return getRatingValues(1) / getRatingValues(0); //calculate the average
+        } catch (ArithmeticException e) { //if the average cannot be calculated
+            return 0; //return 0
+        }
+    }
+
+    /**
+     * This method checks if the books file is empty, meaning it has no
+     * comments, ratings or id.
+     *
+     * @return returns true if it is empty, returns false if it is not empty
+     */
+    public boolean fileEmpty() {
+        try { //trys to see if the scanner can take in the next line
+            getInput().hasNextLine(); //goes to the next line in the file
+        } catch (NullPointerException e) { //if the file is empty
+            return true; //return true
+        }
+        return false; //if not then return false
+    }
+
+    /**
+     * This method is used to get the comments, ratings, and the identification
+     * of a book using an Integer.
+     *
+     * @param choice 0 would be used for comments, 1 would be used for ratings,
+     * 2 would be for the identification
+     * @return returns either the comments, ratings, or the id entry
      */
     public String[] getReview(int choice) {
         initiateScanner(); //opens the scanner
@@ -148,64 +175,44 @@ public class Review {
     }
 
     /**
-     * This method updates the rating of a book by re-calculating the average.
+     * This method gets the file.
      *
-     * @return the rating of the book
-     */
-    public double calculateBookRating() {
-        try { //if they equal 0 then try to calculate it
-            return getRatingValues(1) / getRatingValues(0); //calculate the average
-        } catch (ArithmeticException e) { //if the average cannot be calculated
-            return 0; //return 0
-        }
-    }
-
-    /**
-     * This method checks if the books file is empty, meaning it has no comments
-     * or ratings.
-     *
-     * @return returns true if it is empty, returns false if it is not empty
-     */
-    public boolean fileEmpty() {
-        try { //trys to see if the scanner can take in the next line
-            getInput().hasNextLine(); //goes to the next line in the file
-        } catch (NullPointerException e) { //if the file is empty
-            return true; //return true
-        }
-        return false; //if not then return false
-    }
-    
-    //GETTERS AND SETTERS
-
-    /**
-     * @return the f
+     * @return the file
      */
     public File getF() {
         return f;
     }
 
     /**
-     * @param f the f to set
+     * This method sets a file.
+     *
+     * @param f the file that is being set
      */
     public void setF(File f) {
         this.f = f;
     }
 
     /**
-     * @return the input
+     * This method gets the scanner.
+     *
+     * @return the scanner
      */
     public Scanner getInput() {
         return input;
     }
 
     /**
-     * @param input the input to set
+     * This method sets the scanner.
+     *
+     * @param input the scanner to be set
      */
     public void setInput(Scanner input) {
         this.input = input;
     }
 
     /**
+     * This method gets the print writer.
+     *
      * @return the pw
      */
     public PrintWriter getPw() {
@@ -213,6 +220,8 @@ public class Review {
     }
 
     /**
+     * This method sets the print writer.
+     *
      * @param pw the pw to set
      */
     public void setPw(PrintWriter pw) {
@@ -220,6 +229,8 @@ public class Review {
     }
 
     /**
+     * This method gets the barcode of the book.
+     *
      * @return the barcode
      */
     public String getBarcode() {
@@ -227,7 +238,9 @@ public class Review {
     }
 
     /**
-     * @param barcode the barcode to set
+     * This method sets the barcode of the book.
+     *
+     * @param barcode the barcode to be set
      */
     public void setBarcode(String barcode) {
         this.barcode = barcode;
