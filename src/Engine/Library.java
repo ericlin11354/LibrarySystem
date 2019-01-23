@@ -4,13 +4,10 @@ import java.util.List;
 import java.io.IOException; //the import for the input, ouput exception
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.select.Elements;
-import org.jsoup.nodes.Element;
 import java.io.File; //the import used to access exterior files
 import java.io.FileNotFoundException;
 import java.io.FileWriter; //the import for the File Writer
 import java.io.PrintWriter; //the import for the Print Writer
-import java.net.URL; //the import to access the internet using a URL
 import java.util.ArrayList;
 import java.util.Scanner; //the import for the Scanner
 import org.openqa.selenium.By;
@@ -20,10 +17,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 /**
- * The file for the library class.
+ * The file for handling books from book class
  *
- * @author 349361337
+ * @author North Star Inc. Team
  */
+
 public class Library {
 
     String delimiter = ",,";

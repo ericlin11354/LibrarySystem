@@ -16,8 +16,9 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author 069949345
+ * @author North Star Inc. Team
  */
+
 public class BookInfoScreen extends javax.swing.JFrame {
 
     private Library lib = new Library();

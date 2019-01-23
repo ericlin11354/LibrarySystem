@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import Engine.Book;
@@ -10,7 +5,7 @@ import Engine.Library;
 
 /**
  *
- * @author 069949345
+ * @author North Star Inc. Team
  */
 public class ReviewScreen extends javax.swing.JFrame {
     //Library class handles book info

@@ -11,14 +11,15 @@ import java.util.Scanner; //the import used to access the scanner function
 /**
  * This file is for when a user wants to leave a review on a book.
  *
- * @author 073685950 (Alex Weber)
+ * @author North Star Inc. Team
  */
+
 public class Review {
 
-    File f = null; //create a new file linked to bookinfo
-    Scanner input = null; //create a new scanner
-    PrintWriter pw = null; //create a new print writer
-    String barcode = null; //the variable for the barcode of the book
+    private File f = null; //create a new file linked to bookinfo
+    private Scanner input = null; //create a new scanner
+    private PrintWriter pw = null; //create a new print writer
+    private String barcode = null; //the variable for the barcode of the book
     public static final String delim = ",,"; //the variable for the delimeter
 
     /**
@@ -44,9 +45,9 @@ public class Review {
      */
     public void initiatePrintWriter() {
         try { //checks to see if a print writer can be opened
-            pw = new PrintWriter(new FileWriter(f, true)); //makes a new print writer for the file
+            setPw(new PrintWriter(new FileWriter(getF(), true))); //makes a new print writer for the file
         } catch (IOException e) { //if not then print an error
-            System.out.println("IOException reading " + f.getName());
+            System.out.println("IOException reading " + getF().getName());
             System.exit(0); //shuts the program down
         }
     }
@@ -57,9 +58,9 @@ public class Review {
      */
     public void initiateScanner() {
         try { //checks to see if a scanner can be opened
-            input = new Scanner(f); //makes a new scanner for the file
+            setInput(new Scanner(getF())); //makes a new scanner for the file
         } catch (FileNotFoundException e) { //if not then print an error
-            System.out.println("FileNotFoundException reading " + f.getName());
+            System.out.println("FileNotFoundException reading " + getF().getName());
             System.exit(0); //shuts the program down
         }
     }
@@ -74,8 +75,8 @@ public class Review {
      */
     public void addReview(String comment, int rating, String id) {
         initiatePrintWriter(); //open the print writer
-        pw.println(comment + delim + rating + delim + id); //adds the review to the file
-        pw.close(); //close the print writer
+        getPw().println(comment + delim + rating + delim + id); //adds the review to the file
+        getPw().close(); //close the print writer
     }
 
     /**
@@ -103,11 +104,11 @@ public class Review {
         if (fileEmpty()) { //checks if the file is empty
             return null; //return null if true
         }
-        while (input.hasNextLine()) { //runs until there are no more lines in the file
-            s = input.nextLine().split(delim); //splits the comments from the ratings
+        while (getInput().hasNextLine()) { //runs until there are no more lines in the file
+            s = getInput().nextLine().split(delim); //splits the comments from the ratings
             list.add(s[choice]); //adds the comment to the list
         }
-        input.close(); //closes the scanner
+        getInput().close(); //closes the scanner
         temp = new String[list.size()]; //makes it the size of the list
         temp = list.toArray(temp); //converts the list into a String array
         return temp; //return the String array of comments
@@ -130,19 +131,19 @@ public class Review {
         }
         switch (choice) { //decides to get the sum or number of ratings
             case 0: { //case statement for the number of ratings
-                while (input.hasNextLine()) { //runs until there are no more lines in the file
-                    s = input.nextLine().split(delim); //splits the ratings from the comments
+                while (getInput().hasNextLine()) { //runs until there are no more lines in the file
+                    s = getInput().nextLine().split(delim); //splits the ratings from the comments
                     count++; //adds to the count
                 }
             }
             case 1: { //case statement for the sum of ratings
-                while (input.hasNextLine()) { //runs until there are no more lines in the file
-                    s = input.nextLine().split(delim); //splits the ratings from the comments
+                while (getInput().hasNextLine()) { //runs until there are no more lines in the file
+                    s = getInput().nextLine().split(delim); //splits the ratings from the comments
                     count += Integer.parseInt(s[choice]); //sets the counter to the arrays values
                 }
             }
         }
-        input.close(); //closes the scanner
+        getInput().close(); //closes the scanner
         return count; //returns the total sum of ratings
     }
 
@@ -167,10 +168,68 @@ public class Review {
      */
     public boolean fileEmpty() {
         try { //trys to see if the scanner can take in the next line
-            input.hasNextLine(); //goes to the next line in the file
+            getInput().hasNextLine(); //goes to the next line in the file
         } catch (NullPointerException e) { //if the file is empty
             return true; //return true
         }
         return false; //if not then return false
+    }
+    
+    //GETTERS AND SETTERS
+
+    /**
+     * @return the f
+     */
+    public File getF() {
+        return f;
+    }
+
+    /**
+     * @param f the f to set
+     */
+    public void setF(File f) {
+        this.f = f;
+    }
+
+    /**
+     * @return the input
+     */
+    public Scanner getInput() {
+        return input;
+    }
+
+    /**
+     * @param input the input to set
+     */
+    public void setInput(Scanner input) {
+        this.input = input;
+    }
+
+    /**
+     * @return the pw
+     */
+    public PrintWriter getPw() {
+        return pw;
+    }
+
+    /**
+     * @param pw the pw to set
+     */
+    public void setPw(PrintWriter pw) {
+        this.pw = pw;
+    }
+
+    /**
+     * @return the barcode
+     */
+    public String getBarcode() {
+        return barcode;
+    }
+
+    /**
+     * @param barcode the barcode to set
+     */
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
     }
 }

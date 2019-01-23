@@ -1,9 +1,9 @@
 package Engine;
 
 /**
- * This is the file for the book class.
+ * This is the file for handling individual book info
  *
- * @author 349361337
+ * @author North Star Inc. Team
  */
 public class Book {
 

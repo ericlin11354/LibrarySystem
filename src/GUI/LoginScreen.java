@@ -2,7 +2,7 @@ package GUI;
 
 /**
  *
- * @author NorthStar Inc Team
+ * @author NorthStar Inc. Team
  */
 
 public class LoginScreen extends javax.swing.JFrame {
