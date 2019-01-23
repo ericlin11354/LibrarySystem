@@ -24,7 +24,7 @@ public class SearchResultsScreen extends javax.swing.JFrame {
         DefaultListModel dlm = new DefaultListModel();
         resultGoesHere.setText(search);
         for(int i=0;i<list.length;i++){
-            dlm.addElement(list[i].title);
+            dlm.addElement(list[i].getTitle());
         }
         searchResultsGoHere.setModel(dlm);
     }
@@ -129,7 +129,7 @@ public class SearchResultsScreen extends javax.swing.JFrame {
             jOptionPane1.showMessageDialog(null, "Please select an item");
         else{
             dispose();
-            new BookInfoScreen(getList()[searchResultsGoHere.getSelectedIndex()].url).setVisible(true);
+            new BookInfoScreen(getList()[searchResultsGoHere.getSelectedIndex()].getUrl()).setVisible(true);
         }
     }//GEN-LAST:event_proceedButtonActionPerformed
 

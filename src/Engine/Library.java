@@ -77,15 +77,15 @@ public class Library {
         PrintWriter pw = initPW(f);
         input.close();
         //adds book info to the file
-        pw.print(book.barcode + delimiter);
-        pw.print(book.title + delimiter);
-        pw.print(book.author + delimiter);
-        pw.print(book.synopsis + delimiter);
-        pw.print(book.publisher + delimiter);
-        pw.print(book.datePublished + delimiter);
-        pw.print(book.categories + delimiter);
-        pw.print(book.cover + delimiter);
-        pw.print(book.url + delimiter);
+        pw.print(book.getBarcode() + delimiter);
+        pw.print(book.getTitle() + delimiter);
+        pw.print(book.getAuthor() + delimiter);
+        pw.print(book.getSynopsis() + delimiter);
+        pw.print(book.getPublisher() + delimiter);
+        pw.print(book.getDatePublished() + delimiter);
+        pw.print(book.getCategories() + delimiter);
+        pw.print(book.getCover() + delimiter);
+        pw.print(book.getUrl() + delimiter);
         pw.println();
         pw.close();
     }

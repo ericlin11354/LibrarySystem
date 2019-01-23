@@ -32,16 +32,16 @@ public class BookInfoScreen extends javax.swing.JFrame {
         initComponents();
         //sets labels to book info respectively
         b = lib.getBookInfo(url);
-        jTitleLabel.setText(b.title);
-        jAuthorLabel.setText(b.author);
-        jDatePubLabel.setText(b.datePublished);
-        jPubLabel.setText(b.publisher);
-        jGenreLabel.setText(b.categories);
-        putSynopsisHere.setText(b.synopsis);
+        jTitleLabel.setText(b.getTitle());
+        jAuthorLabel.setText(b.getAuthor());
+        jDatePubLabel.setText(b.getDatePublished());
+        jPubLabel.setText(b.getPublisher());
+        jGenreLabel.setText(b.getCategories());
+        putSynopsisHere.setText(b.getSynopsis());
         //gets book cover image
         Image temp = null;
         try {
-            temp = ImageIO.read(new URL(getB().cover));
+            temp = ImageIO.read(new URL(getB().getCover()));
             temp = temp.getScaledInstance(jCoverLabel.getWidth(), jCoverLabel.getHeight(), Image.SCALE_SMOOTH);
         } catch (IOException e) {
             e.printStackTrace();
@@ -273,7 +273,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
         //gets book info url in order to store comments
-        new ReviewScreen(getB().url).setVisible(true);
+        new ReviewScreen(getB().getUrl()).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
     /**
