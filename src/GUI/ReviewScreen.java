@@ -7,20 +7,20 @@ package GUI;
 
 import Engine.Book;
 import Engine.Library;
-import java.io.IOException;
 
 /**
  *
  * @author 069949345
  */
 public class ReviewScreen extends javax.swing.JFrame {
-    Library lib;
-    String url;
-    Book b;
+    //Library class handles book info
+    private Library lib;
+    //bookinfo url
+    private String url;
+    //updates book info
+    private Book b;
     public static String id;
-    /**
-     * Creates new form ReviewScreen
-     */
+    
     public ReviewScreen() {
         initComponents();
     }
@@ -137,19 +137,30 @@ public class ReviewScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Brings user back to BookInfoScreen
+     * @param evt 
+     */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new BookInfoScreen(url).setVisible(true);
+        new BookInfoScreen(getUrl()).setVisible(true);
     }//GEN-LAST:event_backButtonActionPerformed
 
+    /**
+     * Brings user back to BookInfoScreen with comment section updated
+     * @param evt 
+     */
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-        b.writeReview(enterReviewHere.getText(),Integer.parseInt(enterStarNumberHere.getText()),id);
+        getB().writeReview(enterReviewHere.getText(),Integer.parseInt(enterStarNumberHere.getText()),id);
         this.dispose();
-        new BookInfoScreen(url).setVisible(true);
+        new BookInfoScreen(getUrl()).setVisible(true);
     }//GEN-LAST:event_doneButtonActionPerformed
-
+    /**
+     * Allows user to return to login screen and change student id
+     * @param evt 
+     */
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -203,4 +214,49 @@ public class ReviewScreen extends javax.swing.JFrame {
     private javax.swing.JLabel reviewLabel;
     private javax.swing.JLabel starsLabel;
     // End of variables declaration//GEN-END:variables
+
+    
+    //GETTERS AND SETTERS
+    
+    /**
+     * @return the lib
+     */
+    public Library getLib() {
+        return lib;
+    }
+
+    /**
+     * @param lib the lib to set
+     */
+    public void setLib(Library lib) {
+        this.lib = lib;
+    }
+
+    /**
+     * @return the url
+     */
+    public String getUrl() {
+        return url;
+    }
+
+    /**
+     * @param url the url to set
+     */
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    /**
+     * @return the b
+     */
+    public Book getB() {
+        return b;
+    }
+
+    /**
+     * @param b the b to set
+     */
+    public void setB(Book b) {
+        this.b = b;
+    }
 }

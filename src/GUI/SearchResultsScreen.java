@@ -15,17 +15,17 @@ import javax.swing.DefaultListModel;
  */
 public class SearchResultsScreen extends javax.swing.JFrame {
 
-    Library lib = new Library();
-    Book[] list;
-    /**
-     * Creates new form SearchResultsScreen2
-     */
+    private Library lib = new Library();
+    private Book[] list;
+    
     public SearchResultsScreen() {
         initComponents();
     }
     public SearchResultsScreen(String search){
         initComponents();
+        //gets list of books found
         list = lib.browseBook(search);
+        //initializes JList for search results
         DefaultListModel dlm = new DefaultListModel();
         resultGoesHere.setText(search);
         for(int i=0;i<list.length;i++){
@@ -59,11 +59,6 @@ public class SearchResultsScreen extends javax.swing.JFrame {
         resultGoesHere.setEditable(false);
         resultGoesHere.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         resultGoesHere.setText("jTextField1");
-        resultGoesHere.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resultGoesHereActionPerformed(evt);
-            }
-        });
 
         searchResultsGoHere.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -74,6 +69,11 @@ public class SearchResultsScreen extends javax.swing.JFrame {
 
         backButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         backButton.setText("Back");
+        backButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backButtonActionPerformed(evt);
+            }
+        });
 
         proceedButton.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         proceedButton.setText("Select");
@@ -123,20 +123,30 @@ public class SearchResultsScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void resultGoesHereActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resultGoesHereActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_resultGoesHereActionPerformed
-
+    /**
+     * User is brought to the BookInfoScreen showing book info
+     * @param evt 
+     */
     private void proceedButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_proceedButtonActionPerformed
         // TODO add your handling code here:
+        //case where no item is selected
         if(searchResultsGoHere.isSelectionEmpty())
             jOptionPane1.showMessageDialog(null, "Please select an item");
         else{
             dispose();
-            //System.out.println(list[searchResultsGoHere.getSelectedIndex()].link);
-            new BookInfoScreen(list[searchResultsGoHere.getSelectedIndex()].url).setVisible(true);
+            new BookInfoScreen(getList()[searchResultsGoHere.getSelectedIndex()].url).setVisible(true);
         }
     }//GEN-LAST:event_proceedButtonActionPerformed
+
+    /**
+     * User is brought back to the login screen and can search another book
+     * @param evt 
+     */
+    private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        new LoginScreen().setVisible(true);
+    }//GEN-LAST:event_backButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,4 +193,35 @@ public class SearchResultsScreen extends javax.swing.JFrame {
     private javax.swing.JLabel resultsForQueryLabel;
     private javax.swing.JList searchResultsGoHere;
     // End of variables declaration//GEN-END:variables
+
+    
+    //GETTERS AND SETTERS   
+    
+    /**
+     * @return the lib
+     */
+    public Library getLib() {
+        return lib;
+    }
+
+    /**
+     * @param lib the lib to set
+     */
+    public void setLib(Library lib) {
+        this.lib = lib;
+    }
+
+    /**
+     * @return the list
+     */
+    public Book[] getList() {
+        return list;
+    }
+
+    /**
+     * @param list the list to set
+     */
+    public void setList(Book[] list) {
+        this.list = list;
+    }
 }

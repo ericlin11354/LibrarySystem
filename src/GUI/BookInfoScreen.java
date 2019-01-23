@@ -8,7 +8,6 @@ package GUI;
 import Engine.Book;
 import Engine.Library;
 import java.awt.Image;
-import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -21,18 +20,16 @@ import javax.swing.ImageIcon;
  */
 public class BookInfoScreen extends javax.swing.JFrame {
 
-    Toolkit tk = Toolkit.getDefaultToolkit();
-    Library lib = new Library();
-    Book b;
-    /**
-     * Creates new form BookInfoScreen2
-     */
+    private Library lib = new Library();
+    private Book b;
+
     public BookInfoScreen() {
         initComponents();
     }
-    public BookInfoScreen(String url){
+
+    public BookInfoScreen(String url) {
         initComponents();
-        //System.out.println(url);
+        //sets labels to book info respectively
         b = lib.getBookInfo(url);
         jTitleLabel.setText(b.title);
         jAuthorLabel.setText(b.author);
@@ -40,33 +37,25 @@ public class BookInfoScreen extends javax.swing.JFrame {
         jPubLabel.setText(b.publisher);
         jGenreLabel.setText(b.categories);
         putSynopsisHere.setText(b.synopsis);
-        //System.out.println(b.cover);
+        //gets book cover image
         Image temp = null;
-        try{
-            if(b.cover.equals("https://coverart.oclc.org/ImageWebSvc/oclc/+-+750211882_140.jpg?SearchOrder=+-+OT,OS,TN,GO,FA")){
-                temp = ImageIO.read(new File("No cover image available.png"));
-            }
-            else{
-        temp = ImageIO.read(new URL(b.cover));
-            }
-        //gets PreferredSize for img
-        this.pack();
-        temp = temp.getScaledInstance(jCoverLabel.getWidth(), jCoverLabel.getHeight(), Image.SCALE_SMOOTH);
-        }
-        catch(IOException e){
-            System.out.println("IOException reading image url");
+        try {
+            temp = ImageIO.read(new URL(getB().cover));
+            temp = temp.getScaledInstance(jCoverLabel.getWidth(), jCoverLabel.getHeight(), Image.SCALE_SMOOTH);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         jCoverLabel.setIcon(new ImageIcon(temp));
-        putAverageRatingHere.setText(String.format("%.2f",b.getAverageRating()));
+        //puts book comments into comment section
+        putAverageRatingHere.setText(String.format("%.2f", b.getAverageRating()));
         String[] comments = b.getComments();
         String[] ratings = b.getRatings();
         String[] ids = b.getIds();
         String s = "";
-        for(int i=0;i<comments.length;i++){
-            s += ids[i]+"\tRating: "+ratings[i]+"\n"+comments[i]+"\n\n";
+        for (int i = 0; i < comments.length; i++) {
+            s += ids[i] + "\tRating: " + ratings[i] + "\n" + comments[i] + "\n\n";
         }
         ratingsList.setText(s);
-        //System.out.println(b.getAverageRating());
     }
 
     /**
@@ -275,12 +264,21 @@ public class BookInfoScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Brings user to ReviewScreen in order to write a review
+     * @param evt 
+     */
     private void ratingAndReviewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ratingAndReviewButtonActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new ReviewScreen(b.url).setVisible(true);
+        //gets book info url in order to store comments
+        new ReviewScreen(getB().url).setVisible(true);
     }//GEN-LAST:event_ratingAndReviewButtonActionPerformed
 
+    /**
+     * Brings user to LoginScreen in order to search for another book and enter student id
+     * @param evt 
+     */
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
         // TODO add your handling code here:
         this.dispose();
@@ -346,4 +344,32 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea ratingsList;
     private javax.swing.JLabel readingLevelLabel;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the lib
+     */
+    public Library getLib() {
+        return lib;
+    }
+
+    /**
+     * @param lib the lib to set
+     */
+    public void setLib(Library lib) {
+        this.lib = lib;
+    }
+
+    /**
+     * @return the b
+     */
+    public Book getB() {
+        return b;
+    }
+
+    /**
+     * @param b the b to set
+     */
+    public void setB(Book b) {
+        this.b = b;
+    }
 }

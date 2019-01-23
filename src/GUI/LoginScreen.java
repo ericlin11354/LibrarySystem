@@ -1,33 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.io.IOException;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JRootPane;
-import javax.swing.KeyStroke;
 
 /**
  *
- * @author 069949345
+ * @author NorthStar Inc Team
  */
+
 public class LoginScreen extends javax.swing.JFrame {
 
 
-    /**
-     * Creates new form LoginScreen2
-     */
-
     public LoginScreen() {
         initComponents();
+        //allows for barcode textField to request focus
         this.pack();
         barcodeGoesHere.requestFocusInWindow();
     }
@@ -164,26 +147,41 @@ public class LoginScreen extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-
+    /**
+     * Gets book title/barcode and student id. Brings the user to the SearchResultsScreen to see the search results.
+     * @param evt 
+     */
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         String title = searchBar.getText();
         String bar = barcodeGoesHere.getText();
         String id = studentIDCode.getText();
+        //Shows options in OptionPane in the case where both book title and barcode are not empty
         String[] options = {"Title", "Barcode"};
+        //case where student id is empty
         if (id.isEmpty()) {
             jOptionPane1.showMessageDialog(null, "Please enter your Student ID");
-        } else if (!title.isEmpty() && !bar.isEmpty()) {
+        } 
+        //case where both title and barcode are not empty
+        else if (!title.isEmpty() && !bar.isEmpty()) {
+            //gets rid of LoginScreen
             this.dispose();
+            //sets static variable "id" in Review Screen to student id
             ReviewScreen.id = id;
+            //"0" means search by title. "1" means search by barcode
             if (jOptionPane1.showOptionDialog(null, "Would you like to search by title or barcode?", "Message", jOptionPane1.DEFAULT_OPTION, jOptionPane1.DEFAULT_OPTION, null,
                     options, 0) == 0) {
+                //SearchResultsScreen takes in title
                 new SearchResultsScreen(title).setVisible(true);
             } else {
+                //SearchResultsScreen takes in barcode
                 new SearchResultsScreen(bar).setVisible(true);
             }
-        } else if (title.isEmpty() && bar.isEmpty()) {
+        }
+        //case where both title and barcode ARE empty
+        else if (title.isEmpty() && bar.isEmpty()) {
             jOptionPane1.showMessageDialog(null, "Please enter a title or barcode");
-        } else {
+        }
+        else {
             this.dispose();
             ReviewScreen.id = id;
             if (bar.isEmpty()) {
