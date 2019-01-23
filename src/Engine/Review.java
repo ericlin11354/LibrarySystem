@@ -20,7 +20,7 @@ public class Review {
     private Scanner input = null; //create a new scanner
     private PrintWriter pw = null; //create a new print writer
     private String barcode = null; //the variable for the barcode of the book
-    public static final String delim = ",,"; //the variable for the delimeter
+    public static final String delim = "\\\\"; //the variable for the delimeter. Two backslash
 
     /**
      * This is the constructor for the review class.

@@ -24,7 +24,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Library {
 
-    String delimiter = ",,";
+    String delimiter = "\\\\"; //Two backslash
 
     /**
      * The constructor for the library class.
