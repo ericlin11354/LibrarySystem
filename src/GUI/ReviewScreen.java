@@ -8,6 +8,7 @@ import Engine.Library;
  * @author North Star Inc. Team
  */
 public class ReviewScreen extends javax.swing.JFrame {
+
     //Library class handles book info
     private Library lib;
     //bookinfo url
@@ -15,11 +16,12 @@ public class ReviewScreen extends javax.swing.JFrame {
     //updates book info
     private Book b;
     public static String id;
-    
+
     public ReviewScreen() {
         initComponents();
     }
-    public ReviewScreen(String url){
+
+    public ReviewScreen(String url) {
         initComponents();
         lib = new Library();
         b = lib.getBookInfo(url);
@@ -35,6 +37,7 @@ public class ReviewScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jOptionPane1 = new javax.swing.JOptionPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         enterReviewHere = new javax.swing.JTextArea();
         ratingLabel = new javax.swing.JLabel();
@@ -134,7 +137,8 @@ public class ReviewScreen extends javax.swing.JFrame {
 
     /**
      * Brings user back to BookInfoScreen
-     * @param evt 
+     *
+     * @param evt
      */
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         // TODO add your handling code here:
@@ -144,17 +148,30 @@ public class ReviewScreen extends javax.swing.JFrame {
 
     /**
      * Brings user back to BookInfoScreen with comment section updated
-     * @param evt 
+     *
+     * @param evt
      */
     private void doneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_doneButtonActionPerformed
         // TODO add your handling code here:
-        getB().writeReview(enterReviewHere.getText(),Integer.parseInt(enterStarNumberHere.getText()),id);
-        this.dispose();
-        new BookInfoScreen(getUrl()).setVisible(true);
+        //checks that rating is a number ONLY
+        try {
+            //checks that rating is out of 5 stars
+            if (Integer.parseInt(enterStarNumberHere.getText()) > 5) {
+                jOptionPane1.showMessageDialog(null, "Please give a rating out of 5 stars");
+            } else {
+                this.dispose();
+                getB().writeReview(enterReviewHere.getText(), Integer.parseInt(enterStarNumberHere.getText()), id);
+                new BookInfoScreen(getUrl()).setVisible(true);
+            }
+        }
+        catch(NumberFormatException e){
+            jOptionPane1.showMessageDialog(null, "Please give a number rating ONLY");
+        }
     }//GEN-LAST:event_doneButtonActionPerformed
     /**
      * Allows user to return to login screen and change student id
-     * @param evt 
+     *
+     * @param evt
      */
     private void backToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToLoginActionPerformed
         // TODO add your handling code here:
@@ -204,15 +221,14 @@ public class ReviewScreen extends javax.swing.JFrame {
     private javax.swing.JButton doneButton;
     private javax.swing.JTextArea enterReviewHere;
     private javax.swing.JTextField enterStarNumberHere;
+    private javax.swing.JOptionPane jOptionPane1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel ratingLabel;
     private javax.swing.JLabel reviewLabel;
     private javax.swing.JLabel starsLabel;
     // End of variables declaration//GEN-END:variables
 
-    
     //GETTERS AND SETTERS
-    
     /**
      * @return the lib
      */
