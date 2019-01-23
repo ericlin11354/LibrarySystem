@@ -80,8 +80,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         ratingAndReviewButton = new javax.swing.JButton();
         jGenreLabel = new javax.swing.JLabel();
-        readingLevelLabel = new javax.swing.JLabel();
-        jReadingLabel = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         putSynopsisHere = new javax.swing.JTextArea();
@@ -131,12 +129,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
 
         jGenreLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
         jGenreLabel.setText("jLabel10");
-
-        readingLevelLabel.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
-        readingLevelLabel.setText("Reading Level:");
-
-        jReadingLabel.setFont(new java.awt.Font("Lucida Fax", 0, 12)); // NOI18N
-        jReadingLabel.setText("jLabel12");
 
         jLabel13.setFont(new java.awt.Font("Lucida Fax", 0, 14)); // NOI18N
         jLabel13.setText("Synopsis:");
@@ -194,10 +186,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jGenreLabel))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(readingLevelLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jReadingLabel))
                             .addComponent(jLabel13)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 429, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 529, Short.MAX_VALUE)))
@@ -241,13 +229,9 @@ public class BookInfoScreen extends javax.swing.JFrame {
                             .addComponent(jLabel5)
                             .addComponent(jGenreLabel))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(readingLevelLabel)
-                            .addComponent(jReadingLabel))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
                     .addComponent(jCoverLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -259,7 +243,7 @@ public class BookInfoScreen extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(backToLogin)
                     .addComponent(ratingAndReviewButton))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,7 +319,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jPubLabel;
-    private javax.swing.JLabel jReadingLabel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel jTitleLabel;
@@ -343,7 +326,6 @@ public class BookInfoScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea putSynopsisHere;
     private javax.swing.JButton ratingAndReviewButton;
     private javax.swing.JTextArea ratingsList;
-    private javax.swing.JLabel readingLevelLabel;
     // End of variables declaration//GEN-END:variables
 
     /**

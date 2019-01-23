@@ -52,11 +52,6 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jGenreLabel" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="readingLevelLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jReadingLabel" min="-2" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="429" max="-2" attributes="0"/>
                           <Component id="jTitleLabel" alignment="0" pref="529" max="32767" attributes="0"/>
@@ -90,7 +85,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <Component id="jTitleLabel" min="-2" pref="22" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -113,16 +108,11 @@
                           <Component id="jGenreLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="readingLevelLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jReadingLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jScrollPane1" min="-2" pref="163" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jScrollPane1" max="32767" attributes="0"/>
                   </Group>
-                  <Component id="jCoverLabel" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                  <Component id="jCoverLabel" min="-2" pref="327" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -136,7 +126,7 @@
                   <Component id="backToLogin" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="ratingAndReviewButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="24" max="32767" attributes="0"/>
+              <EmptySpace pref="26" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -234,22 +224,6 @@
           <Font name="Lucida Fax" size="12" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel10"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="readingLevelLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Fax" size="14" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Reading Level:"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jReadingLabel">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Lucida Fax" size="12" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="jLabel12"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
