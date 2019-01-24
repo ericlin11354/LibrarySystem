@@ -159,8 +159,8 @@ public class ReviewScreen extends javax.swing.JFrame {
             if (Integer.parseInt(enterStarNumberHere.getText()) > 5) {
                 jOptionPane1.showMessageDialog(null, "Please give a rating out of 5 stars");
             } else {
-                this.dispose();
                 getB().writeReview(enterReviewHere.getText(), Integer.parseInt(enterStarNumberHere.getText()), id);
+                dispose();
                 new BookInfoScreen(getUrl()).setVisible(true);
             }
         }

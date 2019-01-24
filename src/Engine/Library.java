@@ -9,7 +9,6 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter; //the import for the File Writer
 import java.io.PrintWriter; //the import for the Print Writer
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Scanner; //the import for the Scanner
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -24,7 +23,7 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
  */
 public class Library {
 
-    static final String delimiter = ",,"; //Two backslash
+    static final String delimiter = ",,"; //Two commas
 
     /**
      * The constructor for the library class.

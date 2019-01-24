@@ -6,6 +6,7 @@ import java.io.FileWriter; //the import for the file writer
 import java.io.IOException; //the import for the IOException
 import java.io.PrintWriter; //the import for the print writer class
 import java.util.ArrayList; //the import for the ArrayList class
+import java.util.Arrays;
 import java.util.Scanner; //the import used to access the scanner function
 
 /**
@@ -19,7 +20,7 @@ public class Review {
     private Scanner input = null; //create a new scanner
     private PrintWriter pw = null; //create a new print writer
     private String barcode = null; //the variable for the barcode of the book
-    public static final String delim = "\\\\"; //the variable for the delimeter. Two backslash
+    public static final String delim = ";;"; //the variable for the delimeter. Two semicolons
 
     /**
      * This is the constructor for the review class.
@@ -94,7 +95,7 @@ public class Review {
      */
     public double calculateBookRating() {
         try { //if they equal 0 then try to calculate it
-            return getRatingValues(1) / getRatingValues(0); //calculate the average
+            return (double)getRatingValues(1) / (double)getRatingValues(0); //calculate the average
         } catch (ArithmeticException e) { //if the average cannot be calculated
             return 0; //return 0
         }
@@ -159,15 +160,17 @@ public class Review {
         switch (choice) { //decides to get the sum or number of ratings
             case 0: { //case statement for the number of ratings
                 while (getInput().hasNextLine()) { //runs until there are no more lines in the file
-                    s = getInput().nextLine().split(delim); //splits the ratings from the comments
+                    getInput().nextLine(); //iterates through the file
                     count++; //adds to the count
                 }
+                break;
             }
             case 1: { //case statement for the sum of ratings
                 while (getInput().hasNextLine()) { //runs until there are no more lines in the file
                     s = getInput().nextLine().split(delim); //splits the ratings from the comments
                     count += Integer.parseInt(s[choice]); //sets the counter to the arrays values
                 }
+                break;
             }
         }
         getInput().close(); //closes the scanner
